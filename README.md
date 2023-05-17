@@ -40,4 +40,12 @@ FC Barcelona Fan Community Platform은 FC Barcelona 팬들을 위한 온라인 �
   - Prisma
   - JavaScript
 
+## 팀원
+## 팀원
+
+| Frontend                                                                                                          | Backend                                                                                                           |
+| ----------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| ![icon](https://github.com/joseph0926/project_02-MoneyNote/assets/100750188/212deebf-579d-409e-83b3-ead4e4ef7a90) | ![icon](https://github.com/joseph0926/project_02-MoneyNote/assets/100750188/212deebf-579d-409e-83b3-ead4e4ef7a90) |
+| [김영훈](https://github.com/joseph0926)                                                                           | [김영훈](https://github.com/joseph0926)                                                                           |
+
 ## 실행 방법
