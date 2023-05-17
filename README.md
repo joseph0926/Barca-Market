@@ -12,6 +12,8 @@ FC Barcelona Fan Community Platform은 FC Barcelona 팬들을 위한 온라인 �
 ### 페이지 구성
 ![barcelona-pages](https://github.com/joseph0926/project_03-Barcelona-Fan-Community/assets/100750188/28afa662-22bf-4be0-813b-ad12fd9bb77b)
 
+### ERD
+![prisma-erd](https://github.com/joseph0926/project_03-Barcelona-Fan-Community/assets/100750188/1cc5439a-e6ce-47ca-9727-f5374e4bf08f)
 
 
 ## 주요 기능
