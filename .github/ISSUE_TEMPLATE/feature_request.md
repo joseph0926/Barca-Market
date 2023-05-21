@@ -1,3 +1,12 @@
+---
+name: Feature request
+about: Suggest an idea for this project
+title: ''
+labels: ''
+assignees: joseph0926
+
+---
+
 **목표:** 
 
 **문제:**
