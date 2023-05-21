@@ -56,7 +56,7 @@ project_03-Barcelona-Fan-Community/
 
 - Front-end:
   - Next.js v12
-  - styled-components
+  - ChakraUI
   - Redux Toolkit
   - JavaScript
 
