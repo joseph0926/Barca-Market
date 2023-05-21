@@ -81,3 +81,9 @@ cd barcelona
 npm install
 npm run dev
 ```
+
+## .env
+```
+DATABASE_URL=  #postgreSQL url
+JWT_SECRET=    #JWT 토큰
+```
