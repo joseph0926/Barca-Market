@@ -1,0 +1,18 @@
+---
+name: Feature request
+about: Suggest an idea for this project
+title: ''
+labels: ''
+assignees: joseph0926
+
+---
+
+**목표:** 
+
+**문제:**
+
+**결과**
+
+**담당자:** [joseph0926]
+**레이블:** DB
+**마일스톤:** [ v1.0 - 초기 구조 설계 완료]
