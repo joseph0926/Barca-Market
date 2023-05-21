@@ -30,7 +30,7 @@ FC Barcelona Fan Community Platform은 FC Barcelona 팬들을 위한 온라인 �
 
 - Front-end:
   - Next.js v12
-  - Tailwind CSS
+  - styled-components
   - Redux Toolkit
   - JavaScript
 
@@ -49,3 +49,9 @@ FC Barcelona Fan Community Platform은 FC Barcelona 팬들을 위한 온라인 �
 | [김영훈](https://github.com/joseph0926)                                                                           | [김영훈](https://github.com/joseph0926)                                                                           |
 
 ## 실행 방법
+
+```shell
+cd barcelona
+npm install
+npm run dev
+```
