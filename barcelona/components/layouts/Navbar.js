@@ -1,43 +1,30 @@
-import { Box, Button, Flex, Heading, List, ListIcon, ListItem, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, List, ListIcon, ListItem, Text, chakra, useTheme } from "@chakra-ui/react";
 import Link from "next/link";
 
 import { links } from "@/utils/links.js";
-import { MotionBar, MotionBox } from "../styles/NavbarStyles.js";
+import { Bar, MotionBar, MotionBox } from "../styles/NavbarStyles.js";
 
 const Navbar = () => {
+  const theme = useTheme();
+
   return (
-    <Flex
-      as="nav"
-      align="center"
-      justify="space-between"
-      w="100%"
-      maxW="var(--standard-width)"
-      px={["var(--spacing-sm)", "var(--spacing-md)"]}
-      my="var(--spacing-xl)"
-      boxSizing="border-box"
-      sx={{
-        "@media only screen and (max-width: 768px)": {
-          margin: "var(--spacing-sm) 0 var(--spacing-lg) 0",
-        },
-      }}
-    >
-      <Link href="/">
+    <Flex as="nav" justifyContent="space-between" alignItems="center" width="100%" p="36px" mb="30px">
+      <Link href="/" passHref>
         <Heading as="h1">Logo</Heading>
       </Link>
-      <List
-        listStyleType="none"
-        sx={{
-          "@media only screen and (max-width: 768px)": {
-            display: "none",
-          },
-        }}
-      >
-        <Flex justifyContent="center" alignItems="center">
+      <List display={{ base: "none", md: "block" }}>
+        <Flex justifyContent="center" alignItems="center" gap={6}>
           {links.map((link) => {
             return (
-              <ListItem key={link.title} mx="var(--spacing-md)">
-                <Link href={link.path} passHref color="var(--text-light)" fontWeight="bold">
-                  <ListIcon as={link.icon} />
+              <ListItem
+                key={link.title}
+                fontSize="xl"
+                fontWeight="400"
+                opacity="0.85"
+                transition="opacity 0.2s ease-in-out, box-shadow 0.2s ease-in-out"
+                _hover={{ opacity: 1, boxShadow: "0 2px 0 red" }}
+              >
+                <Link href={link.path} passHref>
                   {link.title}
                 </Link>
               </ListItem>
@@ -45,28 +32,29 @@ const Navbar = () => {
           })}
         </Flex>
       </List>
-      <MotionBox
-        as="button"
-        className="hamburger-button"
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        sx={{
-          "@media only screen and (max-width: 768px)": {
-            width: "50px",
-            height: "30px",
-            backgroundColor: "rgba(250, 250, 250, 0.25)",
-            borderRadius: "var(--standard-border-radius)",
-          },
-          "&.hamburger-button": {
-            display: "none",
-          },
-        }}
-      >
-        <MotionBar />
-        <MotionBar />
-        <MotionBar />
-      </MotionBox>
-      <Button className="primary-button navbar-button">Sign In</Button>
+      <Box as="div" display={{ base: "flex", md: "none" }} w="50px" h="30px" flexDirection="column" cursor="pointer">
+        <Bar />
+        <Bar />
+        <Bar />
+      </Box>
+      <Box as="div" display={{ base: "none", md: "block" }}>
+        <Button
+          mx="5px"
+          bg="transparent"
+          transition="all 0.4s"
+          _hover={{ bg: theme.config.initialColorMode === "dark" ? theme.colors.darkPriText : theme.colors.lightPriText }}
+        >
+          Login
+        </Button>
+        <Button
+          mx="5px"
+          bg="transparent"
+          transition="all 0.4s"
+          _hover={{ bg: theme.config.initialColorMode === "dark" ? theme.colors.darkPriText : theme.colors.lightPriText }}
+        >
+          DarkMode
+        </Button>
+      </Box>
     </Flex>
   );
 };
