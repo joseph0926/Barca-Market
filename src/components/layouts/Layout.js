@@ -13,9 +13,10 @@ const Layout = ({ children }) => {
   useEffect(() => {
     dispatchFn(loadInitialState());
 
-    const localTheme = localStorage.getItem("theme");
-    if (localTheme) {
-      dispatchFn(onMode(localTheme));
+    console.log(mode);
+    if (mode) {
+      dispatchFn(onMode(mode));
+      console.log(mode);
     } else {
       localStorage.setItem("theme", mode);
     }
@@ -41,30 +42,30 @@ const Layout = ({ children }) => {
     styles: {
       global: (props) => ({
         body: {
-          backgroundColor: props.colorMode === "dark" ? "black" : "white",
-          color: props.colorMode === "dark" ? "white" : "black",
+          backgroundColor: mode === "dark" ? theme.colors.dark.pri : theme.colors.white,
+          color: mode === "dark" ? theme.colors.white : theme.colors.black,
         },
         button: {
-          borderColor: props.colorMode === "dark" ? "blue.700" : "red.500",
-          color: "white",
+          borderColor: mode === "dark" ? theme.colors.blue[700] : theme.colors.red[500],
+          color: mode === "dark" ? theme.colors.white : theme.colors.black,
         },
         a: {
-          color: props.colorMode === "dark" ? props.theme.colors.darkPriText : props.theme.colors.lightPriText,
+          color: mode === "dark" ? theme.colors.darkPriText : theme.colors.lightPriText,
         },
       }),
     },
     components: {
       Button: {
         baseStyle: (props) => ({
-          border: "1px solid",
-          borderColor: props.colorMode === "dark" ? props.theme.colors.darkPriText : props.theme.colors.lightPriText,
+          border: "2px solid",
+          borderColor: mode === "dark" ? theme.colors.darkPriText : theme.colors.lightPriText,
           transition: "all 0.2s",
         }),
       },
       Bar: {
         baseStyle: (props) => ({
           height: "4px",
-          bg: props.colorMode === "dark" ? "white" : "black",
+          bg: mode === "dark" ? "white" : "black",
           margin: "3px",
         }),
       },
