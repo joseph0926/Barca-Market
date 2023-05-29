@@ -2,7 +2,7 @@ import Head from "next/head";
 
 import { Provider } from "react-redux";
 import store from "../store/store.js";
-import Layout from "@/src/components/layouts/Layout.js";
+import ThemeLayout from "../components/layouts/ThemeLayout.js";
 
 import "@/src/styles/globals.css";
 
@@ -13,9 +13,9 @@ export default function App({ Component, pageProps }) {
         <title>Barcelona Fan Community</title>
       </Head>
       <Provider store={store}>
-        <Layout>
+        <ThemeLayout>
           <Component {...pageProps} />
-        </Layout>
+        </ThemeLayout>
       </Provider>
     </>
   );

@@ -1,14 +1,14 @@
-import { Box, Button, Flex, Heading, List, ListIcon, ListItem, Text, chakra, useTheme } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, List, ListIcon, ListItem, Text, chakra } from "@chakra-ui/react";
 import Link from "next/link";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { links } from "@/src/utils/links.js";
 import { toggleMode } from "@/src/features/ui/uiSlice.js";
 import { Bar } from "@/src/utils/themeConfig.js";
 
 const Navbar = () => {
-  const theme = useTheme();
   const dispatchFn = useDispatch();
+  const { mode } = useSelector((state) => state.ui);
 
   return (
     <Flex as="nav" justifyContent="space-between" alignItems="center" width="100%" p="36px" mb="30px">
@@ -41,21 +41,10 @@ const Navbar = () => {
         <Bar />
       </Box>
       <Box as="div" display={{ base: "none", md: "block" }}>
-        <Button
-          mx="5px"
-          bg="transparent"
-          transition="all 0.4s"
-          _hover={{ bg: theme.config.initialColorMode === "dark" ? theme.colors.darkPriText : theme.colors.lightPriText }}
-        >
+        <Button mx="5px" bg="transparent" transition="all 0.4s">
           Login
         </Button>
-        <Button
-          mx="5px"
-          bg="transparent"
-          transition="all 0.4s"
-          _hover={{ bg: theme.config.initialColorMode === "dark" ? theme.colors.darkPriText : theme.colors.lightPriText }}
-          onClick={() => dispatchFn(toggleMode())}
-        >
+        <Button mx="5px" bg="transparent" transition="all 0.4s" onClick={() => dispatchFn(toggleMode())}>
           DarkMode
         </Button>
       </Box>
