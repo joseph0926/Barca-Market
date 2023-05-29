@@ -29,6 +29,10 @@ project_03-Barcelona-Fan-Community/
 │   │   ├── _document.js/
 │   │   ├── about.js/
 │   │   ├── index.js/
+│   ├── features/               # redux slice
+│   │   ├── user/
+│   │   ├── ui/
+│   ├── store/                  # redux store   
 │   ├── prisma/                 # prisma 모델 정의
 │   ├── public/                 
 │   ├── styles/
