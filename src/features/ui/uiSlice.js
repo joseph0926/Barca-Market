@@ -17,9 +17,17 @@ const uiSlice = createSlice({
     },
     onMode: (state, action) => {
       state.mode = action.payload;
+
+      if (typeof window !== "undefined") {
+        window.localStorage.setItem("theme", state.mode);
+      }
     },
     toggleMode: (state) => {
       state.mode = state.mode === "dark" ? "light" : "dark";
+
+      if (typeof window !== "undefined") {
+        window.localStorage.setItem("theme", state.mode);
+      }
     },
   },
 });

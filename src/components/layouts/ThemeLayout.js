@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
-import { loadInitialState, onMode } from "@/src/features/ui/uiSlice.js";
+import { loadInitialState } from "@/src/features/ui/uiSlice.js";
 import { GlobalStyle } from "@/src/utils/themeConfig.js";
 import Layout from "./Layout.js";
 
@@ -57,13 +57,13 @@ const ThemeLayout = ({ children }) => {
               solid: {
                 _hover: {
                   bg: mode === "dark" ? darkPriText : lightPriText,
-                  color: "white",
+                  color: mode === "dark" ? "#fff" : "#000",
                 },
               },
               outline: {
                 _hover: {
                   borderColor: mode === "dark" ? darkPriText : lightPriText,
-                  color: "red.500",
+                  color: mode === "dark" ? "#fff" : "#000",
                 },
               },
             },
@@ -82,13 +82,7 @@ const ThemeLayout = ({ children }) => {
 
   useEffect(() => {
     dispatch(loadInitialState());
-
-    if (mode) {
-      dispatch(onMode(mode));
-    } else {
-      localStorage.setItem("theme", mode);
-    }
-  }, [mode, dispatch]);
+  }, []);
 
   return (
     <ChakraProvider theme={theme}>
