@@ -1,4 +1,4 @@
-import { extendTheme, CSSReset } from "@chakra-ui/react";
+import { extendTheme, CSSReset, defineStyleConfig } from "@chakra-ui/react";
 
 export const theme = extendTheme({
   config: {
@@ -45,6 +45,12 @@ export const theme = extendTheme({
       800: "#8C0808",
       900: "#6C0606",
     },
+    darkPriText: "#E82727",
+    lightPriText: "#0099FF",
+    primaryGradient: "linear-gradient(101.33deg, #08209a 0.76%, #6563ff 33.33%, #36c5f0 76.92%, #83e2ff 96.96%)",
+  },
+  shadows: {
+    standardBox: "0px 2px 40px rgba(0, 0, 0, 0.15)",
   },
   styles: {
     global: (props) => ({
@@ -53,28 +59,21 @@ export const theme = extendTheme({
         color: props.colorMode === "dark" ? "white" : "black",
       },
       button: {
-        backgroundColor: props.colorMode === "dark" ? "blue.700" : "red.500",
         borderColor: props.colorMode === "dark" ? "blue.700" : "red.500",
         color: "white",
-        borderRadius: "md",
-        border: "2px solid",
-        padding: "0.5rem 1rem",
       },
       a: {
-        color: props.colorMode === "dark" ? "blue.400" : "red.600",
+        color: props.colorMode === "dark" ? theme.colors.darkPriText : theme.colors.lightPriText,
       },
     }),
   },
   components: {
     Button: {
-      variants: {
-        link: {
-          ":focus": {
-            outline: "none",
-            boxShadow: "none",
-          },
-        },
-      },
+      baseStyle: (props) => ({
+        border: "1px solid",
+        borderColor: props.colorMode === "dark" ? "darkPriText" : "lightPriText",
+        transition: "all 0.2s",
+      }),
     },
   },
 });
