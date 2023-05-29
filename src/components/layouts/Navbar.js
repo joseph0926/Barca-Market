@@ -1,11 +1,14 @@
 import { Box, Button, Flex, Heading, List, ListIcon, ListItem, Text, chakra, useTheme } from "@chakra-ui/react";
 import Link from "next/link";
+import { useDispatch } from "react-redux";
 
 import { links } from "@/src/utils/links.js";
-import { Bar, MotionBar, MotionBox } from "../styles/NavbarStyles.js";
+import { toggleMode } from "@/src/features/ui/uiSlice.js";
+import { Bar } from "@/src/utils/themeConfig.js";
 
 const Navbar = () => {
   const theme = useTheme();
+  const dispatchFn = useDispatch();
 
   return (
     <Flex as="nav" justifyContent="space-between" alignItems="center" width="100%" p="36px" mb="30px">
@@ -51,6 +54,7 @@ const Navbar = () => {
           bg="transparent"
           transition="all 0.4s"
           _hover={{ bg: theme.config.initialColorMode === "dark" ? theme.colors.darkPriText : theme.colors.lightPriText }}
+          onClick={() => dispatchFn(toggleMode())}
         >
           DarkMode
         </Button>
