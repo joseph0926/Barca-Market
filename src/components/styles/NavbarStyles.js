@@ -1,5 +1,5 @@
 import { chakra } from "@chakra-ui/react";
-import { theme } from "@/utils/themeConfig.js";
+import { theme } from "@/src/utils/themeConfig.js";
 
 export const Bar = chakra("div", {
   baseStyle: {

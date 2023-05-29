@@ -1,7 +1,7 @@
 import { Box, Button, Flex, Heading, List, ListIcon, ListItem, Text, chakra, useTheme } from "@chakra-ui/react";
 import Link from "next/link";
 
-import { links } from "@/utils/links.js";
+import { links } from "@/src/utils/links.js";
 import { Bar, MotionBar, MotionBox } from "../styles/NavbarStyles.js";
 
 const Navbar = () => {
