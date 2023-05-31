@@ -19,9 +19,7 @@ jobs:
           node-version: 18
       - name: Install dependencies
         run: |
-          cd barcelona
           npm ci
       - name: Run tests
         run: |
-          cd barcelona
           npm test -- --watchAll=false
