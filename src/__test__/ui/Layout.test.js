@@ -1,4 +1,5 @@
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
+import { render } from "../../../jest.setup.js";
 import "@testing-library/jest-dom";
 import Layout from "@/src/components/layouts/Layout.js";
 
@@ -8,7 +9,6 @@ test("renders Navbar and children", () => {
       <div>Test children</div>
     </Layout>
   );
-  screen.debug();
 
   // TEST: navbar is rendered
   expect(screen.getByRole("navigation")).toBeInTheDocument();

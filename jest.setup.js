@@ -18,3 +18,15 @@ beforeAll(() => server.listen());
 afterEach(() => server.resetHandlers());
 // Clean up after the tests are finished.
 afterAll(() => server.close());
+
+import { render as rtlRender } from "@testing-library/react";
+import { Provider } from "react-redux";
+import store from "./src/store/store.js";
+
+const render = (ui, options) => {
+  const Wrapper = ({ children }) => <Provider store={store}>{children}</Provider>;
+  return rtlRender(ui, { wrapper: Wrapper, ...options });
+};
+
+export * from "@testing-library/react";
+export { render };
