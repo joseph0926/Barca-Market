@@ -1,6 +1,6 @@
 import { Box } from "@chakra-ui/react";
-import Loading from "./Loading.js";
 import Navbar from "./Navbar.js";
+import Loading from "./Loading.js";
 
 const Layout = ({ children }) => {
   return (

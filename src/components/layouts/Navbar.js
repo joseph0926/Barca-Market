@@ -1,11 +1,14 @@
-import { Box, Button, Flex, Heading, List, ListIcon, ListItem, Text, chakra, useTheme } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, List, ListIcon, ListItem, Text, chakra } from "@chakra-ui/react";
 import Link from "next/link";
+import { useDispatch, useSelector } from "react-redux";
 
 import { links } from "@/src/utils/links.js";
-import { Bar, MotionBar, MotionBox } from "../styles/NavbarStyles.js";
+import { toggleMode } from "@/src/features/ui/uiSlice.js";
+import { Bar } from "@/src/utils/themeConfig.js";
 
 const Navbar = () => {
-  const theme = useTheme();
+  const dispatchFn = useDispatch();
+  const { mode } = useSelector((state) => state.ui);
 
   return (
     <Flex as="nav" role="navigation" justifyContent="space-between" alignItems="center" width="100%" p="36px" mb="30px">
@@ -22,7 +25,7 @@ const Navbar = () => {
                 fontWeight="400"
                 opacity="0.85"
                 transition="opacity 0.2s ease-in-out, box-shadow 0.2s ease-in-out"
-                _hover={{ opacity: 1, boxShadow: "0 2px 0 red" }}
+                _hover={{ opacity: 1, boxShadow: `0 2px 0 ${mode === "dark" ? "red" : "blue"}` }}
               >
                 <Link href={link.path} passHref>
                   {link.title}
@@ -38,20 +41,10 @@ const Navbar = () => {
         <Bar />
       </Box>
       <Box as="div" display={{ base: "none", md: "block" }}>
-        <Button
-          mx="5px"
-          bg="transparent"
-          transition="all 0.4s"
-          _hover={{ bg: theme.config.initialColorMode === "dark" ? theme.colors.darkPriText : theme.colors.lightPriText }}
-        >
+        <Button mx="5px" bg="transparent" transition="all 0.4s">
           Login
         </Button>
-        <Button
-          mx="5px"
-          bg="transparent"
-          transition="all 0.4s"
-          _hover={{ bg: theme.config.initialColorMode === "dark" ? theme.colors.darkPriText : theme.colors.lightPriText }}
-        >
+        <Button mx="5px" bg="transparent" transition="all 0.4s" onClick={() => dispatchFn(toggleMode())}>
           DarkMode
         </Button>
       </Box>
