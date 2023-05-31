@@ -8,7 +8,7 @@ const Navbar = () => {
   const theme = useTheme();
 
   return (
-    <Flex as="nav" justifyContent="space-between" alignItems="center" width="100%" p="36px" mb="30px">
+    <Flex as="nav" role="navigation" justifyContent="space-between" alignItems="center" width="100%" p="36px" mb="30px">
       <Link href="/" passHref>
         <Heading as="h1">Logo</Heading>
       </Link>
