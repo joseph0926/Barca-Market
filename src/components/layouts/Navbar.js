@@ -22,7 +22,7 @@ const Navbar = () => {
               <ListItem
                 key={link.title}
                 fontSize="xl"
-                fontWeight="400"
+                fontWeight="700"
                 opacity="0.85"
                 transition="opacity 0.2s ease-in-out, box-shadow 0.2s ease-in-out"
                 _hover={{ opacity: 1, boxShadow: `0 2px 0 ${mode === "dark" ? "red" : "blue"}` }}
