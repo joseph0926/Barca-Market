@@ -3,7 +3,7 @@ import BaseFormControl from "./FormController.js";
 
 const Signup = ({ submitHandler }) => {
   return (
-    <Box w="30vw">
+    <Box as="form" role="form" w="30vw">
       <Heading mb="1rem">Sign up</Heading>
       <BaseFormControl id="username" type="text" name="username" placeholder="UserName" />
       <BaseFormControl id="up-email" type="email" name="email" placeholder="Eamil" />
