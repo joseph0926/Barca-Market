@@ -5,7 +5,7 @@ import { loadInitialState } from "@/src/features/ui/uiSlice.js";
 import { GlobalStyle } from "@/src/utils/themeConfig.js";
 import Layout from "./Layout.js";
 
-const ThemeLayout = ({ children }) => {
+const ThemeLayout = ({ children, isExempt }) => {
   const dispatch = useDispatch();
   const { mode } = useSelector((state) => state.ui);
 
@@ -51,7 +51,7 @@ const ThemeLayout = ({ children }) => {
             baseStyle: (props) => ({
               border: "2px solid",
               borderColor: mode === "dark" ? darkPriText : lightPriText,
-              transition: "all 0.2s",
+              transition: "all 0.5s",
             }),
             variants: {
               solid: {
@@ -87,7 +87,7 @@ const ThemeLayout = ({ children }) => {
   return (
     <ChakraProvider theme={theme}>
       <GlobalStyle />
-      <Layout>{children}</Layout>
+      {isExempt ? children : <Layout>{children}</Layout>}
     </ChakraProvider>
   );
 };
