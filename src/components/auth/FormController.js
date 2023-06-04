@@ -1,17 +1,7 @@
-import { useState } from "react";
 import { FormControl, FormLabel, Input } from "@chakra-ui/react";
 
-const BaseFormControl = ({ id, type, name, placeholder }) => {
-  const [formState, setFormState] = useState({ username: "", password: "", email: "" });
-  const inputHandler = (e) => {
-    setFormState((pervState) => {
-      return {
-        ...pervState,
-        [e.target.name]: e.target.value,
-      };
-    });
-  };
-
+const BaseFormControl = ({ id, type, name, placeholder, value, handleChange, handleBlur, validateFn, isValid, touched }) => {
+  const inputClasses = touched && isValid ? "form-control" : "form-control invalid";
   return (
     <FormControl>
       <FormLabel>{name}</FormLabel>
@@ -20,11 +10,22 @@ const BaseFormControl = ({ id, type, name, placeholder }) => {
         type={type}
         name={name}
         placeholder={placeholder}
-        onChange={inputHandler}
-        value={formState.name}
+        onChange={handleChange}
+        onBlur={handleBlur}
+        value={value}
+        className={inputClasses}
         borderColor="#0099FF"
         _hover={{ borderColor: "#0099FF" }}
       />
+      {touched && !isValid && (
+        <p className="error-text" style={{ color: "red" }}>
+          {name === "email"
+            ? "이메일 형식이 올바르지 않습니다"
+            : name === "password"
+            ? "비밀번호는 최소 6자리 이상이어야 합니다."
+            : "닉네임을 비울수는 없습니다"}
+        </p>
+      )}
     </FormControl>
   );
 };
