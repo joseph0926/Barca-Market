@@ -10,9 +10,7 @@ test("renders Navbar and children", () => {
     </Layout>
   );
 
-  // TEST: navbar is rendered
   expect(screen.getByRole("navigation")).toBeInTheDocument();
 
-  // TEST: children are rendered
   expect(screen.getByText("Test children")).toBeInTheDocument();
 });

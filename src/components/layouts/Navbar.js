@@ -42,7 +42,7 @@ const Navbar = () => {
       </Box>
       <Box as="div" display={{ base: "none", md: "block" }}>
         <Button mx="5px" bg="transparent" transition="all 0.4s">
-          Login
+          <Link href="/sign">Login</Link>
         </Button>
         <Button mx="5px" bg="transparent" transition="all 0.4s" onClick={() => dispatchFn(toggleMode())}>
           DarkMode
