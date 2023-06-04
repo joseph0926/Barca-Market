@@ -1,6 +1,7 @@
 import { Box, Button, Heading } from "@chakra-ui/react";
 import BaseFormControl from "./FormController.js";
 import { useInput } from "@/src/hooks/useInput.js";
+import SocialLogin from "./SocialLogin.js";
 
 const Signin = () => {
   const { formState, touched, isValid, handleInputChange, handleBlur, isLoginFormValid } = useInput();
@@ -41,6 +42,7 @@ const Signin = () => {
       <Button bg="transparent" w="100%" my="1rem" disabled={!isLoginFormValid}>
         Login
       </Button>
+      <SocialLogin />
     </Box>
   );
 };

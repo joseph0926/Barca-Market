@@ -24,7 +24,7 @@ const GradientBox = (props) => {
       top="-600px"
       left="-50%"
       zIndex="-1"
-      animation={`${gradient} 6s ease infinite`}
+      animation={`${gradient} 4s ease infinite`}
       {...props}
     />
   );

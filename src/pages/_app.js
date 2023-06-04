@@ -1,5 +1,6 @@
 import Head from "next/head";
 
+import { SessionProvider } from "next-auth/react";
 import { Provider } from "react-redux";
 import store from "../store/store.js";
 import ThemeLayout from "../components/layouts/ThemeLayout.js";
@@ -14,11 +15,13 @@ export default function App({ Component, pageProps }) {
       <Head>
         <title>Barcelona Fan Community</title>
       </Head>
-      <Provider store={store}>
-        <ThemeLayout isExempt={isExempt}>
-          <Component {...pageProps} />
-        </ThemeLayout>
-      </Provider>
+      <SessionProvider session={pageProps}>
+        <Provider store={store}>
+          <ThemeLayout isExempt={isExempt}>
+            <Component {...pageProps} />
+          </ThemeLayout>
+        </Provider>
+      </SessionProvider>
     </>
   );
 }
