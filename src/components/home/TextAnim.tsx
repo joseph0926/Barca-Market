@@ -1,6 +1,6 @@
 import { TypeAnimation } from "react-type-animation";
 
-const TextAnim = () => {
+const TextAnim = (): JSX.Element => {
   return (
     <TypeAnimation
       sequence={[

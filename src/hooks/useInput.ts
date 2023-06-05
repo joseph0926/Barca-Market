@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { validateEmail, validatePassword, validateName } from "../utils/validation.js";
+import { FormState, TouchedState, UseInputReturn, ValidState } from "../models/user.js";
 
-export const useInput = () => {
-  const [formState, setFormState] = useState({ email: "", password: "" });
-  const [touched, setTouched] = useState({ email: false, password: false, username: false });
-  const [isValid, setIsValid] = useState({ email: true, password: true, username: true });
+export const useInput = (): UseInputReturn => {
+  const [formState, setFormState] = useState<FormState>({ email: "", password: "", name: "" });
+  const [touched, setTouched] = useState<TouchedState>({ email: false, password: false, username: false });
+  const [isValid, setIsValid] = useState<ValidState>({ email: true, password: true, username: true });
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;

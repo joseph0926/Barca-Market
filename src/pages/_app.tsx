@@ -1,3 +1,4 @@
+import { AppProps } from "next/app";
 import Head from "next/head";
 
 import { SessionProvider } from "next-auth/react";
@@ -7,7 +8,7 @@ import ThemeLayout from "../components/layouts/ThemeLayout.js";
 
 import "@/src/styles/globals.css";
 
-export default function App({ Component, pageProps }) {
+export default function App({ Component, pageProps }: AppProps) {
   const isExempt = Component.displayName === "Sign" || Component.name === "Sign";
 
   return (

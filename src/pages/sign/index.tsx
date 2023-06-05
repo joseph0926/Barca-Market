@@ -2,8 +2,8 @@ import Link from "next/link";
 import { useState } from "react";
 import { VStack, Flex, Button, Text, keyframes, Box } from "@chakra-ui/react";
 import { motion } from "framer-motion";
-import Signin from "@/src/components/auth/Signin.js";
-import Signup from "@/src/components/auth/Signup.js";
+import Signin from "@/src/components/auth/Signin";
+import Signup from "@/src/components/auth/Signup";
 
 const gradient = keyframes`
   0% {background-position: 0% 50%}
@@ -11,7 +11,7 @@ const gradient = keyframes`
   100% {background-position: 0% 50%}
 `;
 
-const Sign = () => {
+const Sign = (): JSX.Element => {
   const [signMode, setSignMode] = useState("in");
   const [anim, setAnim] = useState(false);
 
@@ -62,7 +62,5 @@ const Sign = () => {
     </>
   );
 };
-
-Sign.displayName = "Sign";
 
 export default Sign;

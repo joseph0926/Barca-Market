@@ -2,7 +2,7 @@ import { Box, Button, Flex } from "@chakra-ui/react";
 import { signIn } from "next-auth/react";
 import { FaGoogle, FaGithub } from "react-icons/fa";
 
-function SocialLogin() {
+const SocialLogin = (): JSX.Element => {
   return (
     <Flex justifyContent="space-between" my="0.5rem">
       <Button onClick={() => signIn("google")} borderColor="blue.400" _hover={{ bg: "blue.400" }}>
@@ -19,6 +19,6 @@ function SocialLogin() {
       </Button>
     </Flex>
   );
-}
+};
 
 export default SocialLogin;

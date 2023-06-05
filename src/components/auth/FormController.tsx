@@ -1,6 +1,19 @@
+import { FC } from "react";
 import { FormControl, FormLabel, Input } from "@chakra-ui/react";
+import { BaseFormControlProps } from "../../models/user";
 
-const BaseFormControl = ({ id, type, name, placeholder, value, handleChange, handleBlur, validateFn, isValid, touched }) => {
+const BaseFormControl: FC<BaseFormControlProps> = ({
+  id,
+  type,
+  name,
+  placeholder,
+  value,
+  handleChange,
+  handleBlur,
+  validateFn,
+  isValid,
+  touched,
+}): JSX.Element => {
   const inputClasses = touched && isValid ? "form-control" : "form-control invalid";
   return (
     <FormControl>

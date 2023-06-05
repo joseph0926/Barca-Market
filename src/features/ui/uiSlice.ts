@@ -1,6 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { UIState } from "../../models/ui";
 
-const initialState = {
+const initialState: UIState = {
   isSidebarOpen: false,
   mode: "dark",
 };
@@ -15,7 +16,7 @@ const uiSlice = createSlice({
         state.mode = mode;
       }
     },
-    onMode: (state, action) => {
+    onMode: (state, action: PayloadAction<string>) => {
       state.mode = action.payload;
 
       if (typeof window !== "undefined") {

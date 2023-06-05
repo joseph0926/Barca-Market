@@ -1,5 +1,6 @@
-import { Box, keyframes } from "@chakra-ui/react";
+import { Box, keyframes, BoxProps } from "@chakra-ui/react";
 import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
 
 const gradient = keyframes`
   0% {background-position: 0% 50%}
@@ -7,8 +8,8 @@ const gradient = keyframes`
   100% {background-position: 0% 50%}
 `;
 
-const GradientBox = (props) => {
-  const { mode } = useSelector((state) => state.ui);
+const GradientBox = (props: BoxProps): JSX.Element => {
+  const { mode } = useSelector((state: RootState) => state.ui);
 
   const bgGradientLight = "linear(to-l, rgba(232, 39, 39, 0.8), rgba(255, 255, 255, 0.5), rgba(0, 153, 255, 0.8))";
   const bgGradientDark = "linear(to-l, rgba(232, 39, 39, 0.3), rgba(0, 0, 0, 0.5), rgba(0, 153, 255, 0.3))";

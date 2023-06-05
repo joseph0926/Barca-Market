@@ -1,8 +1,8 @@
 import { Box, Button, Heading } from "@chakra-ui/react";
-import BaseFormControl from "./FormController.js";
-import { useInput } from "@/src/hooks/useInput.js";
+import BaseFormControl from "./FormController";
+import { useInput } from "@/src/hooks/useInput";
 
-const Signup = () => {
+const Signup = (): JSX.Element => {
   const { formState, touched, isValid, handleInputChange, handleBlur, isLoginFormValid } = useInput();
 
   return (

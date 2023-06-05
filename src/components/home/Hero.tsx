@@ -1,8 +1,7 @@
 import { Box, Flex, Heading, Text, Button } from "@chakra-ui/react";
-import Image from "next/image";
-import TextAnim from "./TextAnim.js";
+import TextAnim from "./TextAnim";
 
-const Hero = () => {
+const Hero = (): JSX.Element => {
   return (
     <Flex w="100vw" h="70vh" justify="center" align="center" position="relative">
       <Flex direction={{ base: "column", md: "row" }} justify="flex-start" alignItems="center" gap={10}>

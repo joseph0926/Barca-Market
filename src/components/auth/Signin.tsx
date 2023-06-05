@@ -3,7 +3,7 @@ import BaseFormControl from "./FormController.js";
 import { useInput } from "@/src/hooks/useInput.js";
 import SocialLogin from "./SocialLogin.js";
 
-const Signin = () => {
+const Signin = (): JSX.Element => {
   const { formState, touched, isValid, handleInputChange, handleBlur, isLoginFormValid } = useInput();
 
   const submitHandler = (e) => {
