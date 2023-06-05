@@ -1,24 +1,14 @@
 import { Box, Button, Heading } from "@chakra-ui/react";
-import BaseFormControl from "./FormController.js";
-import { useInput } from "@/src/hooks/useInput.js";
+import BaseFormControl from "./FormController";
+import { useInput } from "@/src/hooks/useInput";
+import SocialLogin from "./SocialLogin";
 
-const Signup = () => {
+const Signin = (): JSX.Element => {
   const { formState, touched, isValid, handleInputChange, handleBlur, isLoginFormValid } = useInput();
 
   return (
     <Box as="form" role="form" w="30vw">
-      <Heading mb="1rem">Sign up</Heading>
-      <BaseFormControl
-        id="username"
-        type="text"
-        name="username"
-        placeholder="UserName"
-        value={formState.name}
-        handleChange={handleInputChange}
-        handleBlur={handleBlur}
-        isValid={isValid.username}
-        touched={touched.username}
-      />
+      <Heading mb="1rem">Sign in</Heading>
       <BaseFormControl
         id="in-email"
         type="email"
@@ -42,10 +32,11 @@ const Signup = () => {
         touched={touched.password}
       />
       <Button bg="transparent" w="100%" my="1rem" disabled={!isLoginFormValid}>
-        Sign up
+        Login
       </Button>
+      <SocialLogin />
     </Box>
   );
 };
 
-export default Signup;
+export default Signin;

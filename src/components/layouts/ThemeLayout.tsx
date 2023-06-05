@@ -1,13 +1,14 @@
 import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ChakraProvider, extendTheme } from "@chakra-ui/react";
-import { loadInitialState } from "@/src/features/ui/uiSlice.js";
-import { GlobalStyle } from "@/src/utils/themeConfig.js";
-import Layout from "./Layout.js";
+import { CSSReset, ChakraProvider, extendTheme } from "@chakra-ui/react";
+import { loadInitialState } from "@/src/features/ui/uiSlice";
+import Layout from "./Layout";
+import { RootState } from "@/src/store/store";
+import { BoxProps } from "@/src/models/global";
 
-const ThemeLayout = ({ children, isExempt }) => {
+const ThemeLayout = ({ children, isExempt }: BoxProps): JSX.Element => {
   const dispatch = useDispatch();
-  const { mode } = useSelector((state) => state.ui);
+  const { mode } = useSelector((state: RootState) => state.ui);
 
   const darkPriText = "#E82727";
   const lightPriText = "#0099FF";
@@ -18,6 +19,22 @@ const ThemeLayout = ({ children, isExempt }) => {
         config: {
           initialColorMode: mode,
           useSystemColorMode: false,
+        },
+        global: {
+          "*": {
+            margin: 0,
+            padding: 0,
+            boxSizing: "border-box",
+          },
+          body: {
+            fontFamily: "Ubuntu, sans-serif",
+          },
+          ul: {
+            listStyle: "none",
+          },
+          a: {
+            textDecoration: "none",
+          },
         },
         colors: {
           dark: {
@@ -86,7 +103,7 @@ const ThemeLayout = ({ children, isExempt }) => {
 
   return (
     <ChakraProvider theme={theme}>
-      <GlobalStyle />
+      <CSSReset />
       {isExempt ? children : <Layout>{children}</Layout>}
     </ChakraProvider>
   );

@@ -21,7 +21,7 @@ afterAll(() => server.close());
 
 import { render as rtlRender } from "@testing-library/react";
 import { Provider } from "react-redux";
-import store from "./src/store/store.js";
+import store from "./src/store/store";
 
 const render = (ui, options) => {
   const Wrapper = ({ children }) => <Provider store={store}>{children}</Provider>;

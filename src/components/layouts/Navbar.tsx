@@ -1,20 +1,23 @@
-import { Box, Button, Flex, Heading, List, ListIcon, ListItem, Text, chakra } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, List, ListItem } from "@chakra-ui/react";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 
-import { links } from "@/src/utils/links.js";
-import { toggleMode } from "@/src/features/ui/uiSlice.js";
-import { Bar } from "@/src/utils/themeConfig.js";
+import { links } from "@/src/utils/links";
+import { toggleMode } from "@/src/features/ui/uiSlice";
+import { Bar } from "@/src/utils/themeConfig";
+import { RootState } from "../../store/store";
 
-const Navbar = () => {
-  const dispatchFn = useDispatch();
-  const { mode } = useSelector((state) => state.ui);
+const Navbar = (): JSX.Element => {
+  const dispatch = useDispatch();
+  const { mode } = useSelector((state: RootState) => state.ui);
 
   return (
     <Flex as="nav" role="navigation" justifyContent="space-between" alignItems="center" width="100%" p="36px" mb="30px">
-      <Link href="/" passHref>
-        <Heading as="h1">Logo</Heading>
-      </Link>
+      <Heading as="h1">
+        <Link href="/" passHref>
+          Logo
+        </Link>
+      </Heading>
       <List display={{ base: "none", md: "block" }}>
         <Flex justifyContent="center" alignItems="center" gap={6}>
           {links.map((link) => {
@@ -44,7 +47,7 @@ const Navbar = () => {
         <Button mx="5px" bg="transparent" transition="all 0.4s">
           <Link href="/sign">Login</Link>
         </Button>
-        <Button mx="5px" bg="transparent" transition="all 0.4s" onClick={() => dispatchFn(toggleMode())}>
+        <Button mx="5px" bg="transparent" transition="all 0.4s" onClick={() => dispatch(toggleMode())}>
           DarkMode
         </Button>
       </Box>

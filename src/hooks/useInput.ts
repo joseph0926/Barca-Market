@@ -1,12 +1,13 @@
-import { useState } from "react";
-import { validateEmail, validatePassword, validateName } from "../utils/validation.js";
+import { useState, ChangeEvent, FocusEvent } from "react";
+import { validateEmail, validatePassword, validateName } from "../utils/validation";
+import { FormState, TouchedState, UseInputReturn, ValidState } from "../models/user";
 
-export const useInput = () => {
-  const [formState, setFormState] = useState({ email: "", password: "" });
+export const useInput = (): UseInputReturn => {
+  const [formState, setFormState] = useState({ email: "", password: "", username: "" });
   const [touched, setTouched] = useState({ email: false, password: false, username: false });
   const [isValid, setIsValid] = useState({ email: true, password: true, username: true });
 
-  const handleInputChange = (e) => {
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormState((prevState) => ({
       ...prevState,
@@ -14,7 +15,7 @@ export const useInput = () => {
     }));
   };
 
-  const handleBlur = (e) => {
+  const handleBlur = (e: FocusEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setTouched((prevState) => ({
       ...prevState,
