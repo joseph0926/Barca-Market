@@ -1,10 +1,10 @@
-import { Box, Button, Flex, Heading, List, ListItem, chakra } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, List, ListItem } from "@chakra-ui/react";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 
-import { links } from "@/src/utils/links.js";
-import { toggleMode } from "@/src/features/ui/uiSlice.js";
-import { Bar } from "@/src/utils/themeConfig.js";
+import { links } from "@/src/utils/links";
+import { toggleMode } from "@/src/features/ui/uiSlice";
+import { Bar } from "@/src/utils/themeConfig";
 import { RootState } from "../../store/store";
 
 const Navbar = (): JSX.Element => {
@@ -13,9 +13,11 @@ const Navbar = (): JSX.Element => {
 
   return (
     <Flex as="nav" role="navigation" justifyContent="space-between" alignItems="center" width="100%" p="36px" mb="30px">
-      <Link href="/" passHref>
-        <Heading as="h1">Logo</Heading>
-      </Link>
+      <Heading as="h1">
+        <Link href="/" passHref>
+          Logo
+        </Link>
+      </Heading>
       <List display={{ base: "none", md: "block" }}>
         <Flex justifyContent="center" alignItems="center" gap={6}>
           {links.map((link) => {
@@ -29,7 +31,7 @@ const Navbar = (): JSX.Element => {
                 _hover={{ opacity: 1, boxShadow: `0 2px 0 ${mode === "dark" ? "red" : "blue"}` }}
               >
                 <Link href={link.path} passHref>
-                  <chakra.a>{link.title}</chakra.a>
+                  {link.title}
                 </Link>
               </ListItem>
             );

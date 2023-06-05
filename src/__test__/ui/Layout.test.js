@@ -1,7 +1,7 @@
 import { screen } from "@testing-library/react";
 import { render } from "../../../jest.setup.js";
 import "@testing-library/jest-dom";
-import Layout from "@/src/components/layouts/Layout.js";
+import Layout from "@/src/components/layouts/Layout";
 
 test("renders Navbar and children", () => {
   render(

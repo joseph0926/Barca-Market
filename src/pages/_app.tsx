@@ -1,14 +1,13 @@
-import { AppProps } from "next/app";
 import Head from "next/head";
 
 import { SessionProvider } from "next-auth/react";
 import { Provider } from "react-redux";
-import store from "../store/store.js";
-import ThemeLayout from "../components/layouts/ThemeLayout.js";
+import store from "../store/store";
+import ThemeLayout from "../components/layouts/ThemeLayout";
 
 import "@/src/styles/globals.css";
 
-export default function App({ Component, pageProps }: AppProps) {
+export default function App({ Component, pageProps }) {
   const isExempt = Component.displayName === "Sign" || Component.name === "Sign";
 
   return (

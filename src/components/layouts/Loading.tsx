@@ -1,7 +1,7 @@
 import { Box } from "@chakra-ui/react";
 import { SystemCSSProperties } from "@chakra-ui/react";
 import { loaderStyles } from "../styles/LoadingStyles";
-import { LoadingProps } from "@/src/models/ui.js";
+import { LoadingProps } from "@/src/models/ui";
 
 const Loading = ({ display }: LoadingProps): JSX.Element => {
   const displaySpinner: SystemCSSProperties["display"] = display ? "flex" : "none";

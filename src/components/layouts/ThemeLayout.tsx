@@ -1,11 +1,10 @@
 import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { ChakraProvider, extendTheme } from "@chakra-ui/react";
-import { loadInitialState } from "@/src/features/ui/uiSlice.js";
-import { GlobalStyle } from "@/src/utils/themeConfig.js";
-import Layout from "./Layout.js";
-import { RootState } from "@/src/store/store.js";
-import { BoxProps } from "@/src/models/global.js";
+import { CSSReset, ChakraProvider, extendTheme } from "@chakra-ui/react";
+import { loadInitialState } from "@/src/features/ui/uiSlice";
+import Layout from "./Layout";
+import { RootState } from "@/src/store/store";
+import { BoxProps } from "@/src/models/global";
 
 const ThemeLayout = ({ children, isExempt }: BoxProps): JSX.Element => {
   const dispatch = useDispatch();
@@ -20,6 +19,22 @@ const ThemeLayout = ({ children, isExempt }: BoxProps): JSX.Element => {
         config: {
           initialColorMode: mode,
           useSystemColorMode: false,
+        },
+        global: {
+          "*": {
+            margin: 0,
+            padding: 0,
+            boxSizing: "border-box",
+          },
+          body: {
+            fontFamily: "Ubuntu, sans-serif",
+          },
+          ul: {
+            listStyle: "none",
+          },
+          a: {
+            textDecoration: "none",
+          },
         },
         colors: {
           dark: {
@@ -88,7 +103,7 @@ const ThemeLayout = ({ children, isExempt }: BoxProps): JSX.Element => {
 
   return (
     <ChakraProvider theme={theme}>
-      <GlobalStyle />
+      <CSSReset />
       {isExempt ? children : <Layout>{children}</Layout>}
     </ChakraProvider>
   );

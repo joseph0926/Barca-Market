@@ -1,18 +1,10 @@
 import { Box, Button, Heading } from "@chakra-ui/react";
-import BaseFormControl from "./FormController.js";
-import { useInput } from "@/src/hooks/useInput.js";
-import SocialLogin from "./SocialLogin.js";
+import BaseFormControl from "./FormController";
+import { useInput } from "@/src/hooks/useInput";
+import SocialLogin from "./SocialLogin";
 
 const Signin = (): JSX.Element => {
   const { formState, touched, isValid, handleInputChange, handleBlur, isLoginFormValid } = useInput();
-
-  const submitHandler = (e) => {
-    e.preventDefault();
-
-    if (!isLoginFormValid) {
-      return;
-    }
-  };
 
   return (
     <Box as="form" role="form" w="30vw">

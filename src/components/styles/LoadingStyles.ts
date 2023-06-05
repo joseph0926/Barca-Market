@@ -1,5 +1,3 @@
-import { css } from "@chakra-ui/react";
-
 import { SystemStyleObject } from "@chakra-ui/react";
 
 const loaderSpanStyles: SystemStyleObject = {

@@ -2,7 +2,7 @@ import { ChangeEvent, FocusEvent } from "react";
 
 export interface User {
   id: number;
-  name: string;
+  name?: string;
   email: string;
   password: string;
 }
@@ -22,20 +22,25 @@ export interface BaseFormControlProps {
   validateFn?: (value: string) => boolean;
   isValid: boolean;
   touched: boolean;
+  username?: string;
 }
 
-export type FormState = Pick<User, "email" | "password" | "name">;
+export interface FormState {
+  email: string;
+  password: string;
+  username: string;
+}
 
 export interface TouchedState {
   email: boolean;
   password: boolean;
-  username?: boolean;
+  username: boolean;
 }
 
 export interface ValidState {
   email: boolean;
   password: boolean;
-  username?: boolean;
+  username: boolean;
 }
 
 export interface UseInputReturn {
@@ -43,6 +48,6 @@ export interface UseInputReturn {
   touched: TouchedState;
   isValid: ValidState;
   handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
-  handleBlur: (e: FocusEvent<HTMLInputElement>) => void;
+  handleBlur: (e: ChangeEvent<HTMLInputElement>) => void;
   isLoginFormValid: boolean;
 }

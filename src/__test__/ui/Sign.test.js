@@ -1,7 +1,7 @@
 import { act, screen } from "@testing-library/react";
 import { render } from "../../../jest.setup.js";
 import "@testing-library/jest-dom";
-import Sign from "@/src/pages/sign/index.js";
+import Sign from "@/src/pages/sign/index";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 
 const theme = extendTheme({

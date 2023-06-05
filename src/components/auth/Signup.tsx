@@ -1,19 +1,20 @@
 import { Box, Button, Heading } from "@chakra-ui/react";
 import BaseFormControl from "./FormController";
-import { useInput } from "@/src/hooks/useInput";
+import { useInput } from "../../hooks/useInput";
+import { UseInputReturn } from "@/src/models/user";
 
 const Signup = (): JSX.Element => {
-  const { formState, touched, isValid, handleInputChange, handleBlur, isLoginFormValid } = useInput();
+  const { formState, touched, isValid, handleInputChange, handleBlur, isLoginFormValid }: UseInputReturn = useInput();
 
   return (
     <Box as="form" role="form" w="30vw">
-      <Heading mb="1rem">Sign up</Heading>
+      <Heading mb="1rem">회원 가입</Heading>
       <BaseFormControl
         id="username"
         type="text"
         name="username"
-        placeholder="UserName"
-        value={formState.name}
+        placeholder="사용자명"
+        value={formState.username}
         handleChange={handleInputChange}
         handleBlur={handleBlur}
         isValid={isValid.username}
@@ -23,7 +24,7 @@ const Signup = (): JSX.Element => {
         id="in-email"
         type="email"
         name="email"
-        placeholder="Email"
+        placeholder="이메일"
         value={formState.email}
         handleChange={handleInputChange}
         handleBlur={handleBlur}
@@ -34,7 +35,7 @@ const Signup = (): JSX.Element => {
         id="in-password"
         type="password"
         name="password"
-        placeholder="Password"
+        placeholder="비밀번호"
         value={formState.password}
         handleChange={handleInputChange}
         handleBlur={handleBlur}
@@ -42,7 +43,7 @@ const Signup = (): JSX.Element => {
         touched={touched.password}
       />
       <Button bg="transparent" w="100%" my="1rem" disabled={!isLoginFormValid}>
-        Sign up
+        가입하기
       </Button>
     </Box>
   );
