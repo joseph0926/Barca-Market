@@ -1,14 +1,15 @@
-import { Box, Button, Flex, Heading, List, ListIcon, ListItem, Text, chakra } from "@chakra-ui/react";
+import { Box, Button, Flex, Heading, List, ListItem, chakra } from "@chakra-ui/react";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 
 import { links } from "@/src/utils/links.js";
 import { toggleMode } from "@/src/features/ui/uiSlice.js";
 import { Bar } from "@/src/utils/themeConfig.js";
+import { RootState } from "../../store/store";
 
-const Navbar = () => {
-  const dispatchFn = useDispatch();
-  const { mode } = useSelector((state) => state.ui);
+const Navbar = (): JSX.Element => {
+  const dispatch = useDispatch();
+  const { mode } = useSelector((state: RootState) => state.ui);
 
   return (
     <Flex as="nav" role="navigation" justifyContent="space-between" alignItems="center" width="100%" p="36px" mb="30px">
@@ -28,7 +29,7 @@ const Navbar = () => {
                 _hover={{ opacity: 1, boxShadow: `0 2px 0 ${mode === "dark" ? "red" : "blue"}` }}
               >
                 <Link href={link.path} passHref>
-                  {link.title}
+                  <chakra.a>{link.title}</chakra.a>
                 </Link>
               </ListItem>
             );
@@ -44,7 +45,7 @@ const Navbar = () => {
         <Button mx="5px" bg="transparent" transition="all 0.4s">
           <Link href="/sign">Login</Link>
         </Button>
-        <Button mx="5px" bg="transparent" transition="all 0.4s" onClick={() => dispatchFn(toggleMode())}>
+        <Button mx="5px" bg="transparent" transition="all 0.4s" onClick={() => dispatch(toggleMode())}>
           DarkMode
         </Button>
       </Box>

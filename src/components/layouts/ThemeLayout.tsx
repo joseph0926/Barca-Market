@@ -4,10 +4,12 @@ import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { loadInitialState } from "@/src/features/ui/uiSlice.js";
 import { GlobalStyle } from "@/src/utils/themeConfig.js";
 import Layout from "./Layout.js";
+import { RootState } from "@/src/store/store.js";
+import { BoxProps } from "@/src/models/global.js";
 
-const ThemeLayout = ({ children, isExempt }) => {
+const ThemeLayout = ({ children, isExempt }: BoxProps): JSX.Element => {
   const dispatch = useDispatch();
-  const { mode } = useSelector((state) => state.ui);
+  const { mode } = useSelector((state: RootState) => state.ui);
 
   const darkPriText = "#E82727";
   const lightPriText = "#0099FF";
