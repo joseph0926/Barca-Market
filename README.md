@@ -4,7 +4,8 @@
 
 ## 프로젝트 소개
 
-[기획서](https://carnation-domain-4f6.notion.site/Project-FC-Barcelona-Fan-Community-Platform-63bf4d3fb51f4011be378c8a21fd65e5)
+- Typescript를 활용
+- Microservice를 이용한 서버 구축
 
 FC Barcelona Fan Community Platform은 FC Barcelona 팬들을 위한 온라인 커뮤니티 플랫폼입니다. <br/>
 이 플랫폼을 통해 FC Barcelona 팬들끼리 소통하고, 다양한 정보와 소식을 공유할 수 있습니다. 팬들은 게시물 작성, 댓글 달기, 팔로우 등의 기능을 활용하여 활발한 커뮤니티 활동을 할 수 있습니다.
@@ -65,13 +66,14 @@ project_03-Barcelona-Fan-Community/
   - Next.js v12
   - ChakraUI
   - Redux Toolkit
-  - JavaScript
+  - TypeScript
 
 - Back-end:
-  - Next.js v12
+  - Node.js
+  - Express
   - PostgreSQL
   - Prisma
-  - JavaScript
+  - TypeScript
 
 ## 팀원
 
