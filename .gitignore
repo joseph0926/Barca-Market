@@ -40,3 +40,4 @@ next-env.d.ts
 /prisma/migrations
 
 */**/auth-psql-secret.yaml
+*/**/prisma/migrations

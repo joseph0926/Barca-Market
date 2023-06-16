@@ -10,6 +10,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum ROLE {
+  USER
+  ADMIN
+}
+
 model User {
     id                 Int       @id @default(autoincrement())
     createdAt DateTime @default(now())
@@ -17,7 +22,7 @@ model User {
     name               String
     email              String    @unique
     password           String
-    role               String    @default("user")
+    role               ROLE    @default(USER)
     
     isVerified         Boolean   @default(false)
     verificationToken  String?   
