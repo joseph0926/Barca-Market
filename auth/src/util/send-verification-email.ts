@@ -1,3 +1,5 @@
+/// <reference path="../@types/index.d.ts" />
+
 import { sendEmail } from "./send-email";
 
 export const sendVerificationEmail = async ({
