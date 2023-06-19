@@ -15,3 +15,8 @@ interface JwtUser {
   id: number;
   email: string;
 }
+
+interface UserPayload {
+  id: string;
+  email: string;
+}

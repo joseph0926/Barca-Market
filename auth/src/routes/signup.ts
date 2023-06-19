@@ -1,6 +1,7 @@
 import express from "express";
 import { body } from "express-validator";
 import { signupController } from "../controllers/signup-controller";
+import { validateRequest } from "../middlewares/vaildate-request";
 
 const router = express.Router();
 
@@ -17,6 +18,7 @@ router.post(
       .isLength({ min: 4, max: 10 })
       .withMessage("닉네임은 4자리 이상 10자리 이하여야 합니다."),
   ],
+  validateRequest,
   signupController
 );
 

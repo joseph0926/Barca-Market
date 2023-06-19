@@ -27,17 +27,4 @@ model User {
     isVerified         Boolean   @default(false)
     verificationToken  String?   
     verified           DateTime?
-
-    tokens Token[]
-}
-
-model Token {
-    id         Int    @id @default(autoincrement())
-    createdAt DateTime @default(now())
-
-    refreshToken String
-    ip          String
-    userAgent   String
-    userId      Int
-    user        User   @relation(fields: [userId], references: [id])
 }
