@@ -16,34 +16,6 @@ FC Barcelona Fan Community Platform은 FC Barcelona 팬들을 위한 온라인 �
 
 
 ### 프로젝트 구성
-```
-project_03-Barcelona-Fan-Community/
-├── src/                   
-│   ├── components/
-|   |   ├── layout               # 레이아웃 관련 컴포넌트 (navbar,,,)
-|   |   ├── styles               # 컴포넌트 관련 스타일링 폴더 (애니메이션등,,)
-│   ├── pages/                     
-│   │   ├── api/                 
-|   |   |   ├── auth/
-|   |   |   ├── forum/
-|   |   |   ├── user/
-|   |   |   ├── index.js/
-│   │   ├── notification/
-│   │   ├── profile/
-│   │   ├── sign/
-│   │   ├── _app.js/
-│   │   ├── _document.js/
-│   │   ├── about.js/
-│   │   ├── index.js/
-│   ├── features/               # redux slice
-│   │   ├── user/
-│   │   ├── ui/
-│   ├── store/                  # redux store   
-│   ├── prisma/                 # prisma 모델 정의
-│   ├── public/                 
-│   ├── styles/
-│   ├── utils/                  # 데이터, 테마 설정 파일 
-```
 
 
 ### ERD
@@ -63,7 +35,7 @@ project_03-Barcelona-Fan-Community/
 ## 기술 스택
 
 - Front-end:
-  - Next.js v12
+  - Next.js
   - ChakraUI
   - Redux Toolkit
   - TypeScript
@@ -74,6 +46,7 @@ project_03-Barcelona-Fan-Community/
   - PostgreSQL
   - Prisma
   - TypeScript
+  - MicroService
 
 ## 팀원
 
@@ -84,12 +57,25 @@ project_03-Barcelona-Fan-Community/
 
 ## 실행 방법
 
+서버 코드를 실행시키려면 Kubernetes, Skaffold, ingress nginx 가 필요합니다 <br/>
+[skaffold 설치](https://skaffold.dev/docs/install/) <br/>
+[ingress nginx 설치](https://kubernetes.github.io/ingress-nginx/deploy/#quick-start)
+
 ```shell
+// front
+cd client
 npm install
 npm run dev
+
+// back
+cd auth
+kubectl apply -f auth-psql-pvc.yaml
+
+cd ..
+skaffold dev
 ```
 
-## .env
+## auth/.env
 ```
 DATABASE_URL=  #postgreSQL url
 JWT_SECRET=    #JWT 토큰
