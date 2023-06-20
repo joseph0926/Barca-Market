@@ -6,7 +6,6 @@ import { StatusCodes } from "http-status-codes";
 import { BadRequestError } from "../errors/bad-request-error";
 import { sendVerificationEmail } from "../util/send-verification-email";
 import { hashPassword } from "../util/password";
-import { createJwtToken } from "../util/jwt";
 
 export const signupController = async (req: Request, res: Response) => {
   const { email, password, name } = req.body;
@@ -38,11 +37,6 @@ export const signupController = async (req: Request, res: Response) => {
       verificationToken,
     },
   });
-
-  const userJwt = createJwtToken({ id: user.id, email: user.email });
-  req.session = {
-    jwt: userJwt,
-  };
 
   // 확인 이메일
   const origin = req.get("origin") || "http://localhost:3000";
