@@ -20,9 +20,18 @@ FC Barcelona Fan Community Platform은 FC Barcelona 팬들을 위한 온라인 �
 
 
 
-
 ### ERD
-![prisma-erd](https://github.com/joseph0926/project_03-Barcelona-Fan-Community/assets/100750188/1cc5439a-e6ce-47ca-9727-f5374e4bf08f)
+
+<div>
+  <span>User</span>
+  <img src="https://github.com/joseph0926/project_03-Barcelona-Fan-Community/assets/100750188/b3e3e9a8-8e9f-4697-967c-4bc45bb1fb70" alt="이미지1 설명" width="400" height="300">
+  <span>Post, Commnet</span>
+  <img src="https://github.com/joseph0926/project_03-Barcelona-Fan-Community/assets/100750188/86f43d2e-5cf5-4c1a-8cd2-89de57418d0b" alt="이미지2 설명"  width="400" height="300">
+  <span>Community</span>
+  <img src="https://github.com/joseph0926/project_03-Barcelona-Fan-Community/assets/100750188/ba6fcc6d-9204-442d-84b7-c1608c1f4ca3" alt="이미지2 설명"  width="400" height="300">
+  <span>Notification</span>
+  <img src="https://github.com/joseph0926/project_03-Barcelona-Fan-Community/assets/100750188/12d2069e-dd64-4b8c-bed2-ce6de89074c4" alt="이미지2 설명"  width="400" height="300">
+</div>
 
 
 ## 주요 기능
