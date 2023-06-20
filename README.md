@@ -16,7 +16,8 @@ FC Barcelona Fan Community Platform은 FC Barcelona 팬들을 위한 온라인 �
 
 
 ### 프로젝트 구성
-![barcelona](https://github.com/joseph0926/project_03-Barcelona-Fan-Community/assets/100750188/8dd72818-1060-4c13-837e-25b0d8ce691e)
+![barcelona](https://github.com/joseph0926/project_03-Barcelona-Fan-Community/assets/100750188/3ff58c97-f1ad-4b2d-81af-fa20104c249e)
+
 
 
 
@@ -46,10 +47,12 @@ FC Barcelona Fan Community Platform은 FC Barcelona 팬들을 위한 온라인 �
   - Node.js
   - Express
   - PostgreSQL
-  - Prisma
-  - TypeScript
   - Redis
+  - MongoDB
+  - Prisma
+  - mongoose
   - MicroService
+  - TypeScript
 
 ## 팀원
 
