@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node-dev src/index.ts",
+    "start": "ts-node-dev --poll src/index.ts",
     "prisma:migrate": "sleep 10 && npx prisma migrate dev",
     "test": "jest --watchAll --no-cache"
   },

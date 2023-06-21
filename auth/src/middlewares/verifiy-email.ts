@@ -20,7 +20,10 @@ export const verifiyEmail = async (
       "해당 이메일로 가입된 사용자를 찾을 수 없습니다."
     );
   }
-  if (existingUser.verificationToken !== verificationToken) {
+  if (
+    !existingUser.isVerified &&
+    existingUser.verificationToken !== verificationToken
+  ) {
     throw new NotAuthorizedError();
   }
 
