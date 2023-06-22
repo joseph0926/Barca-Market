@@ -1,7 +1,6 @@
 import { Request, Response } from "express";
 import prisma from "../db/connectDB";
 import crypto from "crypto";
-import { StatusCodes } from "http-status-codes";
 
 import { BadRequestError } from "../errors/bad-request-error";
 import { sendVerificationEmail } from "../util/send-verification-email";
@@ -47,7 +46,5 @@ export const signupController = async (req: Request, res: Response) => {
     origin,
   });
 
-  res
-    .status(StatusCodes.CREATED)
-    .json({ message: "회원가입 성공! 이메일을 확인해주세요." });
+  res.status(200).json({ message: "회원가입 성공! 이메일을 확인해주세요." });
 };
