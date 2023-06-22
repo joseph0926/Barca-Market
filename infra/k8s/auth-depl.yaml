@@ -14,4 +14,4 @@ spec:
     spec:
       containers:
         - name: auth
-          image: barcelona/auth
+          image: joseph0926-barcelona/auth

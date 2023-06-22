@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth-psql-depl
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth-psql
+  template:
+    metadata:
+      labels:
+        app: auth-psql
+    spec:
+      containers:
+        - name: auth-psql
+          image: postgres:latest
+          env:
+            - name: POSTGRES_USER
+              valueFrom:
+                secretKeyRef:
+                  name: auth-psql-secret
+                  key: POSTGRES_USER
+            - name: POSTGRES_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: auth-psql-secret
+                  key: POSTGRES_PASSWORD
+            - name: POSTGRES_DB
+              value: barcelona
+          ports:
+            - containerPort: 5432
+          volumeMounts:
+            - name: auth-psql-storage
+              mountPath: /var/lib/postgresql/data
+      volumes:
+        - name: auth-psql-storage
+          persistentVolumeClaim:
+            claimName: postgres-pvc

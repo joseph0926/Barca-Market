@@ -9,7 +9,7 @@ build:
   local:
     push: false
   artifacts:
-    - image: barcelona/auth
+    - image: joseph0926-barcelona/auth
       context: auth
       docker:
         dockerfile: Dockerfile
@@ -17,3 +17,9 @@ build:
         manual:
           - src: "src/**/*.ts"
             dest: .
+portForward:
+  - resourceType: service
+    resourceName: auth-psql-srv
+    namespace: default
+    port: 5432
+    localPort: 5432
