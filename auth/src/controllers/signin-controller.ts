@@ -42,5 +42,5 @@ export const signinController = async (req: Request, res: Response) => {
   };
   delete user.password;
 
-  res.status(201).json({ user, message: "로그인에 성공하였습니다." });
+  res.status(201).json([{ user, message: "로그인에 성공하였습니다." }]);
 };

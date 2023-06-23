@@ -9,7 +9,14 @@ router.get(
   currentUser,
   requireAuth,
   (req: Request, res: Response) => {
-    res.status(201).json({ currentUser: req.currentUser || null });
+    res
+      .status(201)
+      .json([
+        {
+          currentUser: req.currentUser || null,
+          message: "유저 정보를 불러오는데 성공하였습니다.",
+        },
+      ]);
   }
 );
 

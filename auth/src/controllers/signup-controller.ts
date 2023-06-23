@@ -46,5 +46,5 @@ export const signupController = async (req: Request, res: Response) => {
     origin,
   });
 
-  res.status(200).json({ message: "회원가입 성공! 이메일을 확인해주세요." });
+  res.status(200).json([{ message: "회원가입 성공! 이메일을 확인해주세요." }]);
 };
