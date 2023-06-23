@@ -77,16 +77,8 @@ FC Barcelona Fan Community Platform은 FC Barcelona 팬들을 위한 온라인 �
 [ingress nginx 설치](https://kubernetes.github.io/ingress-nginx/deploy/#quick-start)
 
 ```shell
-// front
-cd client
-npm install
-npm run dev
-
-// back
-cd auth
-kubectl apply -f auth-psql-pvc.yaml
-
-cd ..
+docker pull rkekqmf0926/auth
+docker pull rkekqmf0926/client
 skaffold dev
 ```
 
