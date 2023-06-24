@@ -1,5 +1,19 @@
+import { ChangeEvent, FocusEvent } from "react";
 import { FormControl, FormLabel, Input } from "@chakra-ui/react";
-import { BaseFormControlProps } from "../../models/user";
+
+type BaseFormControlProps = {
+  id: string;
+  type: string;
+  name: string;
+  placeholder: string;
+  value: string;
+  handleChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleBlur: (e: FocusEvent<HTMLInputElement>) => void;
+  validateFn?: (value: string) => boolean;
+  isValid: boolean;
+  touched: boolean;
+  username?: string;
+};
 
 const BaseFormControl = ({
   id,
@@ -13,7 +27,8 @@ const BaseFormControl = ({
   isValid,
   touched,
 }: BaseFormControlProps): JSX.Element => {
-  const inputClasses = touched && isValid ? "form-control" : "form-control invalid";
+  const inputClasses =
+    touched && isValid ? "form-control" : "form-control invalid";
   return (
     <FormControl>
       <FormLabel>{name}</FormLabel>

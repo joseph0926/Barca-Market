@@ -1,14 +1,12 @@
 import { useEffect, useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import { CSSReset, ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { loadInitialState } from "@/src/features/ui/uiSlice";
 import Layout from "./Layout";
-import { RootState } from "@/src/store/store";
-import { BoxProps } from "@/src/models/global";
+import { useAppDispatch, useAppSelect } from "@/src/hooks/useReduxHook";
 
 const ThemeLayout = ({ children, isExempt }: BoxProps): JSX.Element => {
-  const dispatch = useDispatch();
-  const { mode } = useSelector((state: RootState) => state.ui);
+  const dispatch = useAppDispatch();
+  const { mode } = useAppSelect((state) => state.ui);
 
   const darkPriText = "#E82727";
   const lightPriText = "#0099FF";
@@ -43,7 +41,8 @@ const ThemeLayout = ({ children, isExempt }: BoxProps): JSX.Element => {
           },
           darkPriText,
           lightPriText,
-          primaryGradient: "linear-gradient(101.33deg, #08209a 0.76%, #6563ff 33.33%, #36c5f0 76.92%, #83e2ff 96.96%)",
+          primaryGradient:
+            "linear-gradient(101.33deg, #08209a 0.76%, #6563ff 33.33%, #36c5f0 76.92%, #83e2ff 96.96%)",
         },
         shadows: {
           standardBox: "0px 2px 40px rgba(0, 0, 0, 0.15)",
@@ -51,11 +50,15 @@ const ThemeLayout = ({ children, isExempt }: BoxProps): JSX.Element => {
         styles: {
           global: (props) => ({
             body: {
-              backgroundColor: mode === "dark" ? theme.colors.dark.pri : theme.colors.white,
+              backgroundColor:
+                mode === "dark" ? theme.colors.dark.pri : theme.colors.white,
               color: mode === "dark" ? theme.colors.white : theme.colors.black,
             },
             button: {
-              borderColor: mode === "dark" ? theme.colors.blue[700] : theme.colors.red[500],
+              borderColor:
+                mode === "dark"
+                  ? theme.colors.blue[700]
+                  : theme.colors.red[500],
               color: mode === "dark" ? theme.colors.white : theme.colors.black,
             },
             a: {
