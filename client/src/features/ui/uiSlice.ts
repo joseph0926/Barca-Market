@@ -1,5 +1,9 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { UIState } from "../../models/ui";
+
+export type UIState = {
+  isSidebarOpen: boolean;
+  mode: "dark" | "light" | string;
+};
 
 const initialState: UIState = {
   isSidebarOpen: false,

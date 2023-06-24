@@ -1,18 +1,25 @@
 import { Box, Button, Flex, Heading, List, ListItem } from "@chakra-ui/react";
 import Link from "next/link";
-import { useDispatch, useSelector } from "react-redux";
 
 import { links } from "@/src/utils/links";
 import { toggleMode } from "@/src/features/ui/uiSlice";
 import { Bar } from "@/src/utils/themeConfig";
-import { RootState } from "../../store/store";
+import { useAppDispatch, useAppSelect } from "@/src/hooks/useReduxHook";
 
 const Navbar = (): JSX.Element => {
-  const dispatch = useDispatch();
-  const { mode } = useSelector((state: RootState) => state.ui);
+  const dispatch = useAppDispatch();
+  const { mode } = useAppSelect((state) => state.ui);
 
   return (
-    <Flex as="nav" role="navigation" justifyContent="space-between" alignItems="center" width="100%" p="36px" mb="30px">
+    <Flex
+      as="nav"
+      role="navigation"
+      justifyContent="space-between"
+      alignItems="center"
+      width="100%"
+      p="36px"
+      mb="30px"
+    >
       <Heading as="h1">
         <Link href="/" passHref>
           Logo
@@ -28,7 +35,10 @@ const Navbar = (): JSX.Element => {
                 fontWeight="700"
                 opacity="0.85"
                 transition="opacity 0.2s ease-in-out, box-shadow 0.2s ease-in-out"
-                _hover={{ opacity: 1, boxShadow: `0 2px 0 ${mode === "dark" ? "red" : "blue"}` }}
+                _hover={{
+                  opacity: 1,
+                  boxShadow: `0 2px 0 ${mode === "dark" ? "red" : "blue"}`,
+                }}
               >
                 <Link href={link.path} passHref>
                   {link.title}
@@ -38,7 +48,14 @@ const Navbar = (): JSX.Element => {
           })}
         </Flex>
       </List>
-      <Box as="div" display={{ base: "flex", md: "none" }} w="50px" h="30px" flexDirection="column" cursor="pointer">
+      <Box
+        as="div"
+        display={{ base: "flex", md: "none" }}
+        w="50px"
+        h="30px"
+        flexDirection="column"
+        cursor="pointer"
+      >
         <Bar />
         <Bar />
         <Bar />
@@ -47,7 +64,12 @@ const Navbar = (): JSX.Element => {
         <Button mx="5px" bg="transparent" transition="all 0.4s">
           <Link href="/sign">Login</Link>
         </Button>
-        <Button mx="5px" bg="transparent" transition="all 0.4s" onClick={() => dispatch(toggleMode())}>
+        <Button
+          mx="5px"
+          bg="transparent"
+          transition="all 0.4s"
+          onClick={() => dispatch(toggleMode())}
+        >
           DarkMode
         </Button>
       </Box>

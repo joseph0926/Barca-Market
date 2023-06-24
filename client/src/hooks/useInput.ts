@@ -1,11 +1,35 @@
 import { useState, ChangeEvent, FocusEvent } from "react";
-import { validateEmail, validatePassword, validateName } from "../utils/validation";
-import { FormState, TouchedState, UseInputReturn, ValidState } from "../models/user";
+import {
+  validateEmail,
+  validatePassword,
+  validateName,
+} from "../utils/validation";
+
+type UseInputReturn = {
+  formState: RequireOnly<User, "email" | "password" | "name">;
+  touched: isUserValid;
+  isValid: isUserValid;
+  handleInputChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  handleBlur: (e: ChangeEvent<HTMLInputElement>) => void;
+  isLoginFormValid: boolean;
+};
 
 export const useInput = (): UseInputReturn => {
-  const [formState, setFormState] = useState({ email: "", password: "", username: "" });
-  const [touched, setTouched] = useState({ email: false, password: false, username: false });
-  const [isValid, setIsValid] = useState({ email: true, password: true, username: true });
+  const [formState, setFormState] = useState({
+    email: "",
+    password: "",
+    username: "",
+  });
+  const [touched, setTouched] = useState({
+    email: false,
+    password: false,
+    username: false,
+  });
+  const [isValid, setIsValid] = useState({
+    email: true,
+    password: true,
+    username: true,
+  });
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
