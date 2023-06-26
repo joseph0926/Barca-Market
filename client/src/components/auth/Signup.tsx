@@ -1,24 +1,43 @@
 import { Box, Button, Heading } from "@chakra-ui/react";
 import BaseFormControl from "./FormController";
-import { useInput } from "../../hooks/useInput";
-import { UseInputReturn } from "@/src/models/user";
+import { useInput } from "@/src/hooks/useInput";
+import { useSignupMutation } from "@/src/store/store";
 
 const Signup = (): JSX.Element => {
-  const { formState, touched, isValid, handleInputChange, handleBlur, isLoginFormValid }: UseInputReturn = useInput();
+  const [signup, results] = useSignupMutation();
+
+  const {
+    formState,
+    touched,
+    isValid,
+    handleInputChange,
+    handleBlur,
+    isLoginFormValid,
+  } = useInput();
+
+  const submitHandler = async (e) => {
+    e.preventDefault();
+
+    try {
+      await signup(formState).unwrap();
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
-    <Box as="form" role="form" w="30vw">
+    <Box as="form" role="form" w="30vw" onSubmit={submitHandler}>
       <Heading mb="1rem">회원 가입</Heading>
       <BaseFormControl
-        id="username"
+        id="name"
         type="text"
-        name="username"
+        name="name"
         placeholder="사용자명"
-        value={formState.username}
+        value={formState.name}
         handleChange={handleInputChange}
         handleBlur={handleBlur}
-        isValid={isValid.username}
-        touched={touched.username}
+        isValid={isValid.name}
+        touched={touched.name}
       />
       <BaseFormControl
         id="in-email"
@@ -42,7 +61,13 @@ const Signup = (): JSX.Element => {
         isValid={isValid.password}
         touched={touched.password}
       />
-      <Button bg="transparent" w="100%" my="1rem" disabled={!isLoginFormValid}>
+      <Button
+        type="submit"
+        bg="transparent"
+        w="100%"
+        my="1rem"
+        disabled={!isLoginFormValid || results.isLoading}
+      >
         가입하기
       </Button>
     </Box>

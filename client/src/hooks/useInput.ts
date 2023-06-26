@@ -18,17 +18,17 @@ export const useInput = (): UseInputReturn => {
   const [formState, setFormState] = useState({
     email: "",
     password: "",
-    username: "",
+    name: "",
   });
   const [touched, setTouched] = useState({
     email: false,
     password: false,
-    username: false,
+    name: false,
   });
   const [isValid, setIsValid] = useState({
     email: true,
     password: true,
-    username: true,
+    name: true,
   });
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -57,7 +57,7 @@ export const useInput = (): UseInputReturn => {
         [name]: validatePassword(value),
       }));
     }
-    if (name === "username") {
+    if (name === "name") {
       setIsValid((prevState) => ({
         ...prevState,
         [name]: validateName(value),

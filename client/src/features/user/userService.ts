@@ -1,25 +1,41 @@
-import { customAxios } from "@/src/utils/axios";
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-export const signup = createAsyncThunk(
-  "user/signup",
-  async (user: User, thunkAPI) => {
-    try {
-      const response = await customAxios.post("/users/signup", {
-        email: user.email,
-        password: user.password,
-        name: user.name,
-      });
-      if (response.status !== 200) {
-        throw response.data;
-      }
-      return response.data[0];
-    } catch (error) {
-      if (error.response) {
-        return thunkAPI.rejectWithValue(error.response.data);
-      } else {
-        return thunkAPI.rejectWithValue({ message: error.message });
-      }
-    }
-  }
-);
+const userApi = createApi({
+  reducerPath: "userApi",
+  baseQuery: fetchBaseQuery({
+    baseUrl: "/api/users",
+  }),
+  endpoints(builder) {
+    return {
+      signup: builder.mutation({
+        query: (user) => {
+          return {
+            url: "/signup",
+            method: "POST",
+            body: {
+              email: user.email,
+              password: user.password,
+              name: user.name,
+            },
+          };
+        },
+      }),
+      signin: builder.mutation({
+        query: (user) => {
+          return {
+            url: "/signin",
+            method: "POST",
+            body: {
+              email: user.email,
+              password: user.password,
+            },
+          };
+        },
+      }),
+    };
+  },
+});
+
+export const { useSignupMutation, useSigninMutation } = userApi;
+
+export { userApi };
