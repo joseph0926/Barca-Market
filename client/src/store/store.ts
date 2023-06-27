@@ -24,6 +24,8 @@ export {
   useSignupMutation,
   useSigninMutation,
   useVerifyEmailMutation,
+  useCurrentUserQuery,
+  useSignoutMutation,
 } from "../features/user/userService";
 
 export default store;

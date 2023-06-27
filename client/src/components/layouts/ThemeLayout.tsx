@@ -72,6 +72,7 @@ const ThemeLayout = ({ children, isExempt, user }: BoxProps): JSX.Element => {
               border: "2px solid",
               borderColor: mode === "dark" ? darkPriText : lightPriText,
               transition: "all 0.5s",
+              color: mode === "dark" ? "#fff" : "#000",
             }),
             variants: {
               solid: {

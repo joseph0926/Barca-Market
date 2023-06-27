@@ -5,6 +5,7 @@ const userApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "/api/users",
   }),
+  tagTypes: ["User"],
   endpoints(builder) {
     return {
       signup: builder.mutation({
@@ -21,6 +22,12 @@ const userApi = createApi({
         },
       }),
       signin: builder.mutation({
+        invalidatesTags: (result, error, arg) => {
+          if (result) {
+            return [{ type: "User", id: result[0].currentUser.id }];
+          }
+          return ["User"];
+        },
         query: (user) => {
           return {
             url: "/signin",
@@ -44,11 +51,45 @@ const userApi = createApi({
           };
         },
       }),
+      currentUser: builder.query({
+        providesTags: (result, error, arg) => {
+          if (result) {
+            return [{ type: "User", id: result[0].currentUser.id }];
+          }
+          return ["User"];
+        },
+        query: () => {
+          return {
+            url: "/currentuser",
+            method: "GET",
+          };
+        },
+      }),
+      signout: builder.mutation({
+        invalidatesTags: (result, error, arg) => {
+          console.log(result[0]);
+          if (result) {
+            return [{ type: "User", id: result[0].currentUser.id }];
+          }
+          return ["User"];
+        },
+        query: () => {
+          return {
+            url: "/signout",
+            method: "POST",
+          };
+        },
+      }),
     };
   },
 });
 
-export const { useSignupMutation, useSigninMutation, useVerifyEmailMutation } =
-  userApi;
+export const {
+  useSignupMutation,
+  useSigninMutation,
+  useVerifyEmailMutation,
+  useCurrentUserQuery,
+  useSignoutMutation,
+} = userApi;
 
 export { userApi };

@@ -1,7 +1,4 @@
 import Head from "next/head";
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { useRouter } from "next/router";
 
 import { SessionProvider } from "next-auth/react";
 import { Provider } from "react-redux";
@@ -15,25 +12,6 @@ import "@/src/styles/globals.css";
 export default function App({ Component, pageProps }) {
   const isExempt =
     Component.displayName === "Sign" || Component.name === "Sign";
-  const router = useRouter();
-  const [currentUser, setCurrentUser] = useState(null);
-
-  useEffect(() => {
-    if (router.pathname === "/") {
-      return;
-    }
-
-    const checkUser = async () => {
-      try {
-        const { data } = await axios.get("/api/users/currentuser");
-        setCurrentUser(data);
-      } catch (err) {
-        router.push("/sign");
-      }
-    };
-
-    checkUser();
-  }, [router.pathname]);
 
   return (
     <>
@@ -54,7 +32,7 @@ export default function App({ Component, pageProps }) {
             pauseOnHover={false}
             theme="dark"
           />
-          <ThemeLayout isExempt={isExempt} user={currentUser}>
+          <ThemeLayout isExempt={isExempt}>
             <Component {...pageProps} />
           </ThemeLayout>
         </Provider>

@@ -5,11 +5,14 @@ import { links } from "@/src/utils/links";
 import { toggleMode } from "@/src/features/ui/uiSlice";
 import { Bar } from "@/src/utils/themeConfig";
 import { useAppDispatch, useAppSelect } from "@/src/hooks/useReduxHook";
+import { useSignoutMutation } from "@/src/store/store";
 
 const Navbar = (): JSX.Element => {
   const dispatch = useAppDispatch();
   const { user } = useAppSelect((state) => state.user);
   const { mode } = useAppSelect((state) => state.ui);
+
+  const [signout, results] = useSignoutMutation();
 
   return (
     <Flex
@@ -63,7 +66,13 @@ const Navbar = (): JSX.Element => {
       </Box>
       <Box as="div" display={{ base: "none", md: "block" }}>
         {user ? (
-          <Button mx="5px" bg="transparent" transition="all 0.4s">
+          <Button
+            mx="5px"
+            bg="transparent"
+            transition="all 0.4s"
+            type="submit"
+            onClick={() => signout(undefined)}
+          >
             <Link href="/">Logout</Link>
           </Button>
         ) : (
