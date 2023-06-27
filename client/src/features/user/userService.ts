@@ -32,10 +32,23 @@ const userApi = createApi({
           };
         },
       }),
+      verifyEmail: builder.mutation({
+        query: ({ token, email }) => {
+          return {
+            url: "/verify-email",
+            method: "POST",
+            body: {
+              email,
+              verificationToken: token,
+            },
+          };
+        },
+      }),
     };
   },
 });
 
-export const { useSignupMutation, useSigninMutation } = userApi;
+export const { useSignupMutation, useSigninMutation, useVerifyEmailMutation } =
+  userApi;
 
 export { userApi };

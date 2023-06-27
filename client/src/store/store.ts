@@ -23,6 +23,7 @@ export type ApplicationDispatch = typeof store.dispatch;
 export {
   useSignupMutation,
   useSigninMutation,
+  useVerifyEmailMutation,
 } from "../features/user/userService";
 
 export default store;

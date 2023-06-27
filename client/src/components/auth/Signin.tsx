@@ -3,9 +3,13 @@ import BaseFormControl from "./FormController";
 import { useInput } from "@/src/hooks/useInput";
 import SocialLogin from "./SocialLogin";
 import { useSigninMutation } from "@/src/store/store";
+import { toast } from "react-toastify";
+import { ExtendFetchError } from "./Signup";
+import { useRouter } from "next/router";
 
 const Signin = (): JSX.Element => {
   const [signin, results] = useSigninMutation();
+  const router = useRouter();
 
   const {
     formState,
@@ -16,13 +20,22 @@ const Signin = (): JSX.Element => {
     isLoginFormValid,
   } = useInput();
 
-  const submitHandler = (e) => {
-    e.preventDefalut();
+  const submitHandler = async (e) => {
+    e.preventDefault();
 
-    signin(formState);
-
-    if (results.isError) {
-      console.log(results.isError);
+    try {
+      await signin(formState);
+      if (results.isError) {
+        throw new Error("");
+      }
+      const res = await results.data;
+      toast.success(res[0].message);
+      router.push("/");
+    } catch (error) {
+      if (results.error) {
+        const { data }: ExtendFetchError = results.error;
+        toast.error(data.errors[0].message);
+      }
     }
   };
 

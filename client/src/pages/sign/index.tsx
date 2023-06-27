@@ -12,7 +12,7 @@ const gradient = keyframes`
 `;
 
 const Sign = (): JSX.Element => {
-  const [signMode, setSignMode] = useState("in");
+  const [signMode, setSignMode] = useState("up");
   const [anim, setAnim] = useState(false);
 
   const signModeHandler = () => {
@@ -32,7 +32,14 @@ const Sign = (): JSX.Element => {
 
   return (
     <>
-      <Button position="absolute" top="5%" left="5%" borderWidth={3} borderColor="blue.500" _hover={{ bg: "blue.500" }}>
+      <Button
+        position="absolute"
+        top="5%"
+        left="5%"
+        borderWidth={3}
+        borderColor="blue.500"
+        _hover={{ bg: "blue.500" }}
+      >
         <Link href="/" style={{ color: "#fff" }}>
           Go Back Home
         </Link>
@@ -49,10 +56,22 @@ const Sign = (): JSX.Element => {
         bgSize="200% 100%"
         animation={`${anim ? gradient : "none"} 1.5s ease infinite`}
       >
-        <motion.div initial="initial" animate="animate" key={signMode} variants={fadeIn} transition={{ duration: 1.5 }}>
-          <VStack spacing={5}>{signMode === "up" ? <Signin /> : <Signup />}</VStack>
+        <motion.div
+          initial="initial"
+          animate="animate"
+          key={signMode}
+          variants={fadeIn}
+          transition={{ duration: 1.5 }}
+        >
+          <VStack spacing={5}>
+            {signMode === "up" ? <Signin /> : <Signup />}
+          </VStack>
           <Flex alignItems="center" gap={4}>
-            {signMode === "up" ? <Text color="rgba(255,255,255,0.7)">아직 회원이 아니신가요?</Text> : <Text>이미 회원이신가요?</Text>}
+            {signMode === "up" ? (
+              <Text color="rgba(255,255,255,0.7)">아직 회원이 아니신가요?</Text>
+            ) : (
+              <Text>이미 회원이신가요?</Text>
+            )}
             <Button onClick={signModeHandler} border="none" bg="transparent">
               Sign{signMode}
             </Button>

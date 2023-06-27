@@ -3,6 +3,7 @@ type RequireOnly<T, P extends keyof T> = Pick<T, P> & Partial<Omit<T, P>>;
 type BoxProps = {
   children: React.ReactNode;
   isExempt?: boolean;
+  user?: User;
 };
 
 type LoadingProps = {

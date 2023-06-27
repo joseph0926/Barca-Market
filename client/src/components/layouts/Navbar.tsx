@@ -8,6 +8,7 @@ import { useAppDispatch, useAppSelect } from "@/src/hooks/useReduxHook";
 
 const Navbar = (): JSX.Element => {
   const dispatch = useAppDispatch();
+  const { user } = useAppSelect((state) => state.user);
   const { mode } = useAppSelect((state) => state.ui);
 
   return (
@@ -61,9 +62,15 @@ const Navbar = (): JSX.Element => {
         <Bar />
       </Box>
       <Box as="div" display={{ base: "none", md: "block" }}>
-        <Button mx="5px" bg="transparent" transition="all 0.4s">
-          <Link href="/sign">Login</Link>
-        </Button>
+        {user ? (
+          <Button mx="5px" bg="transparent" transition="all 0.4s">
+            <Link href="/">Logout</Link>
+          </Button>
+        ) : (
+          <Button mx="5px" bg="transparent" transition="all 0.4s">
+            <Link href="/sign">Login</Link>
+          </Button>
+        )}
         <Button
           mx="5px"
           bg="transparent"

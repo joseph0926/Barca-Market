@@ -2,6 +2,12 @@ import { Box, Button, Heading } from "@chakra-ui/react";
 import BaseFormControl from "./FormController";
 import { useInput } from "@/src/hooks/useInput";
 import { useSignupMutation } from "@/src/store/store";
+import { toast } from "react-toastify";
+import { SerializedError } from "@reduxjs/toolkit";
+
+export type ExtendFetchError = SerializedError & {
+  data?: any;
+};
 
 const Signup = (): JSX.Element => {
   const [signup, results] = useSignupMutation();
@@ -19,9 +25,17 @@ const Signup = (): JSX.Element => {
     e.preventDefault();
 
     try {
-      await signup(formState).unwrap();
+      await signup(formState);
+      if (results.isError) {
+        throw new Error("");
+      }
+      const res = await results.data;
+      toast.success(res[0].message);
     } catch (error) {
-      console.log(error);
+      if (results.error) {
+        const { data }: ExtendFetchError = results.error;
+        toast.error(data.errors[0].message);
+      }
     }
   };
 

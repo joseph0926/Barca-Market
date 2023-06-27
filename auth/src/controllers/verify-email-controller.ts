@@ -1,35 +1,29 @@
-import { Request, Response, NextFunction } from "express";
+import { Request, Response } from "express";
 import prisma from "../db/connectDB";
-import { BadRequestError } from "../errors/bad-request-error";
 import { NotAuthorizedError } from "../errors/not-authorized-error";
+import { BadRequestError } from "../errors/bad-request-error";
 
-export const verifiyEmail = async (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => {
+export const veifyEmailController = async (req: Request, res: Response) => {
   const { email, verificationToken } = req.body;
 
-  const existingUser = await prisma.user.findFirst({
-    where: {
-      email,
-    },
-  });
-  if (!existingUser) {
+  const user = await prisma.user.findUnique({ where: { email } });
+  if (!user) {
     throw new BadRequestError(
       "해당 이메일로 가입된 사용자를 찾을 수 없습니다."
     );
   }
-  if (
-    !existingUser.isVerified &&
-    existingUser.verificationToken !== verificationToken
-  ) {
+
+  if (user.verificationToken !== verificationToken) {
     throw new NotAuthorizedError();
   }
 
+  user.isVerified = true;
+  user.verified = new Date();
+  user.verificationToken = "";
+
   try {
     await prisma.user.update({
-      where: { id: existingUser.id },
+      where: { id: user.id },
       data: {
         isVerified: true,
         verified: new Date(),
@@ -39,5 +33,6 @@ export const verifiyEmail = async (
   } catch (error) {
     console.log(error);
   }
-  next();
+
+  res.status(201).json([{ message: "이메일 인증 성공!" }]);
 };

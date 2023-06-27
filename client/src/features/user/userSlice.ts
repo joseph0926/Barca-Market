@@ -1,4 +1,4 @@
-import { createSlice, nanoid } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice, nanoid } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 
 export type UserState = {
@@ -20,7 +20,14 @@ const initialState: UserState = {
 const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
+  reducers: {
+    setUser: (state, action: PayloadAction<DraftUser>) => {
+      const user = createUser(action.payload);
+      state.user = user;
+    },
+  },
 });
+
+export const { setUser } = userSlice.actions;
 
 export default userSlice.reducer;
