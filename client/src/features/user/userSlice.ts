@@ -1,5 +1,4 @@
-import { createSlice, nanoid } from "@reduxjs/toolkit";
-import { signup } from "./userService";
+import { PayloadAction, createSlice, nanoid } from "@reduxjs/toolkit";
 import { toast } from "react-toastify";
 
 export type UserState = {
@@ -21,21 +20,17 @@ const initialState: UserState = {
 const userSlice = createSlice({
   name: "user",
   initialState,
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(signup.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(signup.fulfilled, (state, { payload }) => {
-        state.isLoading = true;
-        toast.success(payload.message);
-      })
-      .addCase(signup.rejected, (state, { payload }) => {
-        state.isLoading = false;
-        toast.error(payload[0].message);
-      });
+  reducers: {
+    setUser: (state, action: PayloadAction<DraftUser>) => {
+      const user = createUser(action.payload);
+      state.user = user;
+    },
+    removeUser: (state) => {
+      return { ...initialState };
+    },
   },
 });
+
+export const { setUser, removeUser } = userSlice.actions;
 
 export default userSlice.reducer;

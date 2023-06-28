@@ -4,7 +4,7 @@ import { loadInitialState } from "@/src/features/ui/uiSlice";
 import Layout from "./Layout";
 import { useAppDispatch, useAppSelect } from "@/src/hooks/useReduxHook";
 
-const ThemeLayout = ({ children, isExempt }: BoxProps): JSX.Element => {
+const ThemeLayout = ({ children, isExempt, user }: BoxProps): JSX.Element => {
   const dispatch = useAppDispatch();
   const { mode } = useAppSelect((state) => state.ui);
 
@@ -72,6 +72,7 @@ const ThemeLayout = ({ children, isExempt }: BoxProps): JSX.Element => {
               border: "2px solid",
               borderColor: mode === "dark" ? darkPriText : lightPriText,
               transition: "all 0.5s",
+              color: mode === "dark" ? "#fff" : "#000",
             }),
             variants: {
               solid: {
@@ -107,7 +108,7 @@ const ThemeLayout = ({ children, isExempt }: BoxProps): JSX.Element => {
   return (
     <ChakraProvider theme={theme}>
       <CSSReset />
-      {isExempt ? children : <Layout>{children}</Layout>}
+      {isExempt ? children : <Layout user={user}>{children}</Layout>}
     </ChakraProvider>
   );
 };

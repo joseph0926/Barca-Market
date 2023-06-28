@@ -7,7 +7,7 @@ const gradient = keyframes`
   100% {background-position: 0% 50%}
 `;
 
-const GradientBox = (props: BoxProps): JSX.Element => {
+const GradientBox = (): JSX.Element => {
   const { mode } = useAppSelect((state) => state.ui);
 
   const bgGradientLight =
@@ -26,8 +26,9 @@ const GradientBox = (props: BoxProps): JSX.Element => {
       top="-600px"
       left="-50%"
       zIndex="-1"
+      overflow="hidden"
       animation={`${gradient} 4s ease infinite`}
-      {...props}
+      // {...props}
     />
   );
 };

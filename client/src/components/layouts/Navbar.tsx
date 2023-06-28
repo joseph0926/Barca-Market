@@ -5,10 +5,22 @@ import { links } from "@/src/utils/links";
 import { toggleMode } from "@/src/features/ui/uiSlice";
 import { Bar } from "@/src/utils/themeConfig";
 import { useAppDispatch, useAppSelect } from "@/src/hooks/useReduxHook";
+import { useSignoutMutation } from "@/src/store/store";
+import { removeUser } from "@/src/features/user/userSlice";
+import { toast } from "react-toastify";
 
 const Navbar = (): JSX.Element => {
   const dispatch = useAppDispatch();
+  const { user } = useAppSelect((state) => state.user);
   const { mode } = useAppSelect((state) => state.ui);
+
+  const [signout, results] = useSignoutMutation();
+
+  const signoutHandler = () => {
+    signout(undefined);
+    dispatch(removeUser());
+    toast.success("로그아웃 되셨습니다.");
+  };
 
   return (
     <Flex
@@ -61,9 +73,21 @@ const Navbar = (): JSX.Element => {
         <Bar />
       </Box>
       <Box as="div" display={{ base: "none", md: "block" }}>
-        <Button mx="5px" bg="transparent" transition="all 0.4s">
-          <Link href="/sign">Login</Link>
-        </Button>
+        {user ? (
+          <Button
+            mx="5px"
+            bg="transparent"
+            transition="all 0.4s"
+            type="submit"
+            onClick={signoutHandler}
+          >
+            <Link href="/">Logout</Link>
+          </Button>
+        ) : (
+          <Button mx="5px" bg="transparent" transition="all 0.4s">
+            <Link href="/sign">Login</Link>
+          </Button>
+        )}
         <Button
           mx="5px"
           bg="transparent"
