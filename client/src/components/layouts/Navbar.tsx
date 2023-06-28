@@ -6,6 +6,8 @@ import { toggleMode } from "@/src/features/ui/uiSlice";
 import { Bar } from "@/src/utils/themeConfig";
 import { useAppDispatch, useAppSelect } from "@/src/hooks/useReduxHook";
 import { useSignoutMutation } from "@/src/store/store";
+import { removeUser } from "@/src/features/user/userSlice";
+import { toast } from "react-toastify";
 
 const Navbar = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -13,6 +15,12 @@ const Navbar = (): JSX.Element => {
   const { mode } = useAppSelect((state) => state.ui);
 
   const [signout, results] = useSignoutMutation();
+
+  const signoutHandler = () => {
+    signout(undefined);
+    dispatch(removeUser());
+    toast.success("로그아웃 되셨습니다.");
+  };
 
   return (
     <Flex
@@ -71,7 +79,7 @@ const Navbar = (): JSX.Element => {
             bg="transparent"
             transition="all 0.4s"
             type="submit"
-            onClick={() => signout(undefined)}
+            onClick={signoutHandler}
           >
             <Link href="/">Logout</Link>
           </Button>

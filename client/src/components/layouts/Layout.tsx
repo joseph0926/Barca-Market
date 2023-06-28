@@ -15,31 +15,18 @@ const Layout = ({ children }: BoxProps): JSX.Element => {
   const { data, error, isFetching } = useCurrentUserQuery(undefined);
 
   useEffect(() => {
-    if (router.pathname === "/") {
-      return;
+    if (data) {
+      const { currentUser } = data[0];
+      dispatch(setUser(currentUser));
     }
+  }, [data]);
 
-    const checkUser = async () => {
-      try {
-        if (!isFetching && data) {
-          const { currentUser, message } = data[0];
-          dispatch(setUser(currentUser));
-          console.log(message);
-        }
-        if (error) {
-          throw new Error("");
-        }
-      } catch (err) {
-        if (error) {
-          const { data }: ExtendFetchError = error;
-          console.log(data.errors[0].message);
-        }
-        router.push("/sign");
-      }
-    };
-
-    checkUser();
-  }, [router.pathname, data]);
+  if (isFetching) {
+    return <Loading display />;
+  }
+  if (!user && router.pathname !== "/") {
+    router.push("/sign");
+  }
 
   return (
     <Box h="100vh" w="100vw">
