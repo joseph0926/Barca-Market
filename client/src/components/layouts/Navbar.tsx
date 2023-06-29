@@ -1,13 +1,12 @@
-import { Box, Button, Flex, Heading, List, ListItem } from "@chakra-ui/react";
 import Link from "next/link";
 
 import { links } from "@/src/utils/links";
 import { toggleMode } from "@/src/features/ui/uiSlice";
-import { Bar } from "@/src/utils/themeConfig";
 import { useAppDispatch, useAppSelect } from "@/src/hooks/useReduxHook";
 import { useSignoutMutation } from "@/src/store/store";
 import { removeUser } from "@/src/features/user/userSlice";
 import { toast } from "react-toastify";
+import { Bar, NavWrapper } from "./Navbar.style";
 
 const Navbar = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -23,81 +22,43 @@ const Navbar = (): JSX.Element => {
   };
 
   return (
-    <Flex
-      as="nav"
-      role="navigation"
-      justifyContent="space-between"
-      alignItems="center"
-      width="100%"
-      p="36px"
-      mb="30px"
-    >
-      <Heading as="h1">
+    <NavWrapper $mode={mode}>
+      <h1>
         <Link href="/" passHref>
           Logo
         </Link>
-      </Heading>
-      <List display={{ base: "none", md: "block" }}>
-        <Flex justifyContent="center" alignItems="center" gap={6}>
+      </h1>
+      <ul>
+        <div className="list">
           {links.map((link) => {
             return (
-              <ListItem
-                key={link.title}
-                fontSize="xl"
-                fontWeight="700"
-                opacity="0.85"
-                transition="opacity 0.2s ease-in-out, box-shadow 0.2s ease-in-out"
-                _hover={{
-                  opacity: 1,
-                  boxShadow: `0 2px 0 ${mode === "dark" ? "red" : "blue"}`,
-                }}
-              >
+              <li key={link.title}>
                 <Link href={link.path} passHref>
                   {link.title}
                 </Link>
-              </ListItem>
+              </li>
             );
           })}
-        </Flex>
-      </List>
-      <Box
-        as="div"
-        display={{ base: "flex", md: "none" }}
-        w="50px"
-        h="30px"
-        flexDirection="column"
-        cursor="pointer"
-      >
+        </div>
+      </ul>
+      <div className="ham">
         <Bar />
         <Bar />
         <Bar />
-      </Box>
-      <Box as="div" display={{ base: "none", md: "block" }}>
+      </div>
+      <div className="btn">
         {user ? (
-          <Button
-            mx="5px"
-            bg="transparent"
-            transition="all 0.4s"
-            type="submit"
-            onClick={signoutHandler}
-          >
+          <button type="submit" onClick={signoutHandler}>
             <Link href="/">Logout</Link>
-          </Button>
+          </button>
         ) : (
-          <Button mx="5px" bg="transparent" transition="all 0.4s">
+          <button>
             <Link href="/sign">Login</Link>
-          </Button>
+          </button>
         )}
-        <Button
-          mx="5px"
-          bg="transparent"
-          transition="all 0.4s"
-          onClick={() => dispatch(toggleMode())}
-        >
-          DarkMode
-        </Button>
-      </Box>
-    </Flex>
+        <button onClick={() => dispatch(toggleMode())}>DarkMode</button>
+      </div>
+    </NavWrapper>
   );
 };
 

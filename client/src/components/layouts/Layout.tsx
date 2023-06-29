@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelect } from "@/src/hooks/useReduxHook";
 import { setUser } from "@/src/features/user/userSlice";
 import { useRouter } from "next/router";
 import { useCurrentUserQuery } from "@/src/store/store";
-import { ExtendFetchError } from "../auth/Signup";
+import { LayoutWrapper } from "./Layout.style";
 
 const Layout = ({ children }: BoxProps): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -29,15 +29,15 @@ const Layout = ({ children }: BoxProps): JSX.Element => {
   }
 
   return (
-    <Box h="100vh" w="100vw">
-      <Box zIndex={10} w="100%">
+    <LayoutWrapper>
+      <div className="nav">
         <Navbar />
-      </Box>
-      <Box w="100%" mt={4}>
+      </div>
+      <div className="main">
         <Loading display={false} />
         <main>{children}</main>
-      </Box>
-    </Box>
+      </div>
+    </LayoutWrapper>
   );
 };
 
