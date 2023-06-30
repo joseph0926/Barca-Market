@@ -7,7 +7,7 @@ type BoxProps = {
 };
 
 type LoadingProps = {
-  display: boolean;
+  display: string;
 };
 
 type User = {
@@ -21,4 +21,16 @@ type isUserValid = {
   name?: boolean;
   email: boolean;
   password: boolean;
+};
+
+type ModeProps = {
+  mode: "dark" | "light" | string;
+};
+
+type DisplayProps = {
+  display: string;
+};
+
+type AnimProps = {
+  anim: boolean;
 };

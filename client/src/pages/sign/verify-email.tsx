@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { useVerifyEmailMutation } from "@/src/store/store";
-import { Flex, Heading } from "@chakra-ui/react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { toast } from "react-toastify";
 import { ExtendFetchError } from "@/src/components/auth/Signup";
+import { VerifyWrapper } from "./verifyStyle";
 
 const VerifyEmail = () => {
   const [verify, results] = useVerifyEmailMutation();
@@ -35,10 +35,10 @@ const VerifyEmail = () => {
   }, [router.query]);
 
   return (
-    <Flex as="form">
-      <Heading as="h2">이메일 인증 성공!</Heading>
+    <VerifyWrapper>
+      <h2>이메일 인증 성공!</h2>
       <Link href="/sign">로그인으로 이동</Link>
-    </Flex>
+    </VerifyWrapper>
   );
 };
 

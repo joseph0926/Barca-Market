@@ -1,9 +1,9 @@
-import { Box, Button, Heading } from "@chakra-ui/react";
 import BaseFormControl from "./FormController";
 import { useInput } from "@/src/hooks/useInput";
 import { useSignupMutation } from "@/src/store/store";
 import { toast } from "react-toastify";
 import { SerializedError } from "@reduxjs/toolkit";
+import { SignFormWrapper } from "./SignFormStyle";
 
 export type ExtendFetchError = SerializedError & {
   data?: any;
@@ -40,8 +40,8 @@ const Signup = (): JSX.Element => {
   };
 
   return (
-    <Box as="form" role="form" w="30vw" onSubmit={submitHandler}>
-      <Heading mb="1rem">회원 가입</Heading>
+    <SignFormWrapper as="form" role="form" onSubmit={submitHandler}>
+      <h2>회원 가입</h2>
       <BaseFormControl
         id="name"
         type="text"
@@ -75,16 +75,10 @@ const Signup = (): JSX.Element => {
         isValid={isValid.password}
         touched={touched.password}
       />
-      <Button
-        type="submit"
-        bg="transparent"
-        w="100%"
-        my="1rem"
-        disabled={!isLoginFormValid || results.isLoading}
-      >
+      <button type="submit" disabled={!isLoginFormValid || results.isLoading}>
         가입하기
-      </Button>
-    </Box>
+      </button>
+    </SignFormWrapper>
   );
 };
 

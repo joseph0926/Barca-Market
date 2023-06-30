@@ -1,23 +1,23 @@
-import { Box, Button, Flex } from "@chakra-ui/react";
 import { signIn } from "next-auth/react";
 import { FaGoogle, FaGithub } from "react-icons/fa";
+import { SocialWrapper } from "./SocialLoginStyle";
 
 const SocialLogin = (): JSX.Element => {
   return (
-    <Flex justifyContent="space-between" my="0.5rem">
-      <Button onClick={() => signIn("google")} borderColor="blue.400" _hover={{ bg: "blue.400" }}>
+    <SocialWrapper>
+      <button onClick={() => signIn("google")} className="google">
         Sign in with Google{" "}
-        <Box ml="0.5rem">
+        <div className="icon">
           <FaGoogle color="red" size={25} />
-        </Box>
-      </Button>
-      <Button onClick={() => signIn("github")}>
+        </div>
+      </button>
+      <button onClick={() => signIn("github")} className="github">
         Sign in with GitHub{" "}
-        <Box ml="0.5rem">
+        <div className="icon">
           <FaGithub color="blue" size={25} />
-        </Box>
-      </Button>
-    </Flex>
+        </div>
+      </button>
+    </SocialWrapper>
   );
 };
 

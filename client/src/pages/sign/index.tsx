@@ -1,15 +1,9 @@
 import Link from "next/link";
 import { useState } from "react";
-import { VStack, Flex, Button, Text, keyframes, Box } from "@chakra-ui/react";
 import { motion } from "framer-motion";
 import Signin from "@/src/components/auth/Signin";
 import Signup from "@/src/components/auth/Signup";
-
-const gradient = keyframes`
-  0% {background-position: 0% 50%}
-  50% {background-position: 100% 50%}
-  100% {background-position: 0% 50%}
-`;
+import { SignWrapper } from "./SignStyle";
 
 const Sign = (): JSX.Element => {
   const [signMode, setSignMode] = useState("up");
@@ -31,31 +25,11 @@ const Sign = (): JSX.Element => {
   };
 
   return (
-    <>
-      <Button
-        position="absolute"
-        top="5%"
-        left="5%"
-        borderWidth={3}
-        borderColor="blue.500"
-        _hover={{ bg: "blue.500" }}
-      >
-        <Link href="/" style={{ color: "#fff" }}>
-          Go Back Home
-        </Link>
-      </Button>
-      <Flex
-        as="div"
-        maxW="100vw"
-        maxH="100vh"
-        h="100vh"
-        flexDirection="column"
-        alignItems="center"
-        justifyContent="center"
-        bgGradient={`linear(to-br, red.700, blue.600)`}
-        bgSize="200% 100%"
-        animation={`${anim ? gradient : "none"} 1.5s ease infinite`}
-      >
+    <SignWrapper anim={anim}>
+      <button className="back">
+        <Link href="/">Go Back Home</Link>
+      </button>
+      <div className="sign">
         <motion.div
           initial="initial"
           animate="animate"
@@ -63,22 +37,20 @@ const Sign = (): JSX.Element => {
           variants={fadeIn}
           transition={{ duration: 1.5 }}
         >
-          <VStack spacing={5}>
+          <div className="sign-form">
             {signMode === "up" ? <Signin /> : <Signup />}
-          </VStack>
-          <Flex alignItems="center" gap={4}>
+          </div>
+          <div className="container">
             {signMode === "up" ? (
-              <Text color="rgba(255,255,255,0.7)">아직 회원이 아니신가요?</Text>
+              <p>아직 회원이 아니신가요?</p>
             ) : (
-              <Text>이미 회원이신가요?</Text>
+              <p>이미 회원이신가요?</p>
             )}
-            <Button onClick={signModeHandler} border="none" bg="transparent">
-              Sign{signMode}
-            </Button>
-          </Flex>
+            <button onClick={signModeHandler}>Sign{signMode}</button>
+          </div>
         </motion.div>
-      </Flex>
-    </>
+      </div>
+    </SignWrapper>
   );
 };
 

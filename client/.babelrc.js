@@ -1,5 +1,6 @@
 module.exports = {
   presets: [
+    "next/babel",
     [
       "@babel/preset-env",
       {
@@ -16,4 +17,5 @@ module.exports = {
     ],
     ["@babel/preset-flow"],
   ],
+  plugins: [["styled-components", { ssr: true }]],
 };
