@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelect } from "@/src/hooks/useReduxHook";
 import { useSignoutMutation } from "@/src/store/store";
 import { removeUser } from "@/src/features/user/userSlice";
 import { toast } from "react-toastify";
-import { Bar, NavWrapper } from "./Navbar.style";
+import { Bar, NavWrapper } from "./NavbarStyle";
 
 const Navbar = (): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -22,7 +22,7 @@ const Navbar = (): JSX.Element => {
   };
 
   return (
-    <NavWrapper $mode={mode}>
+    <NavWrapper mode={mode}>
       <h1>
         <Link href="/" passHref>
           Logo

@@ -1,8 +1,8 @@
-import { LoaderSpan, LoadingWrapper } from "./Loading.style";
+import { LoaderSpan, LoadingWrapper } from "./LoadingStyle";
 
 const Loading = ({ display }: LoadingProps): JSX.Element => {
   return (
-    <LoadingWrapper $display={display}>
+    <LoadingWrapper display={display}>
       <LoaderSpan />
       <LoaderSpan />
       <LoaderSpan />

@@ -1,11 +1,10 @@
 import { useAppSelect } from "@/src/hooks/useReduxHook";
-import { Box, keyframes } from "@chakra-ui/react";
-import { GradientWrapper } from "./Gradient.style";
+import { GradientWrapper } from "./GradientStyle";
 
 const GradientBox = (): JSX.Element => {
   const { mode } = useAppSelect((state) => state.ui);
 
-  return <GradientWrapper $mode={mode} />;
+  return <GradientWrapper mode={mode} />;
 };
 
 export default GradientBox;

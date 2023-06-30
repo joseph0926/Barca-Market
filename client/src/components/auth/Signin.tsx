@@ -1,4 +1,3 @@
-import { Box, Button, Heading } from "@chakra-ui/react";
 import BaseFormControl from "./FormController";
 import { useInput } from "@/src/hooks/useInput";
 import SocialLogin from "./SocialLogin";
@@ -6,6 +5,7 @@ import { useSigninMutation } from "@/src/store/store";
 import { toast } from "react-toastify";
 import { ExtendFetchError } from "./Signup";
 import { useRouter } from "next/router";
+import { SignFormWrapper } from "./SignFormStyle";
 
 const Signin = (): JSX.Element => {
   const [signin, results] = useSigninMutation();
@@ -40,8 +40,8 @@ const Signin = (): JSX.Element => {
   };
 
   return (
-    <Box as="form" role="form" w="30vw" onSubmit={submitHandler}>
-      <Heading mb="1rem">Sign in</Heading>
+    <SignFormWrapper role="form" onSubmit={submitHandler}>
+      <h2>Sign in</h2>
       <BaseFormControl
         id="in-email"
         type="email"
@@ -64,17 +64,11 @@ const Signin = (): JSX.Element => {
         isValid={isValid.password}
         touched={touched.password}
       />
-      <Button
-        type="submit"
-        bg="transparent"
-        w="100%"
-        my="1rem"
-        disabled={!isLoginFormValid}
-      >
+      <button type="submit" disabled={!isLoginFormValid}>
         Login
-      </Button>
+      </button>
       <SocialLogin />
-    </Box>
+    </SignFormWrapper>
   );
 };
 

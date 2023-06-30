@@ -1,4 +1,3 @@
-import { Box } from "@chakra-ui/react";
 import Navbar from "./Navbar";
 import Loading from "./Loading";
 import { useEffect } from "react";
@@ -6,7 +5,7 @@ import { useAppDispatch, useAppSelect } from "@/src/hooks/useReduxHook";
 import { setUser } from "@/src/features/user/userSlice";
 import { useRouter } from "next/router";
 import { useCurrentUserQuery } from "@/src/store/store";
-import { LayoutWrapper } from "./Layout.style";
+import { LayoutWrapper } from "./LayoutStyle";
 
 const Layout = ({ children }: BoxProps): JSX.Element => {
   const dispatch = useAppDispatch();
@@ -22,7 +21,7 @@ const Layout = ({ children }: BoxProps): JSX.Element => {
   }, [data]);
 
   if (isFetching) {
-    return <Loading display />;
+    return <Loading display="true" />;
   }
   if (!user && router.pathname !== "/") {
     router.push("/sign");
@@ -34,7 +33,7 @@ const Layout = ({ children }: BoxProps): JSX.Element => {
         <Navbar />
       </div>
       <div className="main">
-        <Loading display={false} />
+        <Loading display="false" />
         <main>{children}</main>
       </div>
     </LayoutWrapper>
