@@ -48,7 +48,7 @@ FC Barcelona Fan Community Platform은 FC Barcelona 팬들을 위한 온라인 �
 
 - Front-end:
   - Next.js
-  - ChakraUI
+  - styled-components
   - Redux Toolkit
   - Redux Toolkit Query
   - TypeScript
