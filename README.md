@@ -62,6 +62,7 @@ FC Barcelona Fan Community Platform은 FC Barcelona 팬들을 위한 온라인 �
   - Prisma
   - mongoose
   - MicroService
+  - NATS streaming service
   - TypeScript
 
 ## 팀원
