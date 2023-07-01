@@ -41,5 +41,3 @@ next-env.d.ts
 
 */**/auth-psql-secret.yaml
 */**/prisma/migrations
-
-nats-test
