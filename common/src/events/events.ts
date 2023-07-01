@@ -6,5 +6,16 @@ export interface PostCreatedEvent {
     id: string;
     title: string;
     content: string;
+    userId: string;
+  };
+}
+
+export interface PostUpdatedEvent {
+  subject: Subjects.PostUpdated;
+  data: {
+    id: string;
+    title: string;
+    content: string;
+    userId: string;
   };
 }
