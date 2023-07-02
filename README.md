@@ -81,11 +81,22 @@ FC Barcelona Fan Community Platform은 FC Barcelona 팬들을 위한 온라인 �
 ```shell
 docker pull rkekqmf0926/auth
 docker pull rkekqmf0926/client
-skaffold dev
-```
+docker pull rkekqmf0926/post
 
-## auth/.env
-```
-DATABASE_URL=  #postgreSQL url
-JWT_SECRET=    #JWT 토큰
+// env 설정
+kubectl create secret generic JWT_SERCRET --from-literal=JWT_SECRET={jwt 키}
+/*
+/infra/k6s/auth-psql-secret.yaml 파일 생성 후
+*/
+apiVersion: v1
+kind: Secret
+metadata:
+  name: auth-psql-secret
+type: Opaque
+data:
+  POSTGRES_USER: 
+  POSTGRES_PASSWORD: 
+
+
+skaffold dev
 ```
