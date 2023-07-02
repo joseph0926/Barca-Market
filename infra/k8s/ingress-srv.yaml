@@ -17,6 +17,13 @@ spec:
                 name: auth-srv
                 port:
                   number: 3000
+          - path: /api/post/?(.*)
+            pathType: ImplementationSpecific
+            backend:
+              service:
+                name: post-srv
+                port:
+                  number: 3000
           - path: /?(.*)
             pathType: Prefix
             backend:

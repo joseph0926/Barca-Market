@@ -17,6 +17,14 @@ build:
         manual:
           - src: "src/**/*.ts"
             dest: .
+    - image: rkekqmf0926/post
+      context: post
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.ts"
+            dest: .
     - image: rkekqmf0926/client
       context: client
       docker:
@@ -35,3 +43,8 @@ portForward:
     namespace: default
     port: 5432
     localPort: 5432
+  - resourceType: service
+    resourceName: nats-srv
+    namespace: default
+    port: 4222
+    localPort: 4222
