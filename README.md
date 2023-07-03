@@ -102,6 +102,6 @@ skaffold dev
 ```
 
 - 접속
-etc/hosts -> 127.0.0.1 joseph0926-barcelona.dev 추가
-joseph0926-barcelona.dev 로 접속
+etc/hosts -> 127.0.0.1 joseph0926-barcelona.dev 추가 <br/>
+joseph0926-barcelona.dev 로 접속 <br/>
 (https 문제 -> thisisunsafe 입력)
