@@ -2,6 +2,8 @@ import express, { Request, Response } from "express";
 import { body } from "express-validator";
 import { requireAuth, validateRequest } from "@joseph0926-barcelona/common";
 import { Post } from "../models/post";
+import { PostCreatedPublisher } from "../events/publishers/post-created-publisher";
+import { natsWrapper } from "../nats-wrapper";
 
 const router = express.Router();
 
@@ -22,6 +24,15 @@ router.post(
         userId: req.currentUser!.id,
       });
       await post.save();
+
+      new PostCreatedPublisher(natsWrapper.client).publish({
+        id: post.id,
+        content: post.content,
+        isPrivate: post.isPrivate,
+        hashtags: post.hashtags,
+        images: post.images,
+        userId: post.userId,
+      });
 
       res.status(200).json([{ post, message: "글 작성에 성공하였습니다." }]);
     } catch (error) {
