@@ -4,8 +4,10 @@ export interface PostCreatedEvent {
   subject: Subjects.PostCreated;
   data: {
     id: string;
-    title: string;
     content: string;
+    images?: string[];
+    hashtags?: string[];
+    isPrivate: boolean;
     userId: string;
   };
 }
