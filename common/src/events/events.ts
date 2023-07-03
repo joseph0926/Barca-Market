@@ -16,8 +16,10 @@ export interface PostUpdatedEvent {
   subject: Subjects.PostUpdated;
   data: {
     id: string;
-    title: string;
     content: string;
+    images?: string[];
+    hashtags?: string[];
+    isPrivate: boolean;
     userId: string;
   };
 }

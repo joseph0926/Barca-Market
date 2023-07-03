@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: post-depl
+  name: comment-depl
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: post
+      app: comment
   template:
     metadata:
       labels:
-        app: post
+        app: comment
     spec:
       containers:
-        - name: post
-          image: rkekqmf0926/post
+        - name: comment
+          image: rkekqmf0926/comment
           env:
             - name: NATS_CLIENT_ID
               valueFrom:
@@ -25,7 +25,7 @@ spec:
             - name: NATS_CLUSTER_ID
               value: barcelona
             - name: MONGO_URI
-              value: "mongodb://post-mongo-srv:27017/post"
+              value: "mongodb://comment-mongo-srv:27017/comment"
             - name: JWT_SECRET
               valueFrom:
                 secretKeyRef:

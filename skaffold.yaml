@@ -25,6 +25,14 @@ build:
         manual:
           - src: "src/**/*.ts"
             dest: .
+    - image: rkekqmf0926/comment
+      context: comment
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.ts"
+            dest: .
     - image: rkekqmf0926/client
       context: client
       docker:
