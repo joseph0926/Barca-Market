@@ -23,3 +23,29 @@ export interface PostUpdatedEvent {
     userId: string;
   };
 }
+
+export interface CommentCreatedEvent {
+  subject: Subjects.CommentCreated;
+  data: {
+    id: string;
+    content: string;
+    parentId?: string;
+    userId: string;
+    post: {
+      id: string;
+    };
+  };
+}
+
+export interface CommentUpdatedEvent {
+  subject: Subjects.Commentupdated;
+  data: {
+    id: string;
+    content: string;
+    parentId?: string;
+    userId: string;
+    post: {
+      id: string;
+    };
+  };
+}
