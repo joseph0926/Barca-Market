@@ -12,6 +12,8 @@ interface CommentDoc extends mongoose.Document {
   content: string;
   parentId: string;
   replys: string[];
+  likes: string[];
+  reports: string[];
   totalLikes: number;
   totalReports: number;
   userId: string;
@@ -34,6 +36,16 @@ const commentSchema = new mongoose.Schema(
       required: false,
     },
     replys: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "Comment",
+      default: [],
+    },
+    likes: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "Comment",
+      default: [],
+    },
+    reports: {
       type: [mongoose.Schema.Types.ObjectId],
       ref: "Comment",
       default: [],

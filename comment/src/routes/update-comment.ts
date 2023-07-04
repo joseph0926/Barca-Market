@@ -1,16 +1,16 @@
 import express from "express";
 import { body } from "express-validator";
 import { requireAuth, validateRequest } from "@joseph0926-barcelona/common";
-import { createComment } from "../controllers/create-comment-controller";
+import { updateComment } from "../controllers/update-comment-controller";
 
 const router = express.Router();
 
-router.post(
-  "/api/comment/:postId",
+router.put(
+  "/api/comment/:commentId",
   requireAuth,
   [body("content").not().isEmpty().withMessage("내용을 작성해주세요.")],
   validateRequest,
-  createComment
+  updateComment
 );
 
-export { router as createCommentRouter };
+export { router as updateCommentRouter };

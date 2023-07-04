@@ -37,7 +37,7 @@ export const updatePost = async (req: Request, res: Response) => {
       userId: post.userId,
     });
 
-    res.status(200).json([{ post, message: "글이 수정되었습니다." }]);
+    res.status(201).json([{ post, message: "글이 수정되었습니다." }]);
   } catch (error) {
     console.log(error);
   }

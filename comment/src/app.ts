@@ -8,6 +8,11 @@ import {
   currentUser,
 } from "@joseph0926-barcelona/common";
 import { createCommentRouter } from "./routes/create-comment";
+import { getCommentRouter } from "./routes/get-comments";
+import { updateCommentRouter } from "./routes/update-comment";
+import { deleteCommentRouter } from "./routes/delete-comment";
+import { likesCommentRouter } from "./routes/likes-comment";
+import { reportCommentRouter } from "./routes/report-comment";
 
 const app = express();
 app.set("trust proxy", true);
@@ -21,6 +26,11 @@ app.use(
 app.use(currentUser);
 
 app.use(createCommentRouter);
+app.use(getCommentRouter);
+app.use(updateCommentRouter);
+app.use(deleteCommentRouter);
+app.use(likesCommentRouter);
+app.use(reportCommentRouter);
 
 app.get("*", async () => {
   throw new NotFoundError();

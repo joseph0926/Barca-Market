@@ -5,8 +5,8 @@ interface PostAttrs {
   content: string;
   images?: string[];
   hashtags?: string[];
-  isPrivate: boolean;
-  userId: string;
+  isPrivate?: boolean;
+  userId?: string;
 }
 
 export interface PostDoc extends mongoose.Document {
