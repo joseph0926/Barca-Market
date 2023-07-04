@@ -40,7 +40,7 @@ export const getPosts = async (req: Request, res: Response) => {
 
     const posts = await result;
 
-    res.status(201).json([{ posts, message: "모든 글을 불러왔습니다." }]);
+    res.status(200).json([{ posts, message: "모든 글을 불러왔습니다." }]);
   } catch (error) {
     console.log(error);
   }

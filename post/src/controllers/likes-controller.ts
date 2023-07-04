@@ -43,5 +43,5 @@ export const deleteLike = async (req: Request, res: Response) => {
     await post.save();
   }
 
-  res.status(201).json([{ post, message: "좋아요를 취소하였습니다." }]);
+  res.status(200).json([{ post, message: "좋아요를 취소하였습니다." }]);
 };

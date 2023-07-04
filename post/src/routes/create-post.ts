@@ -34,7 +34,7 @@ router.post(
         userId: post.userId,
       });
 
-      res.status(200).json([{ post, message: "글 작성에 성공하였습니다." }]);
+      res.status(201).json([{ post, message: "글 작성에 성공하였습니다." }]);
     } catch (error) {
       console.log(error);
     }

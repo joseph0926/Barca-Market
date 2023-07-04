@@ -15,7 +15,7 @@ router.get(
     if (!post) {
       throw new NotFoundError();
     }
-    res.status(201).json([{ post, message: "해당 글을 불러왔습니다." }]);
+    res.status(200).json([{ post, message: "해당 글을 불러왔습니다." }]);
   }
 );
 

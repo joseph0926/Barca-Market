@@ -5,12 +5,12 @@ import { Post } from "../models/post";
 const router = express.Router();
 
 router.delete(
-  "/api/post/:postId",
+  "/api/commnet/:commentId",
   requireAuth,
   async (req: Request, res: Response) => {
     try {
-      const post = await Post.findByIdAndDelete(req.params.postId);
-      if (!post) {
+      const comment = await Post.findByIdAndDelete(req.params.commentId);
+      if (!comment) {
         throw new NotFoundError();
       }
 
@@ -21,4 +21,4 @@ router.delete(
   }
 );
 
-export { router as deletePostRouter };
+export { router as deleteCommentRouter };
