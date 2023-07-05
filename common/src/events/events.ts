@@ -23,6 +23,7 @@ export interface PostUpdatedEvent {
     hashtags?: string[];
     isPrivate: boolean;
     userId: string;
+    commentId?: string;
   };
 }
 
