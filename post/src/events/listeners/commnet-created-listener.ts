@@ -14,7 +14,7 @@ export class CommentCreatedListener extends Listener<CommentCreatedEvent> {
   queueGroupName = queueGroupName;
 
   async onMessage(data: CommentCreatedEvent["data"], msg: Message) {
-    const post = await Post.findById(data.post.id);
+    const post = await Post.findByEvent(data);
     if (!post) {
       throw new NotFoundError();
     }

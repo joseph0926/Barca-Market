@@ -25,6 +25,7 @@ interface PostDoc extends mongoose.Document {
 
 interface PostModel extends mongoose.Model<PostDoc> {
   build(attrs: PostAttrs): PostDoc;
+  findByEvent(event: { id: string; version: number }): Promise<PostDoc | null>;
 }
 
 const postSchema = new mongoose.Schema(
@@ -61,6 +62,12 @@ const postSchema = new mongoose.Schema(
 postSchema.set("versionKey", "version");
 postSchema.plugin(updateIfCurrentPlugin);
 
+postSchema.statics.findByEvent = (event: { id: string; version: number }) => {
+  return Post.findOne({
+    _id: event.id,
+    version: event.version - 1,
+  });
+};
 postSchema.statics.build = (attr: PostAttrs) => {
   return new Post(attr);
 };

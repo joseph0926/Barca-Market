@@ -7,22 +7,18 @@ import { CommentCreatedPublisher } from "../events/publishers/comment-created-pu
 import { natsWrapper } from "../nats-wrapper";
 
 export const createComment = async (req: Request, res: Response) => {
-  const session = await mongoose.startSession();
-  session.startTransaction();
   try {
-    const { content, parentId } = req.body;
+    const { content, parentId, postId } = req.body;
 
-    const post = await Post.findById(req.params.postId);
+    const post = await Post.findById(postId);
     if (!post) {
       throw new NotFoundError();
     }
 
     let parentComment;
     if (parentId) {
-      parentComment = await Comment.findById(parentId).session(session);
+      parentComment = await Comment.findById(parentId);
       if (!parentComment) {
-        await session.abortTransaction();
-        session.endSession();
         throw new NotFoundError();
       }
     }
@@ -33,14 +29,12 @@ export const createComment = async (req: Request, res: Response) => {
       userId: req.currentUser!.id,
       post,
     });
-    await comment.save({ session });
+    await comment.save();
 
     if (parentComment) {
       parentComment.replys.push(comment.id);
-      await parentComment.save({ session });
+      await parentComment.save();
     }
-
-    await session.commitTransaction();
 
     new CommentCreatedPublisher(natsWrapper.client).publish({
       id: comment.id,
@@ -55,11 +49,6 @@ export const createComment = async (req: Request, res: Response) => {
 
     res.status(201).json([{ comment, message: "댓글 작성에 성공하였습니다." }]);
   } catch (error) {
-    if (session.inTransaction()) {
-      await session.abortTransaction();
-    }
     console.log(error);
-  } finally {
-    session.endSession();
   }
 };

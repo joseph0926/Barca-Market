@@ -69,7 +69,14 @@ postSchema.statics.findByEvent = (event: { id: string; version: number }) => {
   });
 };
 postSchema.statics.build = (attr: PostAttrs) => {
-  return new Post(attr);
+  return new Post({
+    _id: attr.id,
+    content: attr.content,
+    hashtags: attr.hashtags,
+    images: attr.images,
+    isPrivate: attr.isPrivate,
+    userId: attr.userId,
+  });
 };
 
 const Post = mongoose.model<PostDoc, PostModel>("Post", postSchema);
