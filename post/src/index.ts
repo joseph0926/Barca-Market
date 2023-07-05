@@ -1,6 +1,8 @@
 import mongoose from "mongoose";
 import app from "./app";
 import { natsWrapper } from "./nats-wrapper";
+import { CommentCreatedListener } from "./events/listeners/commnet-created-listener";
+import { CommentUpdatedListener } from "./events/listeners/comment-updated-listener";
 
 const start = async () => {
   if (!process.env.JWT_SECRET) {
@@ -31,6 +33,9 @@ const start = async () => {
     });
     process.on("SIGINT", () => natsWrapper.client.close());
     process.on("SIGTERM", () => natsWrapper.client.close());
+
+    new CommentCreatedListener(natsWrapper.client).listen();
+    new CommentUpdatedListener(natsWrapper.client).listen();
 
     await mongoose.connect(process.env.MONGO_URI);
     console.log("DB 연결에 성공하였습니다");

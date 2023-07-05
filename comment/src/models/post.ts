@@ -1,7 +1,9 @@
 import mongoose from "mongoose";
 import { Comment } from "./comment";
+import { updateIfCurrentPlugin } from "mongoose-update-if-current";
 
 interface PostAttrs {
+  id: string;
   content: string;
   images?: string[];
   hashtags?: string[];
@@ -19,10 +21,12 @@ export interface PostDoc extends mongoose.Document {
   totalLikes: number;
   isPrivate: boolean;
   userId: string;
+  version: number;
 }
 
 interface PostModel extends mongoose.Model<PostDoc> {
   build(attrs: PostAttrs): PostDoc;
+  findByEvent(event: { id: string; version: number }): Promise<PostDoc | null>;
 }
 
 const postSchema = new mongoose.Schema(
@@ -49,13 +53,21 @@ const postSchema = new mongoose.Schema(
       transform(doc, ret) {
         ret.id = ret._id.toString();
         delete ret._id;
-        delete ret.__v;
       },
     },
     timestamps: true,
   }
 );
 
+postSchema.set("versionKey", "version");
+postSchema.plugin(updateIfCurrentPlugin);
+
+postSchema.statics.findByEvent = (event: { id: string; version: number }) => {
+  return Post.findOne({
+    _id: event.id,
+    version: event.version - 1,
+  });
+};
 postSchema.statics.build = (attr: PostAttrs) => {
   return new Post(attr);
 };

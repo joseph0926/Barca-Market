@@ -1,11 +1,12 @@
 import mongoose from "mongoose";
+import { updateIfCurrentPlugin } from "mongoose-update-if-current";
 
 interface PostAttrs {
   content: string;
   images?: string[];
   hashtags?: string[];
   isPrivate: boolean;
-  userId: string;
+  userId?: string;
 }
 
 interface PostDoc extends mongoose.Document {
@@ -18,6 +19,8 @@ interface PostDoc extends mongoose.Document {
   totalLikes: number;
   isPrivate: boolean;
   userId: string;
+  version: number;
+  commnetId?: string;
 }
 
 interface PostModel extends mongoose.Model<PostDoc> {
@@ -42,18 +45,21 @@ const postSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    commentId: { type: String },
   },
   {
     toJSON: {
       transform(doc, ret) {
         ret.id = ret._id.toString();
         delete ret._id;
-        delete ret.__v;
       },
     },
     timestamps: true,
   }
 );
+
+postSchema.set("versionKey", "version");
+postSchema.plugin(updateIfCurrentPlugin);
 
 postSchema.statics.build = (attr: PostAttrs) => {
   return new Post(attr);
