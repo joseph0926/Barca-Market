@@ -35,6 +35,7 @@ export const updatePost = async (req: Request, res: Response) => {
       hashtags: post.hashtags,
       images: post.images,
       userId: post.userId,
+      version: post.version,
     });
 
     res.status(201).json([{ post, message: "글이 수정되었습니다." }]);

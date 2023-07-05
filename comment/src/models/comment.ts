@@ -4,7 +4,7 @@ import { PostDoc } from "./post";
 interface CommentAttrs {
   content: string;
   parentId?: string;
-  userId: string;
+  userId?: string;
   post: PostDoc;
 }
 
@@ -18,6 +18,7 @@ interface CommentDoc extends mongoose.Document {
   totalReports: number;
   userId: string;
   post: PostDoc;
+  version: number;
 }
 
 interface CommentModel extends mongoose.Model<CommentDoc> {
@@ -72,7 +73,6 @@ const commentSchema = new mongoose.Schema(
       transform(doc, ret) {
         ret.id = ret._id.toString();
         delete ret._id;
-        delete ret.__v;
       },
     },
     timestamps: true,

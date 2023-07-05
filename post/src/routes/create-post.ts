@@ -32,6 +32,7 @@ router.post(
         hashtags: post.hashtags,
         images: post.images,
         userId: post.userId,
+        version: post.version,
       });
 
       res.status(201).json([{ post, message: "글 작성에 성공하였습니다." }]);

@@ -28,6 +28,7 @@ export const updateComment = async (req: Request, res: Response) => {
       content: comment.content,
       parentId: comment.parentId,
       userId: comment.userId,
+      version: comment.version,
       post: {
         id: comment.post.id,
       },
