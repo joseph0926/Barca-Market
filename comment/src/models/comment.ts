@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { PostDoc } from "./post";
+import { updateIfCurrentPlugin } from "mongoose-update-if-current";
 
 interface CommentAttrs {
   content: string;
@@ -78,6 +79,9 @@ const commentSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
+commentSchema.set("versionKey", "version");
+commentSchema.plugin(updateIfCurrentPlugin);
 
 commentSchema.statics.build = (attrs: CommentAttrs) => {
   return new Comment(attrs);

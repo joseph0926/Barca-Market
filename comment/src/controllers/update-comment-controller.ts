@@ -16,7 +16,7 @@ export const updateComment = async (req: Request, res: Response) => {
       throw new NotFoundError();
     }
 
-    if (comment.userId !== req.currentUser!.id) {
+    if (comment.userId !== req.currentUser!.id.toString()) {
       throw new NotAuthorizedError();
     }
 
