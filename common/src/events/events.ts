@@ -28,6 +28,13 @@ export interface PostUpdatedEvent {
   };
 }
 
+export interface PostDeletedEvent {
+  subject: Subjects.PostDeleted;
+  data: {
+    id: string;
+  };
+}
+
 export interface CommentCreatedEvent {
   subject: Subjects.CommentCreated;
   data: {
@@ -50,6 +57,16 @@ export interface CommentUpdatedEvent {
     content: string;
     parentId?: string;
     userId: string;
+    post: {
+      id: string;
+    };
+  };
+}
+
+export interface CommentDeletedEvent {
+  subject: Subjects.CommentDeleted;
+  data: {
+    id: string;
     post: {
       id: string;
     };
