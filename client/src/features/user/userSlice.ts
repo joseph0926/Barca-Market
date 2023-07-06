@@ -1,5 +1,4 @@
 import { PayloadAction, createSlice, nanoid } from "@reduxjs/toolkit";
-import { toast } from "react-toastify";
 
 export type UserState = {
   user: User;

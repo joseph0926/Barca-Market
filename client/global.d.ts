@@ -34,3 +34,17 @@ type DisplayProps = {
 type AnimProps = {
   anim: boolean;
 };
+
+type Post = {
+  id: string;
+  content: string;
+  likes?: string[];
+  images?: string[];
+  hashtags?: string[];
+  totalComments?: number;
+  totalLikes?: number;
+  isPrivate: boolean;
+  userId: string;
+  version?: number;
+  comments?: string[];
+};
