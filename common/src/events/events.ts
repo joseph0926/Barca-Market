@@ -10,6 +10,7 @@ export interface PostCreatedEvent {
     hashtags?: string[];
     isPrivate: boolean;
     userId: string;
+    comments?: string[];
   };
 }
 
@@ -23,9 +24,7 @@ export interface PostUpdatedEvent {
     hashtags?: string[];
     isPrivate: boolean;
     userId: string;
-    comment: {
-      id: string | undefined;
-    };
+    comments?: string[];
   };
 }
 
