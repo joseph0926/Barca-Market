@@ -3,6 +3,7 @@ import app from "./app";
 import { natsWrapper } from "./nats-wrapper";
 import { PostCreatedListener } from "./events/listeners/post-created-listener";
 import { PostUpdatedListener } from "./events/listeners/post-updated-listener";
+import { PostDeletedListener } from "./events/listeners/post-deleted-listener";
 
 const start = async () => {
   if (!process.env.JWT_SECRET) {
@@ -36,6 +37,7 @@ const start = async () => {
 
     new PostCreatedListener(natsWrapper.client).listen();
     new PostUpdatedListener(natsWrapper.client).listen();
+    new PostDeletedListener(natsWrapper.client).listen();
 
     await mongoose.connect(process.env.MONGO_URI);
     console.log("DB 연결에 성공하였습니다");

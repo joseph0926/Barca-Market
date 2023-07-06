@@ -1,9 +1,6 @@
 import { Request, Response } from "express";
 import { Post } from "../models/post";
-import {
-  NotAuthorizedError,
-  NotFoundError,
-} from "@joseph0926-barcelona/common";
+import { NotAuthorizedError } from "@joseph0926-barcelona/common";
 import { PostUpdatedPublisher } from "../events/publishers/post-updated-publisher";
 import { natsWrapper } from "../nats-wrapper";
 
@@ -13,7 +10,7 @@ export const updatePost = async (req: Request, res: Response) => {
 
     const post = await Post.findById(req.params.postId);
     if (!post) {
-      throw new NotFoundError();
+      throw new Error("해당 게시글을 찾을 수 없습니다");
     }
 
     if (!req.currentUser!.id) {
@@ -36,6 +33,7 @@ export const updatePost = async (req: Request, res: Response) => {
       images: post.images,
       userId: post.userId,
       version: post.version,
+      comments: post.comments,
     });
 
     res.status(201).json([{ post, message: "글이 수정되었습니다." }]);

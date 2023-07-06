@@ -14,14 +14,16 @@ router.post(
   validateRequest,
   async (req: Request, res: Response) => {
     try {
-      const { content, hashtags, images, isPrivate } = req.body;
+      const { id, content, hashtags, images, isPrivate } = req.body;
 
       const post = Post.build({
+        id,
         content,
         isPrivate,
         hashtags,
         images,
         userId: req.currentUser!.id,
+        comments: [],
       });
       await post.save();
 
@@ -33,6 +35,7 @@ router.post(
         images: post.images,
         userId: post.userId,
         version: post.version,
+        comments: [],
       });
 
       res.status(201).json([{ post, message: "글 작성에 성공하였습니다." }]);

@@ -9,6 +9,7 @@ interface PostAttrs {
   hashtags?: string[];
   isPrivate?: boolean;
   userId?: string;
+  comments?: string[];
 }
 
 export interface PostDoc extends mongoose.Document {
@@ -22,6 +23,7 @@ export interface PostDoc extends mongoose.Document {
   isPrivate: boolean;
   userId: string;
   version: number;
+  comments?: string[];
 }
 
 interface PostModel extends mongoose.Model<PostDoc> {
@@ -46,6 +48,10 @@ const postSchema = new mongoose.Schema(
     userId: {
       type: String,
       required: true,
+    },
+    comments: {
+      type: [String],
+      ref: "Comment",
     },
   },
   {

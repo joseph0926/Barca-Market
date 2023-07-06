@@ -1,12 +1,15 @@
 import mongoose from "mongoose";
 import { updateIfCurrentPlugin } from "mongoose-update-if-current";
+import { CommentDoc } from "./comment";
 
 interface PostAttrs {
+  id: string;
   content: string;
   images?: string[];
   hashtags?: string[];
   isPrivate: boolean;
   userId?: string;
+  comments?: string[];
 }
 
 interface PostDoc extends mongoose.Document {
@@ -20,7 +23,7 @@ interface PostDoc extends mongoose.Document {
   isPrivate: boolean;
   userId: string;
   version: number;
-  commnetId?: string;
+  comments?: string[];
 }
 
 interface PostModel extends mongoose.Model<PostDoc> {
@@ -46,7 +49,10 @@ const postSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    commentId: { type: String },
+    comments: {
+      type: [String],
+      ref: "Comment",
+    },
   },
   {
     toJSON: {
@@ -68,10 +74,9 @@ postSchema.statics.findByEvent = (event: { id: string; version: number }) => {
     version: event.version - 1,
   });
 };
-postSchema.statics.build = (attr: PostAttrs) => {
-  return new Post(attr);
+postSchema.statics.build = (attrs: PostAttrs) => {
+  return new Post(attrs);
 };
-
 const Post = mongoose.model<PostDoc, PostModel>("Post", postSchema);
 
 export { Post };

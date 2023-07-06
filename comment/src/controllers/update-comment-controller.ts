@@ -30,7 +30,7 @@ export const updateComment = async (req: Request, res: Response) => {
       userId: comment.userId,
       version: comment.version,
       post: {
-        id: comment.post.id,
+        id: Buffer.from(comment.post.id).toString("hex"),
       },
     });
 
