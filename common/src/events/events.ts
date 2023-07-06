@@ -24,7 +24,7 @@ export interface PostUpdatedEvent {
     isPrivate: boolean;
     userId: string;
     comment: {
-      id: string;
+      id: string | undefined;
     };
   };
 }
