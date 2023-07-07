@@ -1,31 +1,19 @@
 import Navbar from "./Navbar";
 import Loading from "./Loading";
-import { useEffect } from "react";
-import { useAppDispatch, useAppSelect } from "@/src/hooks/useReduxHook";
-import { setUser } from "@/src/features/user/userSlice";
-import { useRouter } from "next/router";
-import { useCurrentUserQuery } from "@/src/store/store";
 import { LayoutWrapper } from "./LayoutStyle";
+import { useAppSelect } from "@/src/hooks/useReduxHook";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 const Layout = ({ children }: BoxProps): JSX.Element => {
-  const dispatch = useAppDispatch();
-  const { user } = useAppSelect((state) => state.user);
+  const { user, userLoading, isLoading } = useAppSelect((state) => state.user);
   const router = useRouter();
-  const { data, error, isFetching } = useCurrentUserQuery(undefined);
 
   useEffect(() => {
-    if (data) {
-      const { currentUser } = data[0];
-      dispatch(setUser(currentUser));
+    if (!userLoading && !user && router.pathname !== "/") {
+      router.push("/sign");
     }
-  }, [data]);
-
-  if (isFetching) {
-    return <Loading display="true" />;
-  }
-  if (!user && router.pathname !== "/") {
-    router.push("/sign");
-  }
+  }, [user, router.pathname]);
 
   return (
     <LayoutWrapper>
@@ -33,7 +21,7 @@ const Layout = ({ children }: BoxProps): JSX.Element => {
         <Navbar />
       </div>
       <div className="main">
-        <Loading display="false" />
+        <Loading $display={false} />
         <main>{children}</main>
       </div>
     </LayoutWrapper>

@@ -10,3 +10,11 @@ export const validatePassword = (password: string): boolean => {
 export const validateName = (name: string): boolean => {
   return name.trim() !== "";
 };
+
+export const validatePost = (post: string): boolean => {
+  return post.trim().length <= 300;
+};
+
+export const validateHash = (hash: string): boolean => {
+  return hash.startsWith("#");
+};

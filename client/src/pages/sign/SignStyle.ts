@@ -36,7 +36,8 @@ export const SignWrapper = styled.div<AnimProps>`
     .sign-form {
       gap: 0.5rem;
     }
-    animation: ${(props) => (props.anim ? gradient : "none")} 1.5s ease infinite;
+    animation: ${(props) => (props.$anim ? gradient : "none")} 1.5s ease
+      infinite;
     .container {
       display: flex;
       align-items: center;

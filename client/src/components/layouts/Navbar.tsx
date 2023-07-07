@@ -56,7 +56,9 @@ const Navbar = (): JSX.Element => {
             <Link href="/sign">Login</Link>
           </button>
         )}
-        <button onClick={() => dispatch(toggleMode())}>DarkMode</button>
+        <button onClick={() => dispatch(toggleMode())}>
+          {mode !== "dark" ? "Dark" : "Light"}
+        </button>
       </div>
     </NavWrapper>
   );

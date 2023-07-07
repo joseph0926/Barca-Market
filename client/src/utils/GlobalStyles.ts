@@ -21,7 +21,8 @@ const GlobalStyle = createGlobalStyle<ModeProps>`
         ? props.theme.borderColor.dark
         : props.theme.borderColor.light};
     max-width: 100vw;
-    overflow: hidden;
+    overflow-x: hidden;
+  overflow-y: visible;
   }
   ul {
     list-style: none;

@@ -4,10 +4,11 @@ type BoxProps = {
   children: React.ReactNode;
   isExempt?: boolean;
   user?: User;
+  currentUser?: User;
 };
 
 type LoadingProps = {
-  display: string;
+  $display: boolean;
 };
 
 type User = {
@@ -15,6 +16,10 @@ type User = {
   name?: string;
   email: string;
   password: string;
+};
+
+type CurrentUser = {
+  currentUser: User;
 };
 
 type isUserValid = {
@@ -28,9 +33,27 @@ type ModeProps = {
 };
 
 type DisplayProps = {
-  display: string;
+  $display: boolean;
 };
 
 type AnimProps = {
-  anim: boolean;
+  $anim: boolean;
+};
+
+type Post = {
+  id: string;
+  content: string;
+  likes?: string[];
+  images?: string[];
+  hashtags?: string[];
+  totalComments?: number;
+  totalLikes?: number;
+  isPrivate: boolean;
+  userId: string;
+  version?: number;
+  comments?: string[];
+};
+
+type PostProps = {
+  post: Post;
 };

@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createAsyncThunk } from "@reduxjs/toolkit";
 
 const userApi = createApi({
   reducerPath: "userApi",
@@ -44,14 +45,14 @@ const userApi = createApi({
           };
         },
       }),
-      currentUser: builder.query({
-        query: () => {
-          return {
-            url: "/currentuser",
-            method: "GET",
-          };
-        },
-      }),
+      // currentUser: builder.query({
+      //   query: () => {
+      //     return {
+      //       url: "/currentuser",
+      //       method: "GET",
+      //     };
+      //   },
+      // }),
       signout: builder.mutation({
         query: () => {
           return {
@@ -64,11 +65,25 @@ const userApi = createApi({
   },
 });
 
+export const getCurrentUser = createAsyncThunk(
+  "user/getCurrentUser",
+  async (_, thunkAPI) => {
+    try {
+      const response = await fetch("/api/users/currentuser");
+      if (!response.ok) {
+        throw response.json();
+      }
+      return response.json();
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
 export const {
   useSignupMutation,
   useSigninMutation,
   useVerifyEmailMutation,
-  useCurrentUserQuery,
   useSignoutMutation,
 } = userApi;
 

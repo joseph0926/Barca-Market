@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const FormWrapper = styled.form`
+export const FormWrapper = styled.div`
   label {
     font-size: 1.15rem;
   }
