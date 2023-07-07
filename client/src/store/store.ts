@@ -13,7 +13,9 @@ const store = configureStore({
     [postApi.reducerPath]: postApi.reducer,
   },
   middleware: (getDefaultMiddleware) => {
-    return getDefaultMiddleware().concat(userApi.middleware);
+    return getDefaultMiddleware()
+      .concat(userApi.middleware)
+      .concat(postApi.middleware);
   },
 });
 

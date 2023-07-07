@@ -93,13 +93,23 @@ const PostForm = (): JSX.Element => {
       </div>
       <div className="sub">
         <div className="private">
-          <span>
-            비공개:{" "}
-            <FaLock
-              color={mode === "dark" ? "#fff" : "#000"}
-              onClick={toggleIsPrivate}
-            />
-          </span>
+          {isPrivate ? (
+            <span>
+              비공개:{" "}
+              <FaLock
+                color={mode === "dark" ? "#fff" : "#000"}
+                onClick={toggleIsPrivate}
+              />
+            </span>
+          ) : (
+            <span>
+              공개:{" "}
+              <FaUnlock
+                color={mode === "dark" ? "#fff" : "#000"}
+                onClick={toggleIsPrivate}
+              />
+            </span>
+          )}
           <span>
             #HashTags:{" "}
             <input

@@ -25,7 +25,7 @@ const Sign = (): JSX.Element => {
   };
 
   return (
-    <SignWrapper anim={anim}>
+    <SignWrapper $anim={anim}>
       <button className="back">
         <Link href="/">Go Back Home</Link>
       </button>

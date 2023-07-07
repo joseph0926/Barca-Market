@@ -13,7 +13,7 @@ const bounce = keyframes`
 `;
 
 export const LoadingWrapper = styled.div<DisplayProps>`
-  display: ${(props) => (props.display === "true" ? "flex" : "none")};
+  display: ${(props) => (props.$display === true ? "flex" : "none")};
   justify-content: center;
   align-items: center;
   height: 100vh;

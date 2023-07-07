@@ -34,6 +34,18 @@ const postApi = createApi({
           };
         },
       }),
+      updatePosts: builder.mutation({
+        invalidatesTags: (result, error, post) => {
+          return [{ type: "Post", id: post.id }];
+        },
+        query: ({ postId, content, hashtags, images, isPrivate }) => {
+          return {
+            url: `/${postId}`,
+            method: "PUT",
+            body: { content, hashtags, images, isPrivate },
+          };
+        },
+      }),
     };
   },
 });

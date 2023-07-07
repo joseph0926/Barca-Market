@@ -1,7 +1,7 @@
 import { SideWrapper } from "./SidebarStyle";
 
 const Sidebar = (): JSX.Element => {
-  return <SideWrapper>Hello~</SideWrapper>;
+  return <SideWrapper>필터</SideWrapper>;
 };
 
 export default Sidebar;

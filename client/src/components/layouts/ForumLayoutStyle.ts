@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const ForumLayoutWrapper = styled.div`
   max-width: 100vw;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   .left {
     flex: 1;
@@ -10,11 +10,11 @@ export const ForumLayoutWrapper = styled.div`
     position: sticky;
     top: 0;
     left: 0;
-    background: red;
   }
   .main {
-    flex: 2;
+    flex: 3;
     width: 100%;
+    height: 100%;
     margin: 0;
   }
   .right {

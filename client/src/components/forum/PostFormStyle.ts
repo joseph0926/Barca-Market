@@ -5,7 +5,6 @@ export const PostFormWrapper = styled.form<ModeProps>`
   height: 25%;
   display: flex;
   flex-direction: column;
-  border-bottom: 2px solid;
   .input {
     display: flex;
     justify-content: space-between;
@@ -36,6 +35,9 @@ export const PostFormWrapper = styled.form<ModeProps>`
     display: flex;
     justify-content: space-around;
     align-items: center;
+    padding: 1rem 0;
+    background: ${(props) =>
+      props.mode === "dark" ? "rgba(151, 17, 17, 0.699)" : "#87CEFA"};
     .private {
       display: flex;
       flex-direction: column;
