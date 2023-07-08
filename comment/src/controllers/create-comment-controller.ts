@@ -8,9 +8,9 @@ import { natsWrapper } from "../nats-wrapper";
 
 export const createComment = async (req: Request, res: Response) => {
   try {
-    const { content, parentId, postId } = req.body;
+    const { content, parentId } = req.body;
 
-    const post = await Post.findById(postId);
+    const post = await Post.findById(req.params.postId);
     if (!post) {
       throw new NotFoundError();
     }
@@ -43,7 +43,8 @@ export const createComment = async (req: Request, res: Response) => {
       userId: comment.userId,
       version: comment.version,
       post: {
-        id: comment.post.id,
+        // id: comment.post.id,
+        id: req.params.postId,
       },
     });
 

@@ -6,7 +6,7 @@ import { createComment } from "../controllers/create-comment-controller";
 const router = express.Router();
 
 router.post(
-  "/api/comment",
+  "/api/post/:postId/comment",
   requireAuth,
   [body("content").not().isEmpty().withMessage("내용을 작성해주세요.")],
   validateRequest,

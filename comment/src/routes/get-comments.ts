@@ -4,6 +4,6 @@ import { getComments } from "../controllers/get-comments-controller";
 
 const router = express.Router();
 
-router.get("/api/comment/:postId", requireAuth, getComments);
+router.get("/api/post/:postId/comment", requireAuth, getComments);
 
 export { router as getCommentRouter };

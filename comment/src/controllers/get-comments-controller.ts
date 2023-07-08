@@ -5,9 +5,7 @@ import { NotFoundError } from "@joseph0926-barcelona/common";
 
 export const getComments = async (req: Request, res: Response) => {
   try {
-    const { postId } = req.params;
-
-    const post = await Post.findById(postId);
+    const post = await Post.findById(req.params.postId);
     if (!post) {
       throw new NotFoundError();
     }

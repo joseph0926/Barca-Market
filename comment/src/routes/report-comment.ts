@@ -6,7 +6,7 @@ import { Comment } from "../models/comment";
 const router = express.Router();
 
 router.post(
-  "/api/comment/:commentId/reports",
+  "/api/post/:postId/comment/:commentId/report",
   requireAuth,
   async (req: Request, res: Response) => {
     const session = await mongoose.startSession();

@@ -6,7 +6,7 @@ import { updateComment } from "../controllers/update-comment-controller";
 const router = express.Router();
 
 router.put(
-  "/api/comment/:commentId",
+  "/api/post/:postId/comment/:commentId",
   requireAuth,
   [body("content").not().isEmpty().withMessage("내용을 작성해주세요.")],
   validateRequest,

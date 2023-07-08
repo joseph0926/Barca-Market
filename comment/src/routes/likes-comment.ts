@@ -4,6 +4,10 @@ import { likesComment } from "../controllers/likes-comment-controller";
 
 const router = express.Router();
 
-router.post("/api/comment/:commentId/likes", requireAuth, likesComment);
+router.post(
+  " /api/post/:postId/comment/:commentId/like",
+  requireAuth,
+  likesComment
+);
 
 export { router as likesCommentRouter };

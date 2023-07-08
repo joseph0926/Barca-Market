@@ -7,7 +7,7 @@ import { Comment } from "../models/comment";
 const router = express.Router();
 
 router.delete(
-  "/api/comment/:commentId",
+  "/api/post/:postId/comment/:commentId",
   requireAuth,
   async (req: Request, res: Response) => {
     try {
