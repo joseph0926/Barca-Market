@@ -17,7 +17,7 @@ FC Barcelona Fan Community Platform은 FC Barcelona 팬들을 위한 온라인 �
 
 
 ### 프로젝트 구성
-![barcelona](https://github.com/joseph0926/project_03-Barcelona-Fan-Community/assets/100750188/3ff58c97-f1ad-4b2d-81af-fa20104c249e)
+![다운로드](https://github.com/joseph0926/project_03-Barcelona-Fan-Community/assets/100750188/89c98b73-e57f-43b3-bf1b-5328c02043a1)
 
 
 
