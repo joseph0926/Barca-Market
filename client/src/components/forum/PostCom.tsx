@@ -1,13 +1,21 @@
+import React from "react";
+import { useAppDispatch } from "@/src/hooks/useReduxHook";
+// import { deletePost } from '../redux/actions/postActions';
 import { PostWrapper } from "./PostComStyle";
 
-const PostCom = (): JSX.Element => {
+const Post = ({ post }: PostProps): JSX.Element => {
+  const dispatch = useAppDispatch();
+
+  const deleteHandler = () => {};
+
   return (
     <PostWrapper>
-      <h2>디자인 미완성</h2>
-      <button>편집</button>
-      <button>삭제</button>
+      <h3>{post.content.substring(0, 50) + "..."}</h3>
+      <p>{post.likes.length} likes</p>
+      <p>{post.totalComments} comments</p>
+      <button onClick={deleteHandler}>Delete</button>
     </PostWrapper>
   );
 };
 
-export default PostCom;
+export default Post;
