@@ -11,12 +11,13 @@ FC Barcelona Fan Community Platform은 FC Barcelona 팬들을 위한 온라인 �
 이 플랫폼을 통해 FC Barcelona 팬들끼리 소통하고, 다양한 정보와 소식을 공유할 수 있습니다. 팬들은 게시물 작성, 댓글 달기, 팔로우 등의 기능을 활용하여 활발한 커뮤니티 활동을 할 수 있습니다.
 
 ### 프로젝트 데모
+![데모02](https://github.com/joseph0926/project_03-Barcelona-Fan-Community/assets/100750188/86b250d9-de22-4753-98a3-28c3cdcb8fbe)
+![데모01](https://github.com/joseph0926/project_03-Barcelona-Fan-Community/assets/100750188/4b3438df-d753-470d-8969-100c36f18136)
 
-![barcelona-gradient5](https://github.com/joseph0926/project_03-Barcelona-Fan-Community/assets/100750188/f045e8b8-4cbd-4f58-9a2b-ff3554ac50fa)
 
 
 ### 프로젝트 구성
-![barcelona](https://github.com/joseph0926/project_03-Barcelona-Fan-Community/assets/100750188/3ff58c97-f1ad-4b2d-81af-fa20104c249e)
+![다운로드](https://github.com/joseph0926/project_03-Barcelona-Fan-Community/assets/100750188/89c98b73-e57f-43b3-bf1b-5328c02043a1)
 
 
 
@@ -40,8 +41,8 @@ FC Barcelona Fan Community Platform은 FC Barcelona 팬들을 위한 온라인 �
 - 게시물 작성, 수정, 삭제 기능
 - 댓글 작성, 수정, 삭제 기능
 - 사용자 프로필 관리 기능
-- 팔로우 기능
-- 토론 포럼 기능
+- 추천 기능
+- 맆터링 기능
 - 알림 기능
 
 ## 기술 스택
