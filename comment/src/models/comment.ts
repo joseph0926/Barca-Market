@@ -1,24 +1,22 @@
 import mongoose from "mongoose";
-import { PostDoc } from "./post";
 import { updateIfCurrentPlugin } from "mongoose-update-if-current";
 
 interface CommentAttrs {
   content: string;
   parentId?: string;
   userId?: string;
-  post: PostDoc;
+  postId: string;
 }
 
 interface CommentDoc extends mongoose.Document {
+  id: string;
   content: string;
   parentId: string;
-  replys: string[];
-  likes: string[];
-  reports: string[];
-  totalLikes: number;
-  totalReports: number;
+  replys?: string[];
+  likes: number;
+  reports: number;
   userId: string;
-  post: PostDoc;
+  postId: string;
   version: number;
 }
 
@@ -43,31 +41,19 @@ const commentSchema = new mongoose.Schema(
       default: [],
     },
     likes: {
-      type: [mongoose.Schema.Types.ObjectId],
-      ref: "Comment",
-      default: [],
+      type: Number,
+      default: 0,
     },
     reports: {
-      type: [mongoose.Schema.Types.ObjectId],
-      ref: "Comment",
-      default: [],
-    },
-    totalLikes: {
       type: Number,
       default: 0,
     },
-    totalReports: {
-      type: Number,
-      default: 0,
-    },
+    views: { type: Number, default: 0 },
     userId: {
       type: String,
       required: true,
     },
-    post: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Post",
-    },
+    postId: { type: String, required: true },
   },
   {
     toJSON: {

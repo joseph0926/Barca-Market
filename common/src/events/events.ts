@@ -1,3 +1,4 @@
+import type { DateTime } from "luxon";
 import { Subjects } from "./subjects";
 
 export interface PostCreatedEvent {
@@ -8,9 +9,11 @@ export interface PostCreatedEvent {
     content: string;
     images?: string[];
     hashtags?: string[];
+    views: number;
     isPrivate: boolean;
     userId: string;
     comments?: string[];
+    createdAt: DateTime;
   };
 }
 
@@ -41,11 +44,13 @@ export interface CommentCreatedEvent {
     id: string;
     version: number;
     content: string;
+    views: number;
     parentId?: string;
     userId: string;
     post: {
       id: string;
     };
+    createdAt: DateTime;
   };
 }
 
