@@ -21,6 +21,7 @@ interface PostDoc extends mongoose.Document {
   hashtags?: string[];
   totalComments: number;
   isPrivate: boolean;
+  mostViews: string[];
   userId: string;
   version: number;
   comments?: string[];
@@ -44,6 +45,7 @@ const postSchema = new mongoose.Schema(
     reports: { type: Number, default: 0 },
     views: { type: Number, default: 0 },
     isPrivate: { type: Boolean, default: false },
+    mostViews: { type: [String], default: [] },
     userId: {
       type: String,
       required: true,

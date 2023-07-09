@@ -1,11 +1,7 @@
-import app from "./app";
 import { natsWrapper } from "./nats-wrapper";
 import { redisClient } from "./redis/client";
 
 const start = async () => {
-  if (!process.env.JWT_SECRET) {
-    throw new Error("JWT_SECRET가 정의되어있지 않습니다");
-  }
   if (!process.env.NATS_CLIENT_ID) {
     throw new Error("NATS_CLIENT_ID가 정의되어있지 않습니다");
   }
@@ -32,13 +28,10 @@ const start = async () => {
 
     redisClient.on("error", (err) => console.error(err));
     redisClient.connect();
+    console.log("Redis 연결 성공!");
   } catch (error) {
     console.log(error);
   }
 };
-
-app.listen(3000, () => {
-  console.log("서버가 포트번호 3000에서 정상 작동중입니다.");
-});
 
 start();

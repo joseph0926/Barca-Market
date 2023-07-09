@@ -13,7 +13,7 @@ export class CommentDeletedListener extends Listener<CommentDeletedEvent> {
 
   async onMessage(data: CommentDeletedEvent["data"], msg: Message) {
     try {
-      const post = await Post.findById(data.post.id);
+      const post = await Post.findById(data.postId);
       if (!post) {
         throw new Error("해당 게시글을 찾을 수 없습니다");
       }

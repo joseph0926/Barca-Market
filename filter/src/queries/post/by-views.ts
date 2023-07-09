@@ -1,6 +1,5 @@
 import { postsByViewsKey, postsKey } from "../../redis/keys";
 import { redisClient } from "../../redis/client";
-import { postDeserialize } from "../deserialize";
 
 export const postsByViews = async (
   order: "DESC" | "ASC" = "DESC",
@@ -8,14 +7,7 @@ export const postsByViews = async (
   count = 10
 ) => {
   let results: any = await redisClient.sort(postsByViewsKey(), {
-    GET: [
-      "#",
-      `${postsKey("*")}->content`,
-      `${postsKey("*")}->views`,
-      `${postsKey("*")}->userId`,
-      `${postsKey("*")}->totalComments`,
-      `${postsKey("*")}->likes`,
-    ],
+    GET: ["#"],
     BY: "nosort",
     DIRECTION: order,
     LIMIT: {
@@ -24,17 +16,10 @@ export const postsByViews = async (
     },
   });
 
-  const posts = [];
+  const posts: string[] = [];
   while (results.length) {
-    const [id, content, views, userId, totalComments, likes, ...rest] = results;
-    const post = postDeserialize(id, {
-      content,
-      views,
-      userId,
-      totalComments,
-      likes,
-    });
-    posts.push(post);
+    const [id, ...rest] = results;
+    posts.push(id);
     results = rest;
   }
 

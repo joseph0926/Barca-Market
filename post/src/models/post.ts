@@ -1,10 +1,11 @@
 import mongoose from "mongoose";
 import { updateIfCurrentPlugin } from "mongoose-update-if-current";
+import type { DateTime } from "luxon";
 
 interface PostAttrs {
   id: string;
   content: string;
-  images?: string[];
+  images?: string;
   hashtags?: string[];
   isPrivate: boolean;
   userId?: string;
@@ -16,13 +17,16 @@ interface PostDoc extends mongoose.Document {
   content: string;
   likes: number;
   reposts: number;
+  views: number;
   images: string;
   hashtags?: string[];
   totalComments: number;
   isPrivate: boolean;
   userId: string;
   version: number;
+  mostViews: string[];
   comments?: string[];
+  createdAt: DateTime;
 }
 
 interface PostModel extends mongoose.Model<PostDoc> {
@@ -43,6 +47,7 @@ const postSchema = new mongoose.Schema(
     reports: { type: Number, default: 0 },
     views: { type: Number, default: 0 },
     isPrivate: { type: Boolean, default: false },
+    mostViews: { type: [String], default: [] },
     userId: {
       type: String,
       required: true,
