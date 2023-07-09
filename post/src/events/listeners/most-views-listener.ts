@@ -17,6 +17,8 @@ export class MostViewsListener extends Listener<MostViewsEvent> {
       throw new Error("해당 게시글을 찾을 수 없습니다");
     }
 
+    console.log("filter:mostviews DATA => ", data);
+
     post.set({
       views: data.views,
       mostViews: data.mostViews,

@@ -20,7 +20,7 @@ export class PostViewListener extends Listener<PostViewEvent> {
 
       const mostViews = await postsByViews("DESC", 0, 10);
 
-      console.log(data);
+      console.log("post:view DATA => ", data);
 
       await new MostViewsPublisher(this.client).publish({
         id: data.id,

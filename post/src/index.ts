@@ -4,6 +4,7 @@ import { natsWrapper } from "./nats-wrapper";
 import { CommentCreatedListener } from "./events/listeners/commnet-created-listener";
 import { CommentUpdatedListener } from "./events/listeners/comment-updated-listener";
 import { CommentDeletedListener } from "./events/listeners/comment-deleted-listener";
+import { MostViewsListener } from "./events/listeners/most-views-listener";
 
 const start = async () => {
   if (!process.env.JWT_SECRET) {
@@ -38,6 +39,7 @@ const start = async () => {
     new CommentCreatedListener(natsWrapper.client).listen();
     new CommentUpdatedListener(natsWrapper.client).listen();
     new CommentDeletedListener(natsWrapper.client).listen();
+    new MostViewsListener(natsWrapper.client).listen();
 
     await mongoose.connect(process.env.MONGO_URI);
     console.log("DB 연결에 성공하였습니다");
