@@ -56,6 +56,14 @@ export interface PostViewEvent {
   data: {
     id: string;
     userId: string;
+    views: number;
+  };
+}
+
+export interface MostViewsEvent {
+  subject: Subjects.PostMostViews;
+  data: {
+    mostViews: string[];
   };
 }
 
