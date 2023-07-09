@@ -5,21 +5,21 @@ import { updateIfCurrentPlugin } from "mongoose-update-if-current";
 interface PostAttrs {
   id: string;
   content: string;
-  images?: string[];
+  images?: string;
   hashtags?: string[];
   isPrivate?: boolean;
   userId?: string;
   comments?: string[];
 }
 
-export interface PostDoc extends mongoose.Document {
+interface PostDoc extends mongoose.Document {
+  id: string;
   content: string;
-  likes: string[];
-  reposts: string[];
-  images: string[];
-  hashtags: string[];
+  likes: number;
+  reposts: number;
+  images: string;
+  hashtags?: string[];
   totalComments: number;
-  totalLikes: number;
   isPrivate: boolean;
   userId: string;
   version: number;
@@ -38,12 +38,11 @@ const postSchema = new mongoose.Schema(
       required: true,
       maxlength: [300, "글자수는 최대 300자입니다."],
     },
-    likes: [{ type: String }],
-    reposts: [{ type: String }],
-    images: [{ type: String }],
+    images: { type: String },
     hashtags: [{ type: String }],
-    totalComments: { type: Number, default: 0 },
-    totalLikes: { type: Number, default: 0 },
+    likes: { type: Number, default: 0 },
+    reports: { type: Number, default: 0 },
+    views: { type: Number, default: 0 },
     isPrivate: { type: Boolean, default: false },
     userId: {
       type: String,

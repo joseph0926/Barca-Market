@@ -33,6 +33,14 @@ build:
         manual:
           - src: "src/**/*.ts"
             dest: .
+    - image: rkekqmf0926/filter
+      context: filter
+      docker:
+        dockerfile: Dockerfile
+      sync:
+        manual:
+          - src: "src/**/*.ts"
+            dest: .
     - image: rkekqmf0926/client
       context: client
       docker:
