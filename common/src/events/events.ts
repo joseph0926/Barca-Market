@@ -5,14 +5,17 @@ export interface PostCreatedEvent {
   subject: Subjects.PostCreated;
   data: {
     id: string;
-    version: number;
     content: string;
-    images?: string[];
+    likes: number;
+    reposts: number;
+    images: string;
     hashtags?: string[];
-    views: number;
+    totalComments: number;
     isPrivate: boolean;
     userId: string;
+    version: number;
     comments?: string[];
+    views: number;
     createdAt: DateTime;
   };
 }
@@ -21,13 +24,15 @@ export interface PostUpdatedEvent {
   subject: Subjects.PostUpdated;
   data: {
     id: string;
-    version: number;
     content: string;
-    images?: string[];
+    images: string;
     hashtags?: string[];
+    totalComments: number;
     isPrivate: boolean;
     userId: string;
+    version: number;
     comments?: string[];
+    createdAt: DateTime;
   };
 }
 
@@ -76,9 +81,7 @@ export interface CommentUpdatedEvent {
     content: string;
     parentId?: string;
     userId: string;
-    post: {
-      id: string;
-    };
+    postId: string;
   };
 }
 
