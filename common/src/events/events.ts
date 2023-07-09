@@ -38,6 +38,22 @@ export interface PostDeletedEvent {
   };
 }
 
+export interface PostLikedEvent {
+  subject: Subjects.PostLiked;
+  data: {
+    id: string;
+    userId: string;
+  };
+}
+
+export interface PostViewEvent {
+  subject: Subjects.PostView;
+  data: {
+    id: string;
+    userId: string;
+  };
+}
+
 export interface CommentCreatedEvent {
   subject: Subjects.CommentCreated;
   data: {
@@ -47,9 +63,7 @@ export interface CommentCreatedEvent {
     views: number;
     parentId?: string;
     userId: string;
-    post: {
-      id: string;
-    };
+    postId: string;
     createdAt: DateTime;
   };
 }
@@ -72,8 +86,15 @@ export interface CommentDeletedEvent {
   subject: Subjects.CommentDeleted;
   data: {
     id: string;
-    post: {
-      id: string;
-    };
+    postId: string;
+  };
+}
+
+export interface CommentLikedEvent {
+  subject: Subjects.CommentLiked;
+  data: {
+    id: string;
+    userId: string;
+    postId: string;
   };
 }
