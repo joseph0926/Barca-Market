@@ -15,7 +15,7 @@ export class CommentUpdatedListener extends Listener<CommentUpdatedEvent> {
 
   async onMessage(data: CommentUpdatedEvent["data"], msg: Message) {
     try {
-      const post = await Post.findById(data.post.id);
+      const post = await Post.findById(data.postId);
       if (!post) {
         throw new Error("해당 게시글을 찾을 수 없습니다");
       }
@@ -26,12 +26,14 @@ export class CommentUpdatedListener extends Listener<CommentUpdatedEvent> {
       await new PostUpdatedPublisher(this.client).publish({
         id: post.id,
         content: post.content,
+        isPrivate: post.isPrivate,
         hashtags: post.hashtags,
         images: post.images,
-        isPrivate: post.isPrivate,
         userId: post.userId,
         version: post.version,
         comments: post.comments,
+        totalComments: post.totalComments,
+        createdAt: post.createdAt,
       });
 
       msg.ack();

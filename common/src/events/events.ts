@@ -5,14 +5,17 @@ export interface PostCreatedEvent {
   subject: Subjects.PostCreated;
   data: {
     id: string;
-    version: number;
     content: string;
-    images?: string[];
+    likes: number;
+    reposts: number;
+    images: string;
     hashtags?: string[];
-    views: number;
+    totalComments: number;
     isPrivate: boolean;
     userId: string;
+    version: number;
     comments?: string[];
+    views: number;
     createdAt: DateTime;
   };
 }
@@ -21,13 +24,15 @@ export interface PostUpdatedEvent {
   subject: Subjects.PostUpdated;
   data: {
     id: string;
-    version: number;
     content: string;
-    images?: string[];
+    images: string;
     hashtags?: string[];
+    totalComments: number;
     isPrivate: boolean;
     userId: string;
+    version: number;
     comments?: string[];
+    createdAt: DateTime;
   };
 }
 
@@ -35,6 +40,32 @@ export interface PostDeletedEvent {
   subject: Subjects.PostDeleted;
   data: {
     id: string;
+  };
+}
+
+export interface PostLikedEvent {
+  subject: Subjects.PostLiked;
+  data: {
+    id: string;
+    userId: string;
+  };
+}
+
+export interface PostViewEvent {
+  subject: Subjects.PostView;
+  data: {
+    id: string;
+    userId: string;
+    views: number;
+  };
+}
+
+export interface MostViewsEvent {
+  subject: Subjects.PostMostViews;
+  data: {
+    id: string;
+    views: number;
+    mostViews: string[];
   };
 }
 
@@ -47,9 +78,7 @@ export interface CommentCreatedEvent {
     views: number;
     parentId?: string;
     userId: string;
-    post: {
-      id: string;
-    };
+    postId: string;
     createdAt: DateTime;
   };
 }
@@ -62,9 +91,7 @@ export interface CommentUpdatedEvent {
     content: string;
     parentId?: string;
     userId: string;
-    post: {
-      id: string;
-    };
+    postId: string;
   };
 }
 
@@ -72,8 +99,15 @@ export interface CommentDeletedEvent {
   subject: Subjects.CommentDeleted;
   data: {
     id: string;
-    post: {
-      id: string;
-    };
+    postId: string;
+  };
+}
+
+export interface CommentLikedEvent {
+  subject: Subjects.CommentLiked;
+  data: {
+    id: string;
+    userId: string;
+    postId: string;
   };
 }

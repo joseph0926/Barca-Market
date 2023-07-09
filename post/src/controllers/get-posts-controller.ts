@@ -1,13 +1,5 @@
 import { Request, Response } from "express";
 import { Post } from "../models/post";
-import { NotFoundError } from "@joseph0926-barcelona/common";
-
-interface Query {
-  content?: {
-    $regex: string;
-    $options: string;
-  };
-}
 
 export const getPosts = async (req: Request, res: Response) => {
   try {

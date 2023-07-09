@@ -36,6 +36,11 @@ router.post(
         userId: post.userId,
         version: post.version,
         comments: [],
+        createdAt: post.createdAt,
+        likes: 0,
+        views: 0,
+        reposts: 0,
+        totalComments: 0,
       });
 
       res.status(201).json([{ post, message: "글 작성에 성공하였습니다." }]);
