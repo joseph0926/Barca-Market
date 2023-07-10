@@ -27,12 +27,12 @@ export const createComment = async (req: Request, res: Response) => {
       content,
       parentId: parentId || undefined,
       userId: req.currentUser!.id,
-      post,
+      postId: post.id,
     });
     await comment.save();
 
     if (parentComment) {
-      parentComment.replys.push(comment.id);
+      parentComment.replys?.push(comment.id);
       await parentComment.save();
     }
 
@@ -42,10 +42,9 @@ export const createComment = async (req: Request, res: Response) => {
       parentId: comment.parentId,
       userId: comment.userId,
       version: comment.version,
-      post: {
-        // id: comment.post.id,
-        id: req.params.postId,
-      },
+      postId: req.params.postId,
+      views: post.views,
+      createdAt: comment.createdAt,
     });
 
     res.status(201).json([{ comment, message: "댓글 작성에 성공하였습니다." }]);

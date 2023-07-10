@@ -20,6 +20,7 @@ interface PostDoc extends mongoose.Document {
   images: string;
   hashtags?: string[];
   totalComments: number;
+  views: number;
   isPrivate: boolean;
   mostViews: string[];
   userId: string;

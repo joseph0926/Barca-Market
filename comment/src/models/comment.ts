@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import { updateIfCurrentPlugin } from "mongoose-update-if-current";
+import type { DateTime } from "luxon";
 
 interface CommentAttrs {
   content: string;
@@ -18,6 +19,7 @@ interface CommentDoc extends mongoose.Document {
   userId: string;
   postId: string;
   version: number;
+  createdAt: DateTime;
 }
 
 interface CommentModel extends mongoose.Model<CommentDoc> {

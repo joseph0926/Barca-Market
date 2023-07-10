@@ -18,9 +18,7 @@ router.delete(
 
       new CommentDeletedPublisher(natsWrapper.client).publish({
         id: comment.id,
-        post: {
-          id: Buffer.from(comment.post.id).toString("hex"),
-        },
+        postId: req.params.postId,
       });
 
       res.status(200).json([{ message: "댓글이 삭제되었습니다." }]);
