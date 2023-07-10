@@ -29,10 +29,7 @@ export const updateComment = async (req: Request, res: Response) => {
       parentId: comment.parentId,
       userId: comment.userId,
       version: comment.version,
-      post: {
-        // id: Buffer.from(comment.post.id).toString("hex"),
-        id: req.params.postId,
-      },
+      postId: req.params.postId,
     });
 
     res.status(200).json([{ comment, message: "댓글 수정에 성공하였습니다." }]);
