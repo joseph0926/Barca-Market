@@ -5,6 +5,7 @@ export enum Subjects {
   PostLiked = "post:liked",
   PostView = "post:view",
   PostMostViews = "post:mostviews",
+  PostMostLiked = "post:mostliked",
 
   CommentCreated = "comment:created",
   Commentupdated = "comment:updated",
