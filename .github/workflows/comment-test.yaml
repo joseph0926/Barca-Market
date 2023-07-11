@@ -25,3 +25,7 @@ jobs:
         run: |
           cd comment
           npm run test
+      - name: Finish Actions
+        run: |
+          echo "::set-output name=exit-code::0"
+          exit 0
