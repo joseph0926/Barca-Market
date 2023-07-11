@@ -21,7 +21,6 @@ router.get(
     new PostViewPublisher(natsWrapper.client).publish({
       id: post.id,
       userId: req.currentUser!.id,
-      views: post.views,
     });
 
     res.status(200).json([{ post, message: "해당 글을 불러왔습니다." }]);

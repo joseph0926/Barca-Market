@@ -25,6 +25,7 @@ interface PostDoc extends mongoose.Document {
   userId: string;
   version: number;
   mostViews: string[];
+  mostLiked: string[];
   comments?: string[];
   createdAt: DateTime;
 }
@@ -48,6 +49,7 @@ const postSchema = new mongoose.Schema(
     views: { type: Number, default: 0 },
     isPrivate: { type: Boolean, default: false },
     mostViews: { type: [String], default: [] },
+    mostLiked: { type: [String], default: [] },
     userId: {
       type: String,
       required: true,

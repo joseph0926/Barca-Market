@@ -1,18 +1,20 @@
 import { Message } from "node-nats-streaming";
 import {
   Listener,
-  MostViewsEvent,
+  MostLikedPostEvent,
   Subjects,
 } from "@joseph0926-barcelona/common";
 import { queueGroupName } from "./queue-group-name";
 import { Post } from "../../models/post";
 
-export class MostViewsListener extends Listener<MostViewsEvent> {
-  readonly subject = Subjects.PostMostViews;
+export class MostLikedPostListener extends Listener<MostLikedPostEvent> {
+  readonly subject = Subjects.PostMostLiked;
   queueGroupName = queueGroupName;
 
-  async onMessage(data: MostViewsEvent["data"], msg: Message) {
-    const post = await Post.findById(data.id);
+  async onMessage(data: MostLikedPostEvent["data"], msg: Message) {
+    const { id, likes, mostLiked } = data;
+
+    const post = await Post.findById(id);
     if (!post) {
       throw new Error("해당 게시글을 찾을 수 없습니다");
     }
@@ -20,10 +22,9 @@ export class MostViewsListener extends Listener<MostViewsEvent> {
     console.log("filter:mostviews DATA => ", data);
 
     post.set({
-      views: data.views,
-      mostViews: data.mostViews,
+      likes,
+      mostLiked,
     });
-    console.log(post);
     await post.save();
 
     msg.ack();

@@ -1,3 +1,4 @@
+import { PostLikedListener } from "./events/listeners/post-liked-listener";
 import { PostViewListener } from "./events/listeners/post-view-listener";
 import { natsWrapper } from "./nats-wrapper";
 import { redisClient } from "./redis/client";
@@ -28,6 +29,7 @@ const start = async () => {
     process.on("SIGTERM", () => natsWrapper.client.close());
 
     new PostViewListener(natsWrapper.client).listen();
+    new PostLikedListener(natsWrapper.client).listen();
 
     redisClient.on("error", (err) => console.error(err));
     redisClient.connect();
