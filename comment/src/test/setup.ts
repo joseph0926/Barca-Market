@@ -33,6 +33,7 @@ afterAll(async () => {
     await mongo.stop();
   }
   await mongoose.connection.close();
+  process.exit(0);
 });
 
 global.signin = () => {
