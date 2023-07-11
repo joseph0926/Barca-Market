@@ -24,4 +24,4 @@ jobs:
       - name: Run tests
         run: |
           cd comment
-          npm run test -- --watchAll=false
+          npm run test
