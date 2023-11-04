@@ -1,6 +1,6 @@
 ---
-name: feature
-about: feature-issue
+name: bug
+about: bug-issue
 title: ""
 labels: ""
 assignees: joseph0926
@@ -8,7 +8,7 @@ assignees: joseph0926
 
 ### 이슈 (#넘버링):
 
-**이슈 설명:**
+**버그 설명:**
 
 **체크리스트:**
 
