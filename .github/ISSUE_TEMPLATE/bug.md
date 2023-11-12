@@ -1,23 +1,21 @@
 ---
-name: bug
-about: bug-issue
-title: ""
-labels: ""
-assignees: joseph0926
+name: BUG_ISSUE
+about: 프로젝트 버그 관련 이슈
+title: "[BUG] "
+labels: bug
+assignees: ""
 ---
 
-### 이슈 (#넘버링):
+## BUG_ISSUE
 
-**버그 설명:**
+**버그 설명**
 
-**체크리스트:**
+- ""
 
-- [ ]
+**재현 방법**
 
-**우선순위:**
+- ""
 
-**마감일:**
+**수정 단계**
 
-**담당자:** [joseph0926]
-**레이블:** ""
-**마일스톤:** [ ]
+- ""
