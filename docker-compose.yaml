@@ -89,3 +89,4 @@ services:
 networks:
   elastic:
     name: elastic
+# docker compose up -d redis mongodb mysql psql rabbitmq elasticsearch kibana
