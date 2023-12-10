@@ -69,3 +69,14 @@ export {
   ISellerDocument,
 } from './interfaces/seller.interface';
 export { uploads, vedioUpload } from './cloudinary-upload';
+export {
+  BadRequestError,
+  CustomError,
+  ErrorException,
+  FillSizeError,
+  IError,
+  IErrorResponse,
+  NotAuthorizedError,
+  NotFoundError,
+  ServerError,
+} from './custom-error-handler';
