@@ -81,3 +81,4 @@ export {
   ServerError,
 } from './custom-error-handler';
 export { verifyGatewayRequset } from './gateway-middleware';
+export { winstonLogger } from './logger';
