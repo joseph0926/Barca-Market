@@ -1,4 +1,4 @@
-version: "3.9"
+version: '3.9'
 services:
   redis:
     container_name: redis_container
@@ -47,6 +47,9 @@ services:
     container_name: rabbitmq_container
     image: rabbitmq:3.13-rc-management-alpine
     restart: always
+    environment:
+      - RABBITMQ_DEFAULT_USER=barca
+      - RABBITMQ_DEFAULT_PASS=barcapassword
     ports:
       # AMQP
       - 5672:5672
@@ -58,15 +61,14 @@ services:
     restart: always
     environment:
       ES_JAVA_OPTS: -Xmx1g -Xms1g
-      bootstrap.memory_lock: "true"
+      bootstrap.memory_lock: 'true'
       discovery.type: single-node
-      xpack.security.enabled: "false"
-      xpack.security.authc.api_key.enabled: "true"
-      xpack.monitoring.collection.enabled: "true"
-      xpack.security.enrollment.enabled: "true"
+      xpack.security.enabled: 'false'
+      xpack.security.authc.api_key.enabled: 'true'
+      xpack.monitoring.collection.enabled: 'true'
+      xpack.security.enrollment.enabled: 'true'
     ports:
       - 9200:9200
-      - 9300:9300
     volumes:
       - ./docker-volumes/elasticsearch-data:/usr/share/elasticsearch/data
     networks:
