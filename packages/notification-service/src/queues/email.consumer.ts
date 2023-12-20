@@ -72,7 +72,66 @@ const consumeOrderEmailMessages = async (channel: Channel): Promise<void> => {
     await channel.bindQueue(barcaQueue.queue, exchangeName, routingKey);
 
     channel.consume(barcaQueue.queue, async (msg: ConsumeMessage | null) => {
-      console.log(JSON.parse(msg!.content.toString()));
+      const {
+        title,
+        offerLink,
+        amount,
+        buyerUsername,
+        sellerUsername,
+        description,
+        deliveryDays,
+        orderId,
+        orderDue,
+        requirements,
+        orderUrl,
+        originalDate,
+        newDate,
+        reason,
+        subject,
+        header,
+        type,
+        message,
+        serviceFee,
+        total,
+        receiverEmail,
+        username,
+        template,
+        sender,
+      } = JSON.parse(msg!.content.toString());
+
+      const locals: IEmailLocals = {
+        appLink: `${config.CLIENT_URL}`,
+        appIcon: 'https://i.ibb.co/WDJ3ztB/barca-logo.png',
+        title,
+        offerLink,
+        amount,
+        buyerUsername,
+        sellerUsername,
+        description,
+        deliveryDays,
+        orderId,
+        orderDue,
+        requirements,
+        orderUrl,
+        originalDate,
+        newDate,
+        reason,
+        subject,
+        header,
+        type,
+        message,
+        serviceFee,
+        total,
+        username,
+        sender,
+      };
+
+      if (template === 'orderPlaced') {
+        await sendEmail('orderPlaced', receiverEmail, locals);
+        await sendEmail('orderReceipt', receiverEmail, locals);
+      } else {
+        await sendEmail(template, receiverEmail, locals);
+      }
       channel.ack(msg!);
     });
   } catch (error) {

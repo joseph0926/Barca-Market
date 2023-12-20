@@ -34,22 +34,6 @@ const startQueues = async (): Promise<void> => {
   const emailChannel: Channel = (await createConnection()) as Channel;
   await consumeAuthEmailMessages(emailChannel);
   await consumeOrderEmailMessages(emailChannel);
-
-  const verificationLink = `${config.CLIENT_URL}/confirm_email?v_token=asdkjaskdals`;
-  const messageDetails: IEmailMessageDetails = {
-    receiverEmail: `${config.SENDER_EMAIL}`,
-    verifyLink: verificationLink,
-    template: 'verifyEmail',
-  };
-
-  await emailChannel.assertExchange('barca-email-notification', 'direct');
-  const message = JSON.stringify(messageDetails);
-  emailChannel.publish(
-    'barca-email-notification',
-    'auth-email',
-    Buffer.from(message),
-  );
-  // await emailChannel.assertExchange('barca-order-notification', 'direct');
 };
 
 const startElasticSearch = (): void => {
