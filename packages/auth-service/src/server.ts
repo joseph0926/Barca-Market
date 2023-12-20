@@ -1,13 +1,24 @@
+import http from 'http';
 import { Logger } from 'winston';
-import { Application, NextFunction, Request, Response } from 'express';
+import {
+  Application,
+  NextFunction,
+  Request,
+  Response,
+  json,
+  urlencoded,
+} from 'express';
 import hpp from 'hpp';
 import helmet from 'helmet';
-import cookieSession from 'cookie-session';
+import compression from 'compression';
 import cors from 'cors';
 import { winstonLogger } from '@base/logger';
 import { config } from '@auth/config';
 import { verify } from 'jsonwebtoken';
 import { IAuthPayload } from '@base/interfaces/auth.interface';
+import { checkConnection } from '@auth/elasticsearch';
+import { CustomError, IErrorResponse } from '@base/custom-error-handler';
+import { appRoutes } from '@auth/routes';
 
 const SERVER_PORT = 4002;
 const log: Logger = winstonLogger(
@@ -16,7 +27,15 @@ const log: Logger = winstonLogger(
   'debug',
 );
 
-export const start = (app: Application): void => {};
+export const start = (app: Application): void => {
+  securityMiddleware(app);
+  standardMiddleware(app);
+  routesMiddleware(app);
+  startQueue();
+  startElasticSearch();
+  authErrorHandler(app);
+  startServer(app);
+};
 
 const securityMiddleware = (app: Application): void => {
   app.set('trust proxy', 1);
@@ -37,4 +56,49 @@ const securityMiddleware = (app: Application): void => {
     }
     next();
   });
+};
+
+const standardMiddleware = (app: Application): void => {
+  app.use(compression());
+  app.use(json({ limit: '200mb' }));
+  app.use(urlencoded({ limit: '200mb', extended: true }));
+};
+
+const routesMiddleware = (app: Application): void => {
+  appRoutes(app);
+};
+
+const startQueue = async (): Promise<void> => {};
+
+const startElasticSearch = (): void => {
+  checkConnection();
+};
+
+const authErrorHandler = (app: Application): void => {
+  app.use(
+    (
+      error: IErrorResponse,
+      _req: Request,
+      res: Response,
+      next: NextFunction,
+    ) => {
+      log.log('error', `AuthService ${error.comingFrom}: `, error);
+      if (error instanceof CustomError) {
+        res.status(error.statusCode).json(error.serializeError());
+      }
+      next();
+    },
+  );
+};
+
+const startServer = (app: Application): void => {
+  try {
+    const httpServer: http.Server = new http.Server(app);
+    log.info(`Auth Server has started with process id ${process.pid}`);
+    httpServer.listen(SERVER_PORT, () => {
+      log.info(`Auth Server running on port ${SERVER_PORT}`);
+    });
+  } catch (error) {
+    log.log('error', `AuthService startServer() method: `, error);
+  }
 };
