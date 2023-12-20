@@ -17,7 +17,7 @@ const consumeAuthEmailMessages = async (channel: Channel): Promise<void> => {
     if (!channel) {
       channel = (await createConnection()) as Channel;
     }
-    const exchangeName = 'barca-email-notification';
+    const exchangeName = 'barca-auth-notification';
     const routingKey = 'auth-email';
     const queueName = 'auth-email-queue';
 

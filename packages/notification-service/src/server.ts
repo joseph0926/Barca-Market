@@ -4,7 +4,6 @@ import { Logger } from 'winston';
 import { Application } from 'express';
 import { Channel } from 'amqplib';
 import { winstonLogger } from '@base/logger';
-import { IEmailMessageDetails } from '@base/interfaces/auth.interface';
 import { config } from '@notification/config';
 import { healthRoutes } from '@notification/routes';
 import { checkConnection } from '@notification/elasticsearch';
