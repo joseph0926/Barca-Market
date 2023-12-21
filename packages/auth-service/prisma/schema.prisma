@@ -18,9 +18,9 @@ model User {
   profilePublicId        String
   country                String
   profileImage           String
-  emailVerificationToken String?
+  emailVerificationToken String?  @unique
   emailVerified          Boolean  @default(false)
-  passwordResetToken     String?
+  passwordResetToken     String?  @unique
   passwordResetExpires   DateTime @default(now())
 
   @@index([username])

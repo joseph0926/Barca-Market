@@ -15,10 +15,12 @@ import cors from 'cors';
 import { winstonLogger } from '@base/logger';
 import { config } from '@auth/config';
 import { verify } from 'jsonwebtoken';
+import { Channel } from 'amqplib';
 import { IAuthPayload } from '@base/interfaces/auth.interface';
 import { checkConnection } from '@auth/elasticsearch';
 import { CustomError, IErrorResponse } from '@base/custom-error-handler';
 import { appRoutes } from '@auth/routes';
+import { createConnection } from '@auth/queues/connection';
 
 const SERVER_PORT = 4002;
 const log: Logger = winstonLogger(
@@ -26,6 +28,8 @@ const log: Logger = winstonLogger(
   'authenticationServer',
   'debug',
 );
+
+export let authChannel: Channel;
 
 export const start = (app: Application): void => {
   securityMiddleware(app);
@@ -68,7 +72,9 @@ const routesMiddleware = (app: Application): void => {
   appRoutes(app);
 };
 
-const startQueue = async (): Promise<void> => {};
+const startQueue = async (): Promise<void> => {
+  authChannel = (await createConnection()) as Channel;
+};
 
 const startElasticSearch = (): void => {
   checkConnection();
