@@ -1,7 +1,9 @@
+import { config } from '@auth/config';
 import { db, exclude } from '@auth/db/db';
 import { publishDirectMessage } from '@auth/queues/auth.producer';
 import { authChannel } from '@auth/server';
 import { User } from '@prisma/client';
+import { sign } from 'jsonwebtoken';
 
 interface IAuthBuyerMessageDetails {
   username?: string;
@@ -143,4 +145,84 @@ export const getAuthUserByPasswordToken = async (
   }
 
   return null;
+};
+
+export const updateVerifyEmailField = async (
+  userId: string,
+  emailVerified: boolean,
+  emailVerificationToken: string,
+): Promise<Omit<User, 'password'> | null> => {
+  const user = await db.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      emailVerified,
+      emailVerificationToken,
+    },
+  });
+
+  if (user) {
+    const userWithoutPassword = exclude(user, ['password']);
+    return userWithoutPassword;
+  }
+
+  return null;
+};
+
+export const updatePasswordToken = async (
+  userId: string,
+  token: string,
+  tokenExpiration: Date,
+): Promise<Omit<User, 'password'> | null> => {
+  const user = await db.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      passwordResetToken: token,
+      passwordResetExpires: tokenExpiration,
+    },
+  });
+
+  if (user) {
+    const userWithoutPassword = exclude(user, ['password']);
+    return userWithoutPassword;
+  }
+
+  return null;
+};
+
+export const updatePassword = async (
+  userId: string,
+  password: string,
+): Promise<Omit<User, 'password'> | null> => {
+  const user = await db.user.update({
+    where: {
+      id: userId,
+    },
+    data: {
+      password,
+      passwordResetToken: '',
+      passwordResetExpires: new Date(),
+    },
+  });
+
+  if (user) {
+    const userWithoutPassword = exclude(user, ['password']);
+    return userWithoutPassword;
+  }
+
+  return null;
+};
+
+export const signToken = (userId: string, email: string, username: string) => {
+  return sign(
+    {
+      userId,
+      email,
+      username,
+    },
+    config.JWT_TOKEN!,
+  );
 };
