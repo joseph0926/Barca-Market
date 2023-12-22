@@ -38,6 +38,14 @@ class AuthService {
     return response;
   }
 
+  async verifyEmail(token: string): Promise<AxiosResponse> {
+    const response: AxiosResponse = await axiosAuthInstance.put(
+      '/verify-email',
+      { token },
+    );
+    return response;
+  }
+
   async resendEmail(data: {
     userId: string;
     email: string;
