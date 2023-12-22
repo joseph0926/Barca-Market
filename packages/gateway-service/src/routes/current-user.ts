@@ -1,4 +1,5 @@
-import { CurrentUserController } from '@gateway/controllers/auth/current-user';
+import { CurrentUserController } from '@gateway/controllers/auth/current-user.controller';
+import { RefreshTokenController } from '@gateway/controllers/auth/refresh-token.controller';
 import { authMiddleware } from '@gateway/services/auth-middleware';
 import express, { Router } from 'express';
 
@@ -16,6 +17,11 @@ class CurrentUserRoutes {
       CurrentUserController.prototype.currentUser,
     );
     this.router.get(
+      '/auth/refresh-token/:username',
+      authMiddleware.checkAuthentication,
+      RefreshTokenController.prototype.refreshToken,
+    );
+    this.router.post(
       '/auth/resend-email',
       authMiddleware.checkAuthentication,
       CurrentUserController.prototype.resendEmail,
