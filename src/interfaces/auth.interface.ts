@@ -7,7 +7,7 @@ declare global {
 }
 
 export interface IAuthPayload {
-  id: number;
+  id: string;
   username: string;
   email: string;
   iat?: number;
