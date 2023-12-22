@@ -15,17 +15,17 @@ const tokens: string[] = [
 
 export function verifyGatewayRequset(
   req: Request,
-  res: Response,
+  _res: Response,
   next: NextFunction
 ): void {
-  if (req.headers?.gatewayToken) {
+  if (req.headers?.gatewaytoken) {
     throw new NotAuthorizedError(
       '인증 오류',
       'verifyGatewayRequset(): Request not coming from api gateway'
     );
   }
 
-  const token: string = req.headers?.gatewayToken as string;
+  const token: string = req.headers?.gatewaytoken as string;
   if (!token) {
     throw new NotAuthorizedError(
       '인증 오류',
@@ -50,4 +50,6 @@ export function verifyGatewayRequset(
       'verifyGatewayRequset(): Request not coming from api gateway'
     );
   }
+
+  next();
 }
