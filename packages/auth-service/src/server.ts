@@ -17,7 +17,7 @@ import { config } from '@auth/config';
 import { verify } from 'jsonwebtoken';
 import { Channel } from 'amqplib';
 import { IAuthPayload } from '@base/interfaces/auth.interface';
-import { checkConnection } from '@auth/elasticsearch';
+import { checkConnection, createIndex } from '@auth/elasticsearch';
 import { CustomError, IErrorResponse } from '@base/custom-error-handler';
 import { appRoutes } from '@auth/routes';
 import { createConnection } from '@auth/queues/connection';
@@ -78,6 +78,7 @@ const startQueue = async (): Promise<void> => {
 
 const startElasticSearch = (): void => {
   checkConnection();
+  createIndex('gigs');
 };
 
 const authErrorHandler = (app: Application): void => {
