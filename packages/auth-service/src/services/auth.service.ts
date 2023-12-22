@@ -80,36 +80,26 @@ export const getAuthUserByUsernameOREmail = async (
 
 export const getAuthUserByUsername = async (
   username: string,
-): Promise<Omit<User, 'password'> | null> => {
+): Promise<User | null> => {
   const user = await db.user.findUnique({
     where: {
       username,
     },
   });
 
-  if (user) {
-    const userWithoutPassword = exclude(user, ['password']);
-    return userWithoutPassword;
-  }
-
-  return null;
+  return user;
 };
 
 export const getAuthUserByEmail = async (
   email: string,
-): Promise<Omit<User, 'password'> | null> => {
+): Promise<User | null> => {
   const user = await db.user.findUnique({
     where: {
       email,
     },
   });
 
-  if (user) {
-    const userWithoutPassword = exclude(user, ['password']);
-    return userWithoutPassword;
-  }
-
-  return null;
+  return user;
 };
 
 export const getAuthUserByVerificationToken = async (
