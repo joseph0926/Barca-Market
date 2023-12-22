@@ -19,6 +19,7 @@ import { CustomError, IErrorResponse } from '@base/custom-error-handler';
 import { config } from '@gateway/config';
 import { elasticSearch } from '@gateway/elasticsearch';
 import { appRoutes } from '@gateway/routes';
+import { axiosAuthInstance } from '@gateway/services/api/auth.service';
 
 const SERVER_PORT = 4000;
 const log: Logger = winstonLogger(
@@ -62,6 +63,14 @@ export class GatewayServer {
         methods: ['GET', 'POST', 'DELETE', 'PUT', 'OPTIONS'],
       }),
     );
+
+    app.use((req: Request, res: Response, next: NextFunction) => {
+      if (req.session?.jwt) {
+        axiosAuthInstance.defaults.headers['Authorization'] =
+          `Bearer ${req.session?.jwt}`;
+      }
+      next();
+    });
   }
 
   private standardMiddleware(app: Application): void {

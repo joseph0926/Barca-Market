@@ -1,5 +1,9 @@
 import { Application } from 'express';
+import { authRoutes } from '@auth/routes/auth';
+import { verifyGatewayRequset } from '@base/gateway-middleware';
+
+const BASE_PATH = '/api/v1/auth';
 
 export const appRoutes = (app: Application): void => {
-  app.use('', () => console.log('appRoutes'));
+  app.use(BASE_PATH, verifyGatewayRequset, authRoutes);
 };

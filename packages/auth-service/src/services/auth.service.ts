@@ -14,7 +14,7 @@ interface IAuthBuyerMessageDetails {
   createdAt?: Date;
 }
 
-export const createUser = async (
+export const createAuthUser = async (
   data: User,
 ): Promise<Omit<User, 'password'>> => {
   const result = await db.user.create({
