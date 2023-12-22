@@ -30,7 +30,7 @@ export const resendEmail = async (
   req: Request,
   res: Response,
 ): Promise<void> => {
-  const { email, password } = req.body;
+  const { email } = req.body;
 
   const existingUser = await getAuthUserByEmail(email);
   if (!existingUser) {
