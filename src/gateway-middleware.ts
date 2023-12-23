@@ -13,7 +13,7 @@ const tokens: string[] = [
   'review',
 ];
 
-export function verifyGatewayRequset(
+export function verifyGatewayRequest(
   req: Request,
   _res: Response,
   next: NextFunction
@@ -21,7 +21,7 @@ export function verifyGatewayRequset(
   if (!req.headers?.gatewaytoken) {
     throw new NotAuthorizedError(
       '인증 오류',
-      'verifyGatewayRequset(): Request not coming from api gateway'
+      'verifyGatewayRequest(): Request not coming from api gateway'
     );
   }
 
@@ -30,7 +30,7 @@ export function verifyGatewayRequset(
     console.log('22222222222');
     throw new NotAuthorizedError(
       '인증 오류',
-      'verifyGatewayRequset(): Request not coming from api gateway'
+      'verifyGatewayRequest(): Request not coming from api gateway'
     );
   }
 
@@ -46,14 +46,14 @@ export function verifyGatewayRequset(
       console.log('3333333333');
       throw new NotAuthorizedError(
         '인증 오류',
-        'verifyGatewayRequset(): Request payload is invalid'
+        'verifyGatewayRequest(): Request payload is invalid'
       );
     }
   } catch (error) {
     console.log('444444444');
     throw new NotAuthorizedError(
       '인증 오류',
-      'verifyGatewayRequset(): Request not coming from api gateway'
+      'verifyGatewayRequest(): Request not coming from api gateway'
     );
   }
 
