@@ -125,6 +125,7 @@ const deleteIndexedData = async (
 };
 
 export {
+  elasticSearchClient,
   checkConnection,
   createIndex,
   getIndexedData,
