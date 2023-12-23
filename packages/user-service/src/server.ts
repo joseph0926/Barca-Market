@@ -20,6 +20,13 @@ import { checkConnection } from '@user/elasticsearch';
 import { CustomError, IErrorResponse } from '@base/custom-error-handler';
 import { appRoutes } from '@user/routes';
 import { createConnection } from '@user/queues/connection';
+import { Channel } from 'amqplib';
+import {
+  cousumeBuyerDirectMessages,
+  cousumeReviewFanoutMessages,
+  cousumeSeedDirectMessages,
+  cousumeSellerDirectMessages,
+} from '@user/queues/user.consumer';
 
 const SERVER_PORT = 4003;
 const log: Logger = winstonLogger(
@@ -70,7 +77,11 @@ const routesMiddleware = (app: Application): void => {
 };
 
 const startQueue = async (): Promise<void> => {
-  checkConnection();
+  const userChannel: Channel = (await createConnection()) as Channel;
+  await cousumeBuyerDirectMessages(userChannel);
+  await cousumeSellerDirectMessages(userChannel);
+  await cousumeReviewFanoutMessages(userChannel);
+  await cousumeSeedDirectMessages(userChannel);
 };
 
 const startElasticSearch = (): void => {

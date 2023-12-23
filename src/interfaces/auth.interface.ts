@@ -18,7 +18,7 @@ export interface IAuth {
   password?: string;
   email?: string;
   country?: string;
-  profilePicture?: string;
+  profileImage?: string;
 }
 
 export interface IAuthDocument {
@@ -28,7 +28,7 @@ export interface IAuthDocument {
   email?: string;
   password?: string;
   country?: string;
-  profilePicture?: string;
+  profileImage?: string;
   emailVerified?: number;
   emailVerificationToken?: string;
   createdAt?: Date;
@@ -41,7 +41,7 @@ export interface IAuthDocument {
 
 export interface IAuthBuyerMessageDetails {
   username?: string;
-  profilePicture?: string;
+  profileImage?: string;
   email?: string;
   country?: string;
   createdAt?: Date;
@@ -62,7 +62,7 @@ export interface ISignUpPayload {
   password: string;
   email: string;
   country: string;
-  profilePicture: string;
+  profileImage: string;
 }
 
 export interface ISignInPayload {
@@ -109,7 +109,7 @@ export interface IAuthUser {
   id: number | null;
   passwordResetExpires: Date | null;
   passwordResetToken: null | null;
-  profilePicture: string | null;
+  profileImage: string | null;
   updatedAt: Date | null;
   username: string | null;
 }

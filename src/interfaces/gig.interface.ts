@@ -1,18 +1,13 @@
-import { ObjectId } from "mongoose";
-import { IRatingCategories, IReviewDocument } from "./review.interface";
-import { ISellerDocument } from "./seller.interface";
+import { ObjectId } from 'mongoose';
+import { IRatingCategories, IReviewDocument } from './review.interface';
+import { ISellerDocument } from './seller.interface';
 
-export type GigType =
-  | string
-  | string[]
-  | number
-  | unknown
-  | undefined;
+export type GigType = string | string[] | number | unknown | undefined;
 
 export interface ICreateGig extends Record<string, GigType> {
   // [key: string]: string | string[] | number | undefined;
   sellerId?: string;
-  profilePicture?: string;
+  profileImage?: string;
   title: string;
   categories: string;
   description: string;
@@ -33,7 +28,7 @@ export interface ISellerGig {
   sellerId?: string | ObjectId;
   title: string;
   username?: string;
-  profilePicture?: string;
+  profileImage?: string;
   email?: string;
   description: string;
   active?: boolean;

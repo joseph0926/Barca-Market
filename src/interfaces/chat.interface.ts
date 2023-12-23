@@ -47,7 +47,7 @@ export interface IMessageDetails {
 
 export interface IChatBoxProps {
   seller: IChatSellerProps;
-  buyer: IChatBuyerProps
+  buyer: IChatBuyerProps;
   gigId: string;
   onClose: () => void;
 }
@@ -55,14 +55,14 @@ export interface IChatBoxProps {
 export interface IChatSellerProps {
   _id: string;
   username: string;
-  profilePicture: string;
+  profileImage: string;
   responseTime: number;
 }
 
 export interface IChatBuyerProps {
   _id: string;
   username: string;
-  profilePicture: string;
+  profileImage: string;
 }
 
 export interface IChatMessageProps {

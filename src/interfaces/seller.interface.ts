@@ -1,5 +1,5 @@
-import { ObjectId } from "mongoose";
-import { IRatingCategories } from "./review.interface";
+import { ObjectId } from 'mongoose';
+import { IRatingCategories } from './review.interface';
 
 // By extending ISellerDocument with the Record<string, any> you allow an object to contain other
 // string keys with any values along with those defined in the interface.
@@ -63,7 +63,7 @@ export interface ISellerDocument extends Record<string, SellerType> {
   fullName: string;
   username?: string;
   email?: string;
-  profilePicture?: string;
+  profileImage?: string;
   description: string;
   country: string;
   oneliner: string;
