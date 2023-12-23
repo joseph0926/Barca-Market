@@ -16,6 +16,7 @@ import { IEmailMessageDetails } from '@base/interfaces/auth.interface';
 import { publishDirectMessage } from '@auth/queues/auth.producer';
 import { authChannel } from '@auth/server';
 import { StatusCodes } from 'http-status-codes';
+import { hashPassword } from '@auth/db/auth';
 
 export const createUser = async (
   req: Request,
@@ -55,10 +56,12 @@ export const createUser = async (
   const randomBytes: Buffer = await Promise.resolve(crypto.randomBytes(20));
   const randomChar: string = randomBytes.toString('hex');
 
+  const hashedPassword = await hashPassword(password);
+
   const authData: User = {
     username,
     email,
-    password,
+    password: hashedPassword,
     country,
     profilePublicId,
     profileImage: uploadResult?.secure_url,

@@ -19,7 +19,7 @@ class AuthMiddleware {
     try {
       const payload: IAuthPayload = verify(
         req.session?.jwt,
-        `${config.GATEWAY_JWT_TOKEN}`,
+        `${config.JWT_TOKEN}`,
       ) as IAuthPayload;
       req.currentUser = payload;
     } catch (error) {

@@ -7,9 +7,33 @@ Accept: application/json
 withCredentials: true
 
 {
-  "username": "test01",
-  "email": "test01@test.com",
+  "username": "test03",
+  "email": "test03@test.com",
   "password": "12345678",
   "country": "Korea",
   "profileImage": "https://i.ibb.co/WDJ3ztB/barca-logo.png"
 }
+
+###
+
+PUT {{baseUrl}}/{{urlPath}}/verify-email
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+  "token": "d94c1378a3490832e7a4e59683a2231749914169"
+}
+
+###
+
+POST {{baseUrl}}/{{urlPath}}/signin
+Content-Type: application/json
+Accept: application/json
+withCredentials: true
+
+{
+  "username": "test03@test.com",
+  "password": "12345678"
+}
+

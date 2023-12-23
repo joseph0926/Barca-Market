@@ -13,7 +13,7 @@ class AuthRoutes {
 
   public routes(): Router {
     this.router.post('/auth/signup', SignupController.prototype.createUser);
-    this.router.post('/auth/signup', SigninController.prototype.login);
+    this.router.post('/auth/signin', SigninController.prototype.login);
     this.router.put(
       '/auth/verify-email',
       VerifyEmailController.prototype.verifyEmail,
