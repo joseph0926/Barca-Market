@@ -54,7 +54,7 @@ const updateSeller = async (
       $set: {
         profilePublicId: sellerData.profilePublicId,
         fullName: sellerData.fullName,
-        profilePicture: sellerData.profilePicture,
+        profileImage: sellerData.profileImage,
         description: sellerData.description,
         country: sellerData.country,
         skills: sellerData.skills,

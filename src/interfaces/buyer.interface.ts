@@ -1,10 +1,10 @@
-import { ObjectId } from "mongoose";
+import { ObjectId } from 'mongoose';
 
 export interface IBuyerDocument {
   _id?: string | ObjectId;
   username?: string;
   email?: string;
-  profilePicture?: string;
+  profileImage?: string;
   country: string;
   isSeller?: boolean;
   purchasedGigs: string[];
