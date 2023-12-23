@@ -80,7 +80,7 @@ const createSellerController = async (
     fullName: req.body.fullName,
     username: req.currentUser!.username,
     email: req.body.email,
-    profilePicture: req.body.profilePicture,
+    profileImage: req.body.profileImage,
     description: req.body.description,
     oneliner: req.body.oneliner,
     country: req.body.country,
@@ -112,7 +112,7 @@ const updateSellerController = async (
   const seller: ISellerDocument = {
     profilePublicId: req.body.profilePublicId,
     fullName: req.body.fullName,
-    profilePicture: req.body.profilePicture,
+    profileImage: req.body.profileImage,
     description: req.body.description,
     oneliner: req.body.oneliner,
     country: req.body.country,
@@ -164,7 +164,7 @@ const seedSeller = async (req: Request, res: Response): Promise<void> => {
       username: buyer.username,
       email: buyer.email,
       country: faker.location.country(),
-      profilePicture: buyer.profileImage,
+      profileImage: buyer.profileImage,
       description:
         basicDescription.length <= 250
           ? basicDescription
