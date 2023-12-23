@@ -16,7 +16,7 @@ import { winstonLogger } from '@base/logger';
 import { config } from '@gig/config';
 import { verify } from 'jsonwebtoken';
 import { IAuthPayload } from '@base/interfaces/auth.interface';
-import { checkConnection } from '@gig/elasticsearch';
+import { checkConnection, createIndex } from '@gig/elasticsearch';
 import { CustomError, IErrorResponse } from '@base/custom-error-handler';
 import { appRoutes } from '@gig/routes';
 
@@ -72,6 +72,7 @@ const startQueue = async (): Promise<void> => {};
 
 const startElasticSearch = (): void => {
   checkConnection();
+  createIndex('gigs');
 };
 
 const userErrorHandler = (app: Application): void => {
