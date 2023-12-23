@@ -3,6 +3,7 @@ import { ClusterHealthResponse } from '@elastic/elasticsearch/lib/api/types';
 import { Logger } from 'winston';
 import { config } from '@gig/config';
 import { winstonLogger } from '@base/logger';
+import { ISellerGig } from '@base/interfaces/gig.interface';
 
 const log: Logger = winstonLogger(
   `${config.ELASTIC_SEARCH_URL}`,
@@ -30,4 +31,104 @@ const checkConnection = async (): Promise<void> => {
   }
 };
 
-export { checkConnection };
+const createIndex = async (indexName: string): Promise<void> => {
+  try {
+    const result = await elasticSearchClient.indices.exists({
+      index: indexName,
+    });
+    if (result) {
+      log.info(`Index "${indexName}" already exist.`);
+    } else {
+      await elasticSearchClient.indices.create({ index: indexName });
+      await elasticSearchClient.indices.refresh({ index: indexName });
+      log.info(`Created Index ${indexName}`);
+    }
+  } catch (error) {
+    log.error(`An error occurred while creating the index ${indexName}`);
+    log.log('error', 'GigService createIndex() method: ', error);
+  }
+};
+
+const getIndexedData = async (
+  index: string,
+  itemId: string,
+): Promise<ISellerGig> => {
+  try {
+    const result = await elasticSearchClient.get({ index, id: itemId });
+    return result._source as ISellerGig;
+  } catch (error) {
+    log.log(
+      'error',
+      'GigService elasticsearch getIndexedData() method: ',
+      error,
+    );
+    return {} as ISellerGig;
+  }
+};
+
+const addDataToIndex = async (
+  index: string,
+  itemId: string,
+  gigDocument: unknown,
+): Promise<void> => {
+  try {
+    await elasticSearchClient.index({
+      index,
+      id: itemId,
+      document: gigDocument,
+    });
+  } catch (error) {
+    log.log(
+      'error',
+      'GigService elasticsearch addDataToIndex() method: ',
+      error,
+    );
+  }
+};
+
+const updateIndexedData = async (
+  index: string,
+  itemId: string,
+  gigDocument: unknown,
+): Promise<void> => {
+  try {
+    await elasticSearchClient.update({
+      index,
+      id: itemId,
+      doc: gigDocument,
+    });
+  } catch (error) {
+    log.log(
+      'error',
+      'GigService elasticsearch updateIndexedData() method error:',
+      error,
+    );
+  }
+};
+
+const deleteIndexedData = async (
+  index: string,
+  itemId: string,
+): Promise<void> => {
+  try {
+    await elasticSearchClient.delete({
+      index,
+      id: itemId,
+    });
+  } catch (error) {
+    log.log(
+      'error',
+      'GigService elasticsearch deleteIndexedData() method error:',
+      error,
+    );
+  }
+};
+
+export {
+  checkConnection,
+  createIndex,
+  getIndexedData,
+  addDataToIndex,
+  updateIndexedData,
+  deleteIndexedData,
+};
