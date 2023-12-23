@@ -1,12 +1,14 @@
 import { Application } from 'express';
 import { verifyGatewayRequset } from '@base/gateway-middleware';
+import { buyerRoutes } from '@user/routes/buyer';
+import { healthRoutes } from '@user/routes/health';
 
 const BUYER_BASE_PATH = '/api/v1/buyer';
 const SELLER_BASE_PATH = '/api/v1/seller';
 
 const appRoutes = (app: Application): void => {
-  app.use('', () => console.log('app'));
-  app.use(BUYER_BASE_PATH, verifyGatewayRequset, () => console.log('app'));
+  app.use('', healthRoutes());
+  app.use(BUYER_BASE_PATH, verifyGatewayRequset, buyerRoutes());
   app.use(SELLER_BASE_PATH, verifyGatewayRequset, () => console.log('app'));
 };
 
