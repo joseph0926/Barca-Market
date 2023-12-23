@@ -18,7 +18,7 @@ export function verifyGatewayRequset(
   _res: Response,
   next: NextFunction
 ): void {
-  if (req.headers?.gatewaytoken) {
+  if (!req.headers?.gatewaytoken) {
     throw new NotAuthorizedError(
       '인증 오류',
       'verifyGatewayRequset(): Request not coming from api gateway'
@@ -27,6 +27,7 @@ export function verifyGatewayRequset(
 
   const token: string = req.headers?.gatewaytoken as string;
   if (!token) {
+    console.log('22222222222');
     throw new NotAuthorizedError(
       '인증 오류',
       'verifyGatewayRequset(): Request not coming from api gateway'
@@ -34,17 +35,22 @@ export function verifyGatewayRequset(
   }
 
   try {
-    const payload: { id: string; iat: number } = JWT.verify(token, '') as {
+    const payload: { id: string; iat: number } = JWT.verify(
+      token,
+      '4a0ea5289e11618219f1488e25b2'
+    ) as {
       id: string;
       iat: number;
     };
     if (!tokens.includes(payload.id)) {
+      console.log('3333333333');
       throw new NotAuthorizedError(
         '인증 오류',
         'verifyGatewayRequset(): Request payload is invalid'
       );
     }
   } catch (error) {
+    console.log('444444444');
     throw new NotAuthorizedError(
       '인증 오류',
       'verifyGatewayRequset(): Request not coming from api gateway'

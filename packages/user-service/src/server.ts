@@ -19,7 +19,7 @@ import { IAuthPayload } from '@base/interfaces/auth.interface';
 import { checkConnection } from '@user/elasticsearch';
 import { CustomError, IErrorResponse } from '@base/custom-error-handler';
 import { appRoutes } from '@user/routes';
-// import { createConnection } from '@user/queues/connection';
+import { createConnection } from '@user/queues/connection';
 
 const SERVER_PORT = 4003;
 const log: Logger = winstonLogger(
@@ -69,7 +69,9 @@ const routesMiddleware = (app: Application): void => {
   appRoutes(app);
 };
 
-const startQueue = async (): Promise<void> => {};
+const startQueue = async (): Promise<void> => {
+  checkConnection();
+};
 
 const startElasticSearch = (): void => {
   checkConnection();

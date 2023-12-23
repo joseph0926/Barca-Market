@@ -21,7 +21,7 @@ export const verifyEmail = async (
     );
   }
 
-  await updateVerifyEmailField(existingUser.id, true, '');
+  await updateVerifyEmailField(existingUser.id, true);
 
   const updatedUser = await getAuthUserById(existingUser.id);
 

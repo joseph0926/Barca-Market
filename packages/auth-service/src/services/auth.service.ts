@@ -140,7 +140,7 @@ export const getAuthUserByPasswordToken = async (
 export const updateVerifyEmailField = async (
   userId: string,
   emailVerified: boolean,
-  emailVerificationToken: string,
+  emailVerificationToken?: string,
 ): Promise<Omit<User, 'password'> | null> => {
   const user = await db.user.update({
     where: {

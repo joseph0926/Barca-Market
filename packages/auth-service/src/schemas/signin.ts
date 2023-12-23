@@ -14,7 +14,7 @@ const signinSchema: ObjectSchema = joi.object().keys({
       'string.empty': 'Username은 필수 입력 필드입니다.',
     }),
   }),
-  password: joi.string().email().required().messages({
+  password: joi.string().required().min(4).max(12).messages({
     'string.base': 'Password mush be of type string',
     'string.min': 'Password은 최소 4글자입니다.',
     'string.max': 'Password은 최대 12글자입니다.',

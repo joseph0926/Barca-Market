@@ -11,5 +11,5 @@ withCredentials: true
   "email": "test01@test.com",
   "password": "12345678",
   "country": "Korea",
-  "profileImage": ""
+  "profileImage": "https://i.ibb.co/WDJ3ztB/barca-logo.png"
 }
