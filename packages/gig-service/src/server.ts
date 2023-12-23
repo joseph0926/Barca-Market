@@ -19,6 +19,8 @@ import { IAuthPayload } from '@base/interfaces/auth.interface';
 import { checkConnection, createIndex } from '@gig/elasticsearch';
 import { CustomError, IErrorResponse } from '@base/custom-error-handler';
 import { appRoutes } from '@gig/routes';
+import { createConnection } from '@gig/queues/connection';
+import { Channel } from 'amqplib';
 
 const SERVER_PORT = 4004;
 const log: Logger = winstonLogger(
@@ -26,6 +28,8 @@ const log: Logger = winstonLogger(
   'userServer',
   'debug',
 );
+
+let gigChannel: Channel;
 
 const start = (app: Application): void => {
   securityMiddleware(app);
@@ -68,7 +72,9 @@ const routesMiddleware = (app: Application): void => {
   appRoutes(app);
 };
 
-const startQueue = async (): Promise<void> => {};
+const startQueue = async (): Promise<void> => {
+  gigChannel = (await createConnection()) as Channel;
+};
 
 const startElasticSearch = (): void => {
   checkConnection();
@@ -104,4 +110,4 @@ const startServer = (app: Application): void => {
   }
 };
 
-export { start };
+export { start, gigChannel };
