@@ -47,7 +47,7 @@ const addReview = async (data: IReviewDocument): Promise<IReviewDocument> => {
   };
   await publishFanoutMessage(
     reviewChannel,
-    'jobber-review',
+    'barca-review',
     JSON.stringify(messageDetails),
     'Review details sent to order and users services',
   );

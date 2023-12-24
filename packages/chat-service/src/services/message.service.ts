@@ -41,7 +41,7 @@ const addMessage = async (
     // send email
     await publishDirectMessage(
       chatChannel,
-      'jobber-order-notification',
+      'barca-order-notification',
       'order-email',
       JSON.stringify(emailMessageDetails),
       'Order email sent to notification service.',

@@ -1,5 +1,5 @@
 {
-  "name": "barca-review",
+  "name": "barca-order",
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
@@ -17,5 +17,8 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "stripe": "^14.10.0"
+  }
 }
