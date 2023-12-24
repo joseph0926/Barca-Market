@@ -2,6 +2,20 @@ import cloudinary from 'cloudinary';
 import dotenv from 'dotenv';
 dotenv.config({});
 
+if (process.env.ENABLE_APM === '1') {
+  // eslint-disable-next-line @typescript-eslint/no-var-requires
+  require('elastic-apm-node').start({
+    serviceName: 'barca-user',
+    serverUrl: process.env.ELASTIC_SEARCH_URL,
+    secretToken: process.env.ELASTIC_APM_SECRET_TOKEN,
+    enviroment: process.env.NODE_ENV,
+    active: true,
+    captureBody: 'all',
+    errorOnAbortedRequest: true,
+    captureErrorLogStackTraces: 'always',
+  });
+}
+
 class Config {
   public DATABASE_URL: string | undefined;
   public NODE_ENV: string | undefined;
