@@ -1,0 +1,38 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "experimentalDecorators": true,
+    "allowSyntheticDefaultImports": true,
+    "importHelpers": true,
+    "lib": ["dom", "ES2015"],
+    "module": "CommonJS",
+    "baseUrl": ".",
+    "moduleResolution": "node",
+    "noEmitOnError": true,
+    "outDir": "./build",
+    "rootDir": "../..",
+    "sourceMap": true,
+    "strict": true,
+    "target": "es2021",
+    "emitDecoratorMetadata": true,
+    "forceConsistentCasingInFileNames": true,
+    "pretty": true,
+    "resolveJsonModule": true,
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "esModuleInterop": true,
+    "alwaysStrict": true,
+    "plugins": [
+      { "transform": "typescript-transform-paths" },
+      { "transform": "typescript-transform-paths", "afterDeclarations": true }
+    ],
+    "paths": {
+      "@base/*": ["../../src/*"],
+      "@chat/*": ["src/*"]
+    }
+  },
+  "include": ["src"]
+  // "exclude": ["node_modules"]
+}
