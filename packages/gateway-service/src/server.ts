@@ -157,7 +157,7 @@ export class GatewayServer {
 
   private socketIOConnection(io: Server): void {
     const socketIOApp = new SocketIOAppHandler(io);
-    socketIOApp.listenEvnets();
+    socketIOApp.listen();
   }
 
   private async startHttpServer(httpServer: http.Server): Promise<void> {

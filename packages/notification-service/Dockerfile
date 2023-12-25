@@ -1,24 +1,30 @@
 FROM node:21-alpine3.18 as builder
 
 WORKDIR /app
+
 COPY package.json ./
-COPY tsconfig.json ./
 COPY src ./src
-COPY tools ./tools
-RUN npm install -g npm@latest
-RUN npm ci && npm run build
+
+COPY packages/notificaion-service/package.json ./packages/notificaion-service/
+COPY packages/notificaion-service ./packages/notificaion-service
+
+RUN npm install -g typescript npm@latest
+RUN npm install
+
+RUN npm run build --prefix packages/notificaion-service
 
 FROM node:21-alpine3.18
 
 WORKDIR /app
-RUN apk add --no-cache curl
-COPY package.json ./
-COPY tsconfig.json ./
-COPY src ./src
-RUN npm install -g pm2 npm@latest
-RUN npm ci --production
-COPY --from=builder /app/build ./build
+
+COPY --from=builder /app/package.json ./
+COPY --from=builder /app/src ./src
+
+COPY --from=builder /app/packages/notificaion-service ./packages/notificaion-service
+
+RUN npm install -g typescript pm2 npm@latest
+RUN npm i --production
 
 EXPOSE 4001
 
-CMD ["npm", "run", "start"]
+CMD ["npm", "start", "--prefix", "packages/notificaion-service"]

@@ -8,7 +8,7 @@
     "stop": "pm2 stop all",
     "delete": "pm2 delete all",
     "dev": "nodemon -r tsconfig-paths/register src/app.ts | pino-pretty -c",
-    "build": "tsc --project tsconfig.json && tsc-alias -p tsconfig.json && ts-node tools/copy-assets.ts",
+    "build": "tsc --project tsconfig.json && tsc-alias -p tsconfig.json",
     "lint:check": "eslint 'src/**/*.ts'",
     "lint:fix": "eslint 'src/**/*.ts' --fix",
     "prettier:check": "prettier --check 'src/**/*.{ts,json}'",
@@ -17,21 +17,5 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "@socket.io/redis-adapter": "^8.2.1",
-    "axios": "^1.6.2",
-    "compression": "^1.7.4",
-    "cookie-session": "^2.0.0",
-    "helmet": "^7.1.0",
-    "hpp": "^0.2.3",
-    "socket.io": "^4.7.2",
-    "socket.io-client": "^4.7.2"
-  },
-  "devDependencies": {
-    "@types/compression": "^1.7.5",
-    "@types/cookie-session": "^2.0.48",
-    "@types/cors": "^2.8.17",
-    "@types/hpp": "^0.2.5"
-  }
+  "license": "ISC"
 }
