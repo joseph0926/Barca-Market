@@ -51,7 +51,7 @@ export const createOrder = async (
   // update seller info
   await publishDirectMessage(
     orderChannel,
-    'jobber-seller-update',
+    'barca-seller-update',
     'user-seller',
     JSON.stringify(messageDetails),
     'Details sent to users service',
@@ -74,7 +74,7 @@ export const createOrder = async (
   // send email
   await publishDirectMessage(
     orderChannel,
-    'jobber-order-notification',
+    'barca-order-notification',
     'order-email',
     JSON.stringify(emailMessageDetails),
     'Order email sent to notification service.',
@@ -101,7 +101,7 @@ export const cancelOrder = async (
   // update seller info
   await publishDirectMessage(
     orderChannel,
-    'jobber-seller-update',
+    'barca-seller-update',
     'user-seller',
     JSON.stringify({ type: 'cancel-order', sellerId: data.sellerId }),
     'Cancelled order details sent to users service.',
@@ -109,7 +109,7 @@ export const cancelOrder = async (
   // update buyer info
   await publishDirectMessage(
     orderChannel,
-    'jobber-buyer-update',
+    'barca-buyer-update',
     'user-buyer',
     JSON.stringify({
       type: 'cancel-order',
@@ -153,7 +153,7 @@ export const approveOrder = async (
   // update seller info
   await publishDirectMessage(
     orderChannel,
-    'jobber-seller-update',
+    'barca-seller-update',
     'user-seller',
     JSON.stringify(messageDetails),
     'Approved order details sent to users service.',
@@ -161,7 +161,7 @@ export const approveOrder = async (
   // update buyer info
   await publishDirectMessage(
     orderChannel,
-    'jobber-buyer-update',
+    'barca-buyer-update',
     'user-buyer',
     JSON.stringify({
       type: 'purchased-gigs',
@@ -210,7 +210,7 @@ export const sellerDeliverOrder = async (
     // send email
     await publishDirectMessage(
       orderChannel,
-      'jobber-order-notification',
+      'barca-order-notification',
       'order-email',
       JSON.stringify(messageDetails),
       'Order delivered message sent to notification service.',
@@ -250,7 +250,7 @@ export const requestDeliveryExtension = async (
     // send email
     await publishDirectMessage(
       orderChannel,
-      'jobber-order-notification',
+      'barca-order-notification',
       'order-email',
       JSON.stringify(messageDetails),
       'Order delivered message sent to notification service.',
@@ -301,7 +301,7 @@ export const approveDeliveryDate = async (
     // send email
     await publishDirectMessage(
       orderChannel,
-      'jobber-order-notification',
+      'barca-order-notification',
       'order-email',
       JSON.stringify(messageDetails),
       'Order request extension approval message sent to notification service.',
@@ -346,7 +346,7 @@ export const rejectDeliveryDate = async (
     // send email
     await publishDirectMessage(
       orderChannel,
-      'jobber-order-notification',
+      'barca-order-notification',
       'order-email',
       JSON.stringify(messageDetails),
       'Order request extension rejection message sent to notification service.',

@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: barca-secret
+  namespace: production
+type: Opaque
+data:
+  secret-key-one: OWM1YjI2NDM4YzhkN2Y3ZGFjMTI2MDc2NjFmMz0=
+  secret-key-two: M2UwYjBjNDBiMWE4Y2VlYjU5NzkwNTZhYmJmNj0=
+  gateway-jwt-token: NGEwZWE1Mjg5ZTExNjE4MjE5ZjE0ODhlMjViMj0=
+  jwt-token: ZmRlOGRkMjQxMThlNGJhYjIxOGM0OThkMzE3YT0=
+  barca-redis-host: cmVkaXM6Ly86YWRtaW4xMjM0QEBiYXJjYS1yZWRpcy5wcm9kdWN0aW9uLnN2Yy5jbHVzdGVyLmxvY2FsOjYzNzk=
+  sender-email: dHJpc3Rvbi5icmF1bjI2QGV0aGVyZWFsLmVtYWls
+  sender-email-password: RGR4VlJmYVpjYWFVdk1rYlh6
+  barca-mysql-db: bXlzcWw6Ly9iYXJjYTphcGlAYmFyY2EtbXlzcWwucHJvZHVjdGlvbi5zdmMuY2x1c3Rlci5sb2NhbDozMzA2L2JhcmNhX2F1dGg=
+  barca-psql-host: YmFyY2FfcmV2aWV3cw==
+  barca-psql-user: YmFyY2E=
+  barca-psql-password: YXBp
+  barca-mysql-user: YmFyY2E=
+  barca-mysql-password: YXBp
+  cloud-name: ZGN4YmFpZWlr
+  cloud-api-key: ODc5MjU4NTU1NzI5Nzk3
+  cloud-api-secret: ZzdMS3lXMDFnSWxpZ2RpMkI0bkNweERQbjZF
+  mongo-database-url: bW9uZ29kYjovL2JhcmNhLW1vbmdvLnByb2R1Y3Rpb24uc3ZjLmNsdXN0ZXIubG9jYWw6MjcwMTcvYmFyY2E=
+  stripe-api-key: c2tfdGVzdF81MU9SM3BMRmtTR2N1V0RGeklXdlVhQ2JsOXF0UjJ2d2t1bmNKOEtzbXRTamluaFBneFpBVmJDRk1uUnRyR2JRMTU0TVMwWlZLRnA2S0lrcUpSTXZxeUx4VzAwYzZST0dsMms=
+  stripe-client-key: cGtfdGVzdF81MU9SM3BMRmtTR2N1V0RGelVoblFPWkJ1dUt2TlZBMjFaVDNSNHNIWGo1ZUxlazNOcG5hSUJpbjY5czFTUkNWdmlQRUhLcEIxT042VHBUZjFGWlNtVGI5OTAwd3VqMnB2ZUI=
+  barca-rabbitmq-user: YmFyY2E=
+  barca-rabbitmq-password: YmFyY2FwYXNzd29yZA==
+  barca-rabbitmq-endpoint: YW1xcDovL2JhcmNhOmJhcmNhcGFzc3dvcmRAYmFyY2EtcmFiYml0bXEucHJvZHVjdGlvbi5zdmMuY2x1c3Rlci5sb2NhbDo1Njcy
+  barca-elasticsearch-url: aHR0cDovL2VsYXN0aWM6YWRtaW4xMjM0QGJhcmNhLWVsYXN0aWNzZWFyY2gucHJvZHVjdGlvbi5zdmMuY2x1c3Rlci5sb2NhbDo5MjAw
+  barca-elastic-apm-server-url: ''
+  barca-elastic-apm-secret-token: ''
+  barca-elasticsearch-host: YmFyY2EtZWxhc3RpY3NlYXJjaC5wcm9kdWN0aW9uLnN2Yy5jbHVzdGVyLmxvY2Fs
+  barca-elasticsearch-username: ZWxhc3RpYw==
+  barca-elasticsearch-password: YWRtaW4xMjM0

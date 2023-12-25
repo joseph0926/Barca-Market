@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: barca-kibana
+  namespace: production
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: barca-kibana
+  template:
+    metadata:
+      labels:
+        app: barca-kibana
+    spec:
+      containers:
+        - name: barca-kibana
+          image: docker.elastic.co/kibana/kibana:8.11.0
+          resources:
+            limits:
+              memory: '1Gi'
+              cpu: '1500m'
+            requests:
+              cpu: 250m
+              memory: 1Gi
+          ports:
+            - name: barca-kibana
+              containerPort: 5601
+          env:
+            - name: ELASTICSEARCH_HOSTS
+              value: http://barca-elastic.production.svc.cluster.local:9200
+            - name: ELASTICSEARCH_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: barca-secret
+                  key: barca-elasticsearch-username
+            - name: ELASTICSEARCH_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: barca-secret
+                  key: barca-elasticsearch-password
+            - name: ELASTICSEARCH_SERVICEACCOUNT_TOKEN
+              value: AAEAAWVsYXN0aWMva2liYW5hL2pvYmJlci1raWJhbmE6b1dZRjBpd3JTUG1NejNtb1ZQbHFaZw
+          volumeMounts:
+            - name: kibana-config
+              mountPath: /usr/share/kibana/config
+      volumes:
+        - name: kibana-config
+          configMap:
+            name: kibana-config

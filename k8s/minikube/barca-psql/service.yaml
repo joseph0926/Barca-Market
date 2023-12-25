@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: barca-psql
+  namespace: production
+spec:
+  type: ClusterIP
+  selector:
+    app: barca-psql
+  ports:
+    - name: barca-psql
+      port: 5432
+      targetPort: 5432

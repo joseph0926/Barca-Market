@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: barca-mysql
+  namespace: production
+spec:
+  type: ClusterIP
+  selector:
+    app: barca-mysql
+  ports:
+    - name: barca-mysql
+      port: 3306
+      targetPort: 3306
