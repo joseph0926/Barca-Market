@@ -49,7 +49,7 @@ const addReview = async (data: IReviewDocument): Promise<IReviewDocument> => {
     reviewChannel,
     'barca-review',
     JSON.stringify(messageDetails),
-    'Review details sent to order and users services',
+    'Review details sent to order and user services',
   );
 
   return reviewData;

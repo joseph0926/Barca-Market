@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: barca-auth
+  namespace: production
+spec:
+  type: ClusterIP
+  selector:
+    app: barca-auth
+  ports:
+    - name: auth
+      port: 4002
+      targetPort: 4002
+      protocol: TCP

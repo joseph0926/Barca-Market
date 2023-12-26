@@ -11,7 +11,10 @@ COPY packages/auth-service ./packages/auth-service
 RUN npm install -g typescript npm@latest
 RUN npm install
 
-RUN npm run build --prefix packages/auth-service
+WORKDIR /app/packages/auth-service
+
+RUN npx prisma generate
+RUN npm run build
 
 FROM node:21-alpine3.18
 

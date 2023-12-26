@@ -53,7 +53,7 @@ const createGig = async (gig: ISellerGig): Promise<ISellerGig> => {
         gigSellerId: `${data.sellerId}`,
         count: 1,
       }),
-      'Details sent to users service.',
+      'Details sent to user service.',
     );
     await addDataToIndex('gigs', `${createdGig._id}`, data);
   }
@@ -71,7 +71,7 @@ const deleteGig = async (gigId: string, sellerId: string): Promise<void> => {
       gigSellerId: sellerId,
       count: -1,
     }),
-    'Details sent to users service.',
+    'Details sent to user service.',
   );
   await deleteIndexedData('gigs', `${gigId}`);
 };

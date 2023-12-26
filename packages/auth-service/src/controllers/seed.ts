@@ -54,5 +54,5 @@ export async function create(req: Request, res: Response): Promise<void> {
   }
   res
     .status(StatusCodes.OK)
-    .json({ message: 'Seed users created successfully.' });
+    .json({ message: 'Seed user created successfully.' });
 }

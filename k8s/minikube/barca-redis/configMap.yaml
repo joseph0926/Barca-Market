@@ -681,7 +681,7 @@ data:
     # can be easily a long string from /dev/urandom or whatever, so by using a
     # long and unguessable password no brute force attack will be possible.
 
-    # Redis ACL users are defined in the following format:
+    # Redis ACL user are defined in the following format:
     #
     #   user <username> ... acl rules ...
     #
@@ -777,15 +777,15 @@ data:
 
     # Using an external ACL file
     #
-    # Instead of configuring users here in this file, it is possible to use
-    # a stand-alone file just listing users. The two methods cannot be mixed:
-    # if you configure users here and at the same time you activate the exteranl
+    # Instead of configuring user here in this file, it is possible to use
+    # a stand-alone file just listing user. The two methods cannot be mixed:
+    # if you configure user here and at the same time you activate the exteranl
     # ACL file, the server will refuse to start.
     #
     # The format of the external ACL user file is exactly the same as the
-    # format that is used inside redis.conf to describe users.
+    # format that is used inside redis.conf to describe user.
     #
-    # aclfile /etc/redis/users.acl
+    # aclfile /etc/redis/user.acl
 
     # IMPORTANT NOTE: starting with Redis 6 "requirepass" is just a compatiblity
     # layer on top of the new ACL system. The option effect will be just setting
@@ -1008,7 +1008,7 @@ data:
     #
     # Now it is also possible to handle Redis clients socket reads and writes
     # in different I/O threads. Since especially writing is so slow, normally
-    # Redis users use pipelining in order to speedup the Redis performances per
+    # Redis user use pipelining in order to speedup the Redis performances per
     # core, and spawn multiple instances in order to scale more. Using I/O
     # threads it is possible to easily speedup two times Redis without resorting
     # to pipelining nor sharding of the instance.
@@ -1444,7 +1444,7 @@ data:
     #
     #  notify-keyspace-events Ex
     #
-    #  By default all notifications are disabled because most users don't need
+    #  By default all notifications are disabled because most user don't need
     #  this feature and the feature has some overhead. Note that if you don't
     #  specify at least one of K or E, no events will be delivered.
     notify-keyspace-events ""
@@ -1665,7 +1665,7 @@ data:
     # handled with more precision.
     #
     # The range is between 1 and 500, however a value over 100 is usually not
-    # a good idea. Most users should use the default of 10 and raise this up to
+    # a good idea. Most user should use the default of 10 and raise this up to
     # 100 only in environments where very low latency is required.
     hz 10
 

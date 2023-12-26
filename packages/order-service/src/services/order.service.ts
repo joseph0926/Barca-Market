@@ -54,7 +54,7 @@ export const createOrder = async (
     'barca-seller-update',
     'user-seller',
     JSON.stringify(messageDetails),
-    'Details sent to users service',
+    'Details sent to user service',
   );
   const emailMessageDetails: IOrderMessage = {
     orderId: data.orderId,
@@ -104,7 +104,7 @@ export const cancelOrder = async (
     'barca-seller-update',
     'user-seller',
     JSON.stringify({ type: 'cancel-order', sellerId: data.sellerId }),
-    'Cancelled order details sent to users service.',
+    'Cancelled order details sent to user service.',
   );
   // update buyer info
   await publishDirectMessage(
@@ -116,7 +116,7 @@ export const cancelOrder = async (
       buyerId: data.buyerId,
       purchasedGigs: data.purchasedGigs,
     }),
-    'Cancelled order details sent to users service.',
+    'Cancelled order details sent to user service.',
   );
   sendNotification(
     order,
@@ -156,7 +156,7 @@ export const approveOrder = async (
     'barca-seller-update',
     'user-seller',
     JSON.stringify(messageDetails),
-    'Approved order details sent to users service.',
+    'Approved order details sent to user service.',
   );
   // update buyer info
   await publishDirectMessage(
@@ -168,7 +168,7 @@ export const approveOrder = async (
       buyerId: data.buyerId,
       purchasedGigs: data.purchasedGigs,
     }),
-    'Approved order details sent to users service.',
+    'Approved order details sent to user service.',
   );
   sendNotification(
     order,

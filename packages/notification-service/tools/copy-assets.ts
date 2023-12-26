@@ -1,3 +1,3 @@
-import * as shell from 'shelljs';
+import fse from 'fs-extra';
 
-shell.cp('-R', 'src/emails', 'build/src/');
+fse.copySync('src/emails', 'build/src/emails');

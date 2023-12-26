@@ -134,10 +134,10 @@ data:
         check.response.status: [200]
 
       - type: http
-        id: barca-users
-        name: Barca Users Service
+        id: barca-user
+        name: Barca User Service
         schedule: '@every 5s'
-        hosts: ["http://barca-users.production.svc.cluster.local:4003/user-health"]
+        hosts: ["http://barca-user.production.svc.cluster.local:4003/user-health"]
         check.request.method: GET
         check.response.status: [200]
 
