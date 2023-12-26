@@ -11,7 +11,6 @@ data:
 
     # Elasticsearch Connection
     elasticsearch.hosts: ["http://barca-elastic.production.svc.cluster.local:9200"]
-    elasticsearch.serviceAccountToken: ${ELASTICSEARCH_SERVICEACCOUNT_TOKEN}
 
     monitoring.ui.container.elasticsearch.enabled: true
     xpack.fleet.enabled: true

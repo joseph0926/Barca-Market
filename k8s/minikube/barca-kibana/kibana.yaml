@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: barca-kibana
-          image: docker.elastic.co/kibana/kibana:8.11.0
+          image: docker.elastic.co/kibana/kibana:8.11.1
           resources:
             limits:
               memory: '1Gi'

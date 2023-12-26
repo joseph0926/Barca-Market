@@ -11,10 +11,10 @@ COPY packages/user-service ./packages/user-service
 RUN npm install -g typescript npm@latest
 RUN npm install
 
-WORKDIR /app/packages/auth-service
+WORKDIR /app/packages/user-service
 
 RUN npx prisma generate
-RUN npm run buildq
+RUN npm run build
 
 FROM node:21-alpine3.18
 
