@@ -33,14 +33,17 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: barca-secret
-                  key: barca-elasticsearch-username
+                  key: barca-kibana-username
             - name: ELASTICSEARCH_PASSWORD
               valueFrom:
                 secretKeyRef:
                   name: barca-secret
-                  key: barca-elasticsearch-password
+                  key: barca-kibana-password
             - name: ELASTICSEARCH_SERVICEACCOUNT_TOKEN
-              value: AAEAAWVsYXN0aWMva2liYW5hL2pvYmJlci1raWJhbmE6b1dZRjBpd3JTUG1NejNtb1ZQbHFaZw
+              valueFrom:
+                secretKeyRef:
+                  name: barca-secret
+                  key: barca-kibana-token
           volumeMounts:
             - name: kibana-config
               mountPath: /usr/share/kibana/config
