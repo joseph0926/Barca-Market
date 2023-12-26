@@ -20,12 +20,12 @@ const consumeGigDirectMessage = async (channel: Channel): Promise<void> => {
     const routingKey = 'update-gig';
     const queueName = 'gig-update-queue';
     await channel.assertExchange(exchangeName, 'direct');
-    const jobberQueue: Replies.AssertQueue = await channel.assertQueue(
+    const barcaQueue: Replies.AssertQueue = await channel.assertQueue(
       queueName,
       { durable: true, autoDelete: false },
     );
-    await channel.bindQueue(jobberQueue.queue, exchangeName, routingKey);
-    channel.consume(jobberQueue.queue, async (msg: ConsumeMessage | null) => {
+    await channel.bindQueue(barcaQueue.queue, exchangeName, routingKey);
+    channel.consume(barcaQueue.queue, async (msg: ConsumeMessage | null) => {
       const { gigReview } = JSON.parse(msg!.content.toString());
       await updateGigReview(JSON.parse(gigReview));
       channel.ack(msg!);
@@ -48,12 +48,12 @@ const consumeSeedDirectMessages = async (channel: Channel): Promise<void> => {
     const routingKey = 'receive-sellers';
     const queueName = 'seed-gig-queue';
     await channel.assertExchange(exchangeName, 'direct');
-    const jobberQueue: Replies.AssertQueue = await channel.assertQueue(
+    const barcaQueue: Replies.AssertQueue = await channel.assertQueue(
       queueName,
       { durable: true, autoDelete: false },
     );
-    await channel.bindQueue(jobberQueue.queue, exchangeName, routingKey);
-    channel.consume(jobberQueue.queue, async (msg: ConsumeMessage | null) => {
+    await channel.bindQueue(barcaQueue.queue, exchangeName, routingKey);
+    channel.consume(barcaQueue.queue, async (msg: ConsumeMessage | null) => {
       const { sellers, count } = JSON.parse(msg!.content.toString());
       await seedData(sellers, count);
       channel.ack(msg!);

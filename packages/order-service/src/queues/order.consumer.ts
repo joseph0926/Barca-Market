@@ -21,12 +21,12 @@ export const consumerReviewFanoutMessages = async (
     const exchangeName = 'barca-review';
     const queueName = 'order-review-queue';
     await channel.assertExchange(exchangeName, 'fanout');
-    const jobberQueue: Replies.AssertQueue = await channel.assertQueue(
+    const barcaQueue: Replies.AssertQueue = await channel.assertQueue(
       queueName,
       { durable: true, autoDelete: false },
     );
-    await channel.bindQueue(jobberQueue.queue, exchangeName, '');
-    channel.consume(jobberQueue.queue, async (msg: ConsumeMessage | null) => {
+    await channel.bindQueue(barcaQueue.queue, exchangeName, '');
+    channel.consume(barcaQueue.queue, async (msg: ConsumeMessage | null) => {
       await updateOrderReview(JSON.parse(msg!.content.toString()));
       channel.ack(msg!);
     });

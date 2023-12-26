@@ -166,7 +166,7 @@ data:
         check.response.status: [200]
 
       - type: http
-        id: barca-reviews
+        id: barca-review
         name: Barca Reviews Service
         schedule: '@every 5s'
         urls: ["http://barca-review.production.svc.cluster.local:4007/review-health"]
@@ -216,17 +216,17 @@ spec:
             - name: ELASTICSEARCH_HOST
               valueFrom:
                 secretKeyRef:
-                  name: barca-backend-secret
+                  name: barca-secret
                   key: barca-elasticsearch-host
             - name: ELASTICSEARCH_USERNAME
               valueFrom:
                 secretKeyRef:
-                  name: barca-backend-secret
+                  name: barca-secret
                   key: barca-elasticsearch-username
             - name: ELASTICSEARCH_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  name: barca-backend-secret
+                  name: barca-secret
                   key: barca-elasticsearch-password
             - name: NODE_NAME
               valueFrom:
