@@ -30,7 +30,7 @@ spec:
                   name: barca-secret
                   key: barca-psql-password
             - name: POSTGRES_DB
-              value: barca-review
+              value: barca_review
             - name: PGDATA
               value: /var/lib/postgresql/data/pgdata
           resources:
