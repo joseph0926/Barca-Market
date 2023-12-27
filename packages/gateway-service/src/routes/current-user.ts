@@ -12,7 +12,7 @@ class CurrentUserRoutes {
 
   public routes(): Router {
     this.router.get(
-      '/auth/currentUser',
+      '/auth/currentuser',
       authMiddleware.checkAuthentication,
       CurrentUserController.prototype.currentUser,
     );

@@ -61,6 +61,9 @@ export class GatewayServer {
         keys: [`${config.SECRET_KEY_ONE}`, `${config.SECRET_KEY_TWO}`],
         maxAge: 7 * 24 * 1000 * 3600,
         secure: config.NODE_ENV !== 'development',
+        ...(config.NODE_ENV !== 'development' && {
+          sameSite: 'none',
+        }),
       }),
     );
     app.use(hpp());

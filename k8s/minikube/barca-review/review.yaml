@@ -70,7 +70,7 @@ spec:
                   name: barca-secret
                   key: barca-psql-password
             - name: DATABASE_NAME
-              value: barca_review
+              value: barca-review
             - name: CLOUD_NAME
               valueFrom:
                 secretKeyRef:

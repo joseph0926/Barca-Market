@@ -40,7 +40,7 @@ services:
     restart: always
     environment:
       - POSTGRES_USER=barca
-      - POSTGRES_DB=barca_review
+      - POSTGRES_DB=barca-review
       - POSTGRES_PASSWORD=api
     ports:
       - 5432:5432
@@ -208,6 +208,28 @@ services:
       - ELASTIC_APM_SECRET_TOKEN=
     depends_on:
       - elasticsearch
+
+  jenkins:
+    container_name: jenkins_container
+    image: jenkins/jenkins:lts
+    privileged: true
+    user: root
+    ports:
+      - 8080:8080
+      - 50000:50000
+    volumes:
+      - ./docker-volumes/jenkins_compose/jenkins_configuration:/var/jenkins_home
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  jenkins-agent:
+    container_name: jenkins_agent_container
+    image: jenkins/ssh-agent:jdk11
+    privileged: true
+    user: root
+    expose:
+      - 22
+    environment:
+      - JENKINS_AGENT_SSH_PUBKEY=
 
 networks:
   elastic:

@@ -16,7 +16,7 @@ class AuthService {
   }
 
   async getCurrentUser(): Promise<AxiosResponse> {
-    const response: AxiosResponse = await axiosAuthInstance.get('/currentUser');
+    const response: AxiosResponse = await axiosAuthInstance.get('/currentuser');
     return response;
   }
 

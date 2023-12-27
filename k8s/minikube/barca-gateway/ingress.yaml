@@ -3,6 +3,8 @@ kind: Ingress
 metadata:
   name: barca-gateway-ingress
   namespace: production
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-targe: /
 spec:
   ingressClassName: nginx
   defaultBackend:
