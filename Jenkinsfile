@@ -12,7 +12,7 @@ pipeline {
     dockerTool "Docker"
   }
 
-  enviroment {
+  environment {
     DOCKER_CREDENTIALS = credentials("dockerhub")
     IMAGE_NAME = "joseph0926" + "/" + "barca-review"
     IMAGE_TAG = "stable-${BUILD_NUMBER}"
