@@ -1,0 +1,17 @@
+{
+  "jenkins-runner.jobs": {
+    "barca-review": {
+      "isDefault": true,
+      "runWith": "jenkins-master",
+      "name": "barca-review"
+    }
+  },
+  "jenkins-runner.hostConfigs": {
+    "jenkins-master": {
+      "url": "http://localhost:8080",
+      "user": "joseph0926",
+      "password": "a939498!",
+      "useCrumbIssuer": true
+    }
+  }
+}
