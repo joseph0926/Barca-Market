@@ -7,15 +7,15 @@
     "node": ">=18"
   },
   "scripts": {
-    "build-all": "npm run build-gateway && npm run build-notification && npm run build-auth && npm run build-user && npm run build-gig && npm run build-chat && npm run build-order && npm run build-review",
-    "build-gateway": "cd packages/gateway-service && npm run build",
-    "build-notification": "cd packages/notification-service && npm run build",
-    "build-auth": "cd packages/auth-service && npm run build",
-    "build-user": "cd packages/user-service && npm run build",
-    "build-gig": "cd packages/gig-service && npm run build",
-    "build-chat": "cd packages/chat-service && npm run build",
-    "build-order": "cd packages/order-service && npm run build",
-    "build-review": "cd packages/review-service && npm run build"
+    "dev": "npm run dev-gateway && npm run dev-notification && npm run dev-auth && npm run dev-user && npm run dev-gig && npm run dev-chat && npm run dev-order && npm run dev-review",
+    "dev-gateway": "cd packages/gateway-service && npm run dev",
+    "dev-notification": "cd packages/notification-service && npm run dev",
+    "dev-auth": "cd packages/auth-service && npm run dev",
+    "dev-user": "cd packages/user-service && npm run dev",
+    "dev-gig": "cd packages/gig-service && npm run dev",
+    "dev-chat": "cd packages/chat-service && npm run dev",
+    "dev-order": "cd packages/order-service && npm run dev",
+    "dev-review": "cd packages/review-service && npm run dev"
   },
   "prettier": {
     "printWidth": 80,

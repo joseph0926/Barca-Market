@@ -1,25 +1,28 @@
-import { ReactElement, FC } from 'react';
-import { createBrowserRouter, RouterProvider, RouteObject } from 'react-router-dom';
-import { ConfirmEmailPage, SearchPage, GigPage, HomePage, ResetPasswordPage, RootPage } from '@/pages';
+import { FC, ReactElement, useEffect } from 'react';
+import { BrowserRouter } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+
+import AppRouter from './AppRoutes';
+import useBeforeWindowUnload from '@/hooks/useBeforeWindowUnload';
+import { socketService } from './sockets/socket.service';
 
 const App: FC = (): ReactElement => {
-  const routes: RouteObject[] = [
-    {
-      path: '/',
-      element: <RootPage />,
-      children: [
-        { index: true, element: <HomePage /> },
-        { path: 'reset_password', element: <ResetPasswordPage /> },
-        { path: 'confirm_email', element: <ConfirmEmailPage /> },
-        { path: 'gig/:gigId/:title', element: <GigPage /> },
-        { path: 'search/:type', element: <SearchPage /> }
-      ]
-    }
-  ];
+  useBeforeWindowUnload();
 
-  const router = createBrowserRouter(routes);
+  useEffect(() => {
+    socketService.setupSocketConnection();
+  }, []);
 
-  return <RouterProvider router={router} />;
+  return (
+    <>
+      <BrowserRouter>
+        <div className="relative flex min-h-screen w-screen flex-col">
+          <AppRouter />
+          <ToastContainer />
+        </div>
+      </BrowserRouter>
+    </>
+  );
 };
 
 export default App;
