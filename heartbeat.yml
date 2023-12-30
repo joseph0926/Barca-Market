@@ -8,56 +8,56 @@ heartbeat.monitors:
     id: barca-api-gateway
     name: Barca API Gateway Service
     schedule: '@every 5s'
-    hosts: ['http://gateway_container:4000/gateway-health']
+    hosts: ['http://localhost:4000/gateway-health']
     check.request.method: GET
     check.response.status: [200]
   - type: http
     id: barca-notification
     name: Barca API Notification Service
     schedule: '@every 5s'
-    hosts: ['http://notification_container:4001/notification-health']
+    hosts: ['http://localhost:4001/notification-health']
     check.request.method: GET
     check.response.status: [200]
   - type: http
     id: barca-auth
     name: Barca API Auth Service
     schedule: '@every 5s'
-    hosts: ['http://auth_container:4002/auth-health']
+    hosts: ['http://localhost:4002/auth-health']
     check.request.method: GET
     check.response.status: [200]
   - type: http
     id: barca-user
     name: Barca API User Service
     schedule: '@every 5s'
-    hosts: ['http://user_container:4003/user-health']
+    hosts: ['http://localhost:4003/user-health']
     check.request.method: GET
     check.response.status: [200]
   - type: http
     id: barca-gig
     name: Barca API Gig Service
     schedule: '@every 5s'
-    hosts: ['http://gig_container:4004/gig-health']
+    hosts: ['http://localhost:4004/gig-health']
     check.request.method: GET
     check.response.status: [200]
   - type: http
     id: barca-chat
     name: Barca API Chat Service
     schedule: '@every 5s'
-    hosts: ['http://chat_container:4005/chat-health']
+    hosts: ['http://localhost:4005/chat-health']
     check.request.method: GET
     check.response.status: [200]
   - type: http
     id: barca-order
     name: Barca API Order Service
     schedule: '@every 5s'
-    hosts: ['http://order_container:4006/order-health']
+    hosts: ['http://localhost:4006/order-health']
     check.request.method: GET
     check.response.status: [200]
   - type: http
     id: barca-review
     name: Barca API Review Service
     schedule: '@every 5s'
-    hosts: ['http://review_container:4007/review-health']
+    hosts: ['http://localhost:4007/review-health']
     check.request.method: GET
     check.response.status: [200]
 

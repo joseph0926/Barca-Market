@@ -53,7 +53,7 @@ services:
     restart: always
     environment:
       - RABBITMQ_DEFAULT_USER=barca
-      - RABBITMQ_DEFAULT_PASS=barcapassword
+      - RABBITMQ_DEFAULT_PASS=barcapass
     ports:
       # AMQP
       - 5672:5672
@@ -181,7 +181,7 @@ services:
       - ORDER_BASE_URL=http://localhost:4006
       - REVIEW_BASE_URL=http://localhost:4007
       - REDIS_HOST=redis://redis_container:6379
-      - ELASTIC_SEARCH_URL=http://elastic:admin1234@elasticsearch_container:9200
+      - ELASTIC_SEARCH_URL=http://elastic:admin1234@localhost:9200
       - ELASTIC_APM_SERVER_URL=http://apm_server_container:8200
       - ELASTIC_APM_SECRET_TOKEN=
     depends_on:
@@ -203,7 +203,7 @@ services:
       - RABBITMQ_ENDPOINT=amqp://barca:barcapass@rabbitmq_container:5672
       - SENDER_EMAIL=lysanne.rutherford88@ethereal.email
       - SENDER_EMAIL_PASSWORD=ad8y45AkfebKmW8rCV
-      - ELASTIC_SEARCH_URL=http://elastic:admin1234@elasticsearch_container:9200
+      - ELASTIC_SEARCH_URL=http://elastic:admin1234@localhost:9200
       - ELASTIC_APM_SERVER_URL=http://apm_server_container:8200
       - ELASTIC_APM_SECRET_TOKEN=
     depends_on:
@@ -223,14 +223,14 @@ services:
       - GATEWAY_JWT_TOKEN=4a0ea5289e11618219f1488e25b2
       - JWT_TOKEN=fde8dd24118e4bab218c498d317a
       - NODE_ENV=development
-      - AP_GATEWAY_URL=http://gateway_container:4000
+      - API_GATEWAY_URL=http://gateway_container:4000
       - CLIENT_URL=http://localhost:3000
       - RABBITMQ_ENDPOINT=amqp://barca:barcapass@rabbitmq_container:5672
       - MYSQL_DB=mysql://barca:api@mysql_container:3306/barca_auth
       - CLOUD_NAME=dyamr9ym3
       - CLOUD_API_KEY=879258555729797
       - CLOUD_API_SECRET=-g7LKyW01gIligdi2B4nCpxDPn6E
-      - ELASTIC_SEARCH_URL=http://elastic:admin1234@elasticsearch_container:9200
+      - ELASTIC_SEARCH_URL=http://elastic:admin1234@localhost:9200
       - ELASTIC_APM_SERVER_URL=http://apm_server_container:8200
       - ELASTIC_APM_SECRET_TOKEN=
     depends_on:
@@ -252,13 +252,13 @@ services:
       - GATEWAY_JWT_TOKEN=4a0ea5289e11618219f1488e25b2
       - JWT_TOKEN=fde8dd24118e4bab218c498d317a
       - NODE_ENV=development
-      - AP_GATEWAY_URL=http://gateway_container:4000
+      - API_GATEWAY_URL=http://gateway_container:4000
       - RABBITMQ_ENDPOINT=amqp://barca:barcapass@rabbitmq_container:5672
       - CLOUD_NAME=dyamr9ym3
       - CLOUD_API_KEY=879258555729797
       - CLOUD_API_SECRET=-g7LKyW01gIligdi2B4nCpxDPn6E
       - REDIS_HOST=redis://redis_container:6379
-      - ELASTIC_SEARCH_URL=http://elastic:admin1234@elasticsearch_container:9200
+      - ELASTIC_SEARCH_URL=http://elastic:admin1234@localhost:9200
       - ELASTIC_APM_SERVER_URL=http://apm_server_container:8200
       - ELASTIC_APM_SECRET_TOKEN=
     depends_on:
@@ -280,13 +280,13 @@ services:
       - GATEWAY_JWT_TOKEN=4a0ea5289e11618219f1488e25b2
       - JWT_TOKEN=fde8dd24118e4bab218c498d317a
       - NODE_ENV=development
-      - AP_GATEWAY_URL=http://gateway_container:4000
+      - API_GATEWAY_URL=http://gateway_container:4000
       - RABBITMQ_ENDPOINT=amqp://barca:barcapass@rabbitmq_container:5672
       - CLOUD_NAME=dyamr9ym3
       - CLOUD_API_KEY=879258555729797
       - CLOUD_API_SECRET=-g7LKyW01gIligdi2B4nCpxDPn6E
       - REDIS_HOST=redis://redis_container:6379
-      - ELASTIC_SEARCH_URL=http://elastic:admin1234@elasticsearch_container:9200
+      - ELASTIC_SEARCH_URL=http://elastic:admin1234@localhost:9200
       - ELASTIC_APM_SERVER_URL=http://apm_server_container:8200
       - ELASTIC_APM_SECRET_TOKEN=
     depends_on:
@@ -308,12 +308,12 @@ services:
       - GATEWAY_JWT_TOKEN=4a0ea5289e11618219f1488e25b2
       - JWT_TOKEN=fde8dd24118e4bab218c498d317a
       - NODE_ENV=development
-      - AP_GATEWAY_URL=http://gateway_container:4000
+      - API_GATEWAY_URL=http://gateway_container:4000
       - RABBITMQ_ENDPOINT=amqp://barca:barcapass@rabbitmq_container:5672
       - CLOUD_NAME=dyamr9ym3
       - CLOUD_API_KEY=879258555729797
       - CLOUD_API_SECRET=-g7LKyW01gIligdi2B4nCpxDPn6E
-      - ELASTIC_SEARCH_URL=http://elastic:admin1234@elasticsearch_container:9200
+      - ELASTIC_SEARCH_URL=http://elastic:admin1234@localhost:9200
       - ELASTIC_APM_SERVER_URL=http://apm_server_container:8200
       - ELASTIC_APM_SECRET_TOKEN=
     depends_on:
@@ -335,14 +335,14 @@ services:
       - GATEWAY_JWT_TOKEN=4a0ea5289e11618219f1488e25b2
       - JWT_TOKEN=fde8dd24118e4bab218c498d317a
       - NODE_ENV=development
-      - AP_GATEWAY_URL=http://gateway_container:4000
+      - API_GATEWAY_URL=http://gateway_container:4000
       - CLIENT_URL=http://localhost:3000
       - RABBITMQ_ENDPOINT=amqp://barca:barcapass@rabbitmq_container:5672
       - STRIPE_API_KEY=sk_test_51OR3pLFkSGcuWDFzIWvUaCbl9qtR2vwkuncJ8KsmtSjinhPgxZAVbCFMnRtrGbQ154MS0ZVKFp6KIkqJRMvqyLxW00c6ROGl2k
       - CLOUD_NAME=dyamr9ym3
       - CLOUD_API_KEY=879258555729797
       - CLOUD_API_SECRET=-g7LKyW01gIligdi2B4nCpxDPn6E
-      - ELASTIC_SEARCH_URL=http://elastic:admin1234@elasticsearch_container:9200
+      - ELASTIC_SEARCH_URL=http://elastic:admin1234@localhost:9200
       - ELASTIC_APM_SERVER_URL=http://apm_server_container:8200
       - ELASTIC_APM_SECRET_TOKEN=
     depends_on:
@@ -367,12 +367,12 @@ services:
       - GATEWAY_JWT_TOKEN=4a0ea5289e11618219f1488e25b2
       - JWT_TOKEN=fde8dd24118e4bab218c498d317a
       - NODE_ENV=development
-      - AP_GATEWAY_URL=http://gateway_container:4000
+      - API_GATEWAY_URL=http://gateway_container:4000
       - RABBITMQ_ENDPOINT=amqp://barca:barcapass@rabbitmq_container:5672
       - CLOUD_NAME=dyamr9ym3
       - CLOUD_API_KEY=879258555729797
       - CLOUD_API_SECRET=-g7LKyW01gIligdi2B4nCpxDPn6E
-      - ELASTIC_SEARCH_URL=http://elastic:admin1234@elasticsearch_container:9200
+      - ELASTIC_SEARCH_URL=http://elastic:admin1234@localhost:9200
       - ELASTIC_APM_SERVER_URL=http://apm_server_container:8200
       - ELASTIC_APM_SECRET_TOKEN=
     depends_on:
@@ -406,4 +406,4 @@ networks:
     name: elastic
 # docker compose up -d redis mongodb mysql psql rabbitmq elasticsearch kibana metricbeat heartbeat gateway auth user notification gig order review chat
 
-# docker compose up -d gateway auth user notification gig order review chat
+# docker compose up -d gateway auth user notification gig order review chat rabbitmq
