@@ -6,8 +6,11 @@ import Input from '@/shared/Input';
 import { replaceSpacesWithDash } from '@/shared/utils/utils.service';
 import Typed from 'typed.js';
 import { v4 as uuidv4 } from 'uuid';
+import { rowOneImages, rowTwoImages } from '@/shared/utils/hero-img';
+import MarQuee from 'react-fast-marquee';
+import heroImg from '@/assets/hero.png';
 
-const categories: string[] = ['Graphics & Design', 'Digital Marketing', 'Writing & Translation', 'Programming & Tech'];
+const categories: string[] = ['Action Games', 'Strategy Games', 'Role-Playing Games', 'Adventure Games'];
 
 const Hero: FC = (): ReactElement => {
   const typedElement: RefObject<HTMLSpanElement> = useRef<HTMLSpanElement>(null);
@@ -37,19 +40,40 @@ const Hero: FC = (): ReactElement => {
     <div className="relative bg-white pb-20 pt-40 lg:pt-44 dark:bg-gray-900">
       <div className="relative m-auto px-6 xl:container md:px-12 lg:px-6">
         <h3 className="mb-4 mt-4 max-w-2xl pb-2 text-center text-2xl font-normal lg:text-left dark:text-white">
-          Expert categories: <span ref={typedElement}></span>
+          인기 카테고리: <span ref={typedElement}></span>
         </h3>
         <h1 className="text-center text-4xl font-black text-red-900 sm:mx-auto sm:w-10/12 sm:text-5xl md:w-10/12 md:text-5xl lg:w-auto lg:text-left xl:text-7xl dark:text-white">
-          Hire expert freelancers <br className="hidden lg:block" />{' '}
+          Discover, Buy and Sell Games <br className="hidden lg:block" />{' '}
           <span className="relative bg-gradient-to-r from-red-600 to-pink-500 bg-clip-text text-transparent dark:from-red-400 dark:to-pink-300">
-            for your project
+            Your for Gaming Bliss
           </span>
-          .
         </h1>
+
+        <div className="flex w-full items-center justify-center overflow-x-hidden md:min-h-screen">
+          <div className="mt-8">
+            <div className="md:mt-5"></div>
+            <div className="relative mb-5 w-screen md:mb-20">
+              <div className="mt-10 rotate-[-4deg] md:mt-[6.5rem]">
+                <MarQuee>
+                  {rowOneImages.map((img, index) => (
+                    <img src={img.url} key={index} alt="" className="m-2 w-[200px] rounded-[20px] md:m-4 md:w-[500px]" />
+                  ))}
+                </MarQuee>
+                <MarQuee>
+                  {rowTwoImages.map((img, index) => (
+                    <img src={img.url} key={index} alt="" className="m-2 w-[200px] rounded-[20px] md:m-4 md:w-[500px]" />
+                  ))}
+                </MarQuee>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div className="lg:flex">
           <div className="relative mt-8 space-y-8 text-center sm:mx-auto sm:w-10/12 md:mt-16 md:w-2/3 lg:ml-0 lg:mr-auto lg:w-7/12 lg:text-left">
             <p className="text-gray-700 sm:text-lg lg:w-11/12 dark:text-gray-300">
-              Find the right freelance service for your next project.
+              당신의 다음 게임을 위한 완벽한 선택
+              <br /> 여기서 원하는 게임을 구매하고 판매하세요
             </p>
 
             <div className="flex w-full justify-between gap-6 lg:gap-12">
@@ -97,14 +121,9 @@ const Hero: FC = (): ReactElement => {
               ))}
             </div>
           </div>
-          <div className="-right-10 hidden lg:col-span-2 lg:mt-0 lg:flex">
-            <div className="relative w-full">
-              <img
-                src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/hero/phone-mockup.png"
-                className="relative w-full"
-                alt=""
-                loading="lazy"
-              />
+          <div className="hidden lg:col-span-2 lg:mt-0 lg:flex">
+            <div className="relative flex w-full items-center justify-center">
+              <img src={heroImg} className="relative w-[50%]" alt="" loading="lazy" />
             </div>
           </div>
         </div>

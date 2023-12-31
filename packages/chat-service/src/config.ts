@@ -27,6 +27,8 @@ class Config {
   public GATEWAY_JWT_TOKEN: string | undefined;
   public API_GATEWAY_URL: string | undefined;
   public ELASTIC_SEARCH_URL: string | undefined;
+  public ELASTIC_USERNAME: string | undefined;
+  public ELASTIC_PASSWORD: string | undefined;
 
   constructor() {
     this.DATABASE_URL = process.env.DATABASE_URL || '';
@@ -39,6 +41,8 @@ class Config {
     this.GATEWAY_JWT_TOKEN = process.env.GATEWAY_JWT_TOKEN || '';
     this.API_GATEWAY_URL = process.env.API_GATEWAY_URL || '';
     this.ELASTIC_SEARCH_URL = process.env.ELASTIC_SEARCH_URL || '';
+    this.ELASTIC_USERNAME = process.env.ELASTIC_USERNAME || '';
+    this.ELASTIC_PASSWORD = process.env.ELASTIC_PASSWORD || '';
   }
 
   public cloudinaryConfig(): void {

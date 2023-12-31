@@ -30,6 +30,8 @@ class Config {
   public API_GATEWAY_URL: string | undefined;
   public ELASTIC_SEARCH_URL: string | undefined;
   public CLUSTER_TYPE: string | undefined;
+  public ELASTIC_USERNAME: string | undefined;
+  public ELASTIC_PASSWORD: string | undefined;
 
   constructor() {
     this.DATABASE_HOST = process.env.DATABASE_HOST || '';
@@ -46,6 +48,8 @@ class Config {
     this.API_GATEWAY_URL = process.env.API_GATEWAY_URL || '';
     this.ELASTIC_SEARCH_URL = process.env.ELASTIC_SEARCH_URL || '';
     this.CLUSTER_TYPE = process.env.CLUSTER_TYPE || '';
+    this.ELASTIC_USERNAME = process.env.ELASTIC_USERNAME || '';
+    this.ELASTIC_PASSWORD = process.env.ELASTIC_PASSWORD || '';
   }
 }
 

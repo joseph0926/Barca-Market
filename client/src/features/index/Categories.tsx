@@ -9,7 +9,7 @@ const Categories: FC = (): ReactElement => {
       <div className="mx-auto px-4 py-8 text-center lg:px-6 lg:py-10">
         <div className="mx-auto mb-2 lg:mb-16">
           <h2 className="mb-4 text-left text-xl font-normal tracking-tight text-orange-400 sm:text-center lg:text-2xl">
-            Explore <strong className="font-extrabold">Freelance</strong> Categories
+            Explore <strong className="font-extrabold">Game</strong> Categories
           </h2>
         </div>
         <div className="hidden gap-8 sm:grid sm:grid-cols-3 md:grid-cols-4">
