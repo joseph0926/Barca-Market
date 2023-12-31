@@ -23,7 +23,7 @@ const GigIndexItem: FC<IGigsProps> = ({ gig }): ReactElement => {
         </Link>
         <div className="flex items-center gap-2">
           <LazyLoadImage
-            src={gigData.profilePicture}
+            src={gigData.profileImage}
             alt="profile"
             className="h-7 w-7 rounded-full object-cover"
             placeholderSrc="https://placehold.co/330x220?text=Profile+Image"

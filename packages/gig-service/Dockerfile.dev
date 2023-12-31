@@ -2,21 +2,18 @@ FROM node:21-alpine3.18
 
 WORKDIR /app
 
-# Copying necessary files for the build
+# 루트 디렉토리의 파일 복사
 COPY package.json ./
 COPY tsconfig.json ./
-COPY src ./src
 
-# Copying the gig-service package
-COPY packages/gig-service/package.json ./packages/gig-service/
-COPY packages/gig-service ./packages/gig-service
-
-# Install global and local dependencies
+# 모든 종속성 설치
 RUN npm install -g nodemon ts-node typescript npm@latest
 RUN npm install
 
-# Expose the port that the app runs on
-EXPOSE 4004
+# src 및 gig-service 복사
+COPY src ./src
+COPY packages/gig-service ./packages/gig-service
 
-# Command to run the application in development mode
+# 포트 노출 및 애플리케이션 실행
+EXPOSE 4004
 CMD ["npm", "run", "dev-gig"]

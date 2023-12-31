@@ -54,7 +54,7 @@ const HomeHeaderSideBar: FC<IHeaderSideBarProps> = ({ setOpenSidebar }): ReactEl
       <div className={'absolute left-0 top-0 z-20 flex h-screen w-[250px] flex-col items-start justify-start gap-4 bg-white p-6'}>
         <div className="z-2 sticky top-0 flex w-full flex-col items-start justify-start gap-6 bg-white">
           <div className="flex cursor-pointer gap-4 py-3 text-base font-semibold transition-all duration-300">
-            <img src={`${authUser?.profilePicture}`} alt="profile" className="h-10 w-10 rounded-full object-cover" />
+            <img src={`${authUser?.profileImage}`} alt="profile" className="h-10 w-10 rounded-full object-cover" />
             <span className="text-blacks flex self-center">{authUser?.username}</span>
           </div>
           <div

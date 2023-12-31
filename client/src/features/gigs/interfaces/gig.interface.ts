@@ -66,7 +66,7 @@ export type GigType = string | string[] | number | unknown | undefined;
 export interface ICreateGig extends Record<string, GigType> {
   // [key: string]: string | string[] | number | undefined;
   sellerId?: string;
-  profilePicture?: string;
+  profileImage?: string;
   title: string;
   categories: string;
   description: string;
@@ -85,7 +85,7 @@ export interface ISellerGig {
   sellerId?: string;
   title: string;
   username?: string;
-  profilePicture?: string;
+  profileImage?: string;
   email?: string;
   description: string;
   active?: boolean;

@@ -26,7 +26,7 @@ const DashboardMain: FC = (): ReactElement => {
             <div className="flex flex-col gap-y-3 pt-2">
               <img
                 className="flex h-20 w-20 self-center rounded-full object-cover md:h-24 md:w-24 lg:h-28 lg:w-28"
-                src={seller?.profilePicture}
+                src={seller?.profileImage}
                 alt="Seller image"
               />
               <div className="flex flex-col self-center">

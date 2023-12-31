@@ -92,9 +92,9 @@ const ChatWindow: FC<IChatWindowProps> = ({ chatMessages, isLoading, setSkip }):
         sellerId: singleMessageRef?.current?.sellerId,
         buyerId: singleMessageRef?.current?.buyerId,
         senderUsername: `${authUser?.username}`,
-        senderPicture: `${authUser?.profilePicture}`,
+        senderPicture: `${authUser?.profileImage}`,
         receiverUsername: receiverRef?.current?.username,
-        receiverPicture: receiverRef?.current?.profilePicture,
+        receiverPicture: receiverRef?.current?.profileImage,
         isRead: false,
         hasOffer: false
       };

@@ -2,21 +2,18 @@ FROM node:21-alpine3.18
 
 WORKDIR /app
 
-# Copying necessary files for the build
+# 루트 디렉토리의 파일 복사
 COPY package.json ./
 COPY tsconfig.json ./
-COPY src ./src
 
-# Copying the user-service package
-COPY packages/user-service/package.json ./packages/user-service/
-COPY packages/user-service ./packages/user-service
-
-# Install global and local dependencies
+# 모든 종속성 설치
 RUN npm install -g nodemon ts-node typescript npm@latest
 RUN npm install
 
-# Expose the port that the app runs on
-EXPOSE 4003
+# src 및 user-service 복사
+COPY src ./src
+COPY packages/user-service ./packages/user-service
 
-# Command to run the application in development mode
+# 포트 노출 및 애플리케이션 실행
+EXPOSE 4003
 CMD ["npm", "run", "dev-user"]

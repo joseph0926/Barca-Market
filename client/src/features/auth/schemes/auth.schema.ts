@@ -12,7 +12,7 @@ const registerUserSchema: ObjectSchema<ISignUpPayload> = object({
   password: string().required({ password: 'Password is a required field' }).min(4, { password: 'Password is a required field' }),
   email: string().email({ email: 'Email is a required field' }).required({ email: 'Email is a required field' }),
   country: string().notOneOf(['Select Country'], { country: 'Select a country' }).required({ country: 'Country is a required field' }),
-  profilePicture: string().required({ profilePicture: 'Profile picture is a required field' })
+  profileImage: string().required({ profileImage: 'Profile picture is a required field' })
 });
 
 const resetPasswordSchema: ObjectSchema<IResetPassword> = object({

@@ -19,7 +19,7 @@ const FeaturedExperts: FC<IFeaturedExpertProps> = ({ sellers }): ReactElement =>
           {sellers.map((seller: ISellerDocument) => (
             <div key={uuidv4()} className="border-grey w-full rounded-lg border bg-white shadow">
               <div className="flex flex-col items-center pb-10 pt-5">
-                <img className="mb-3 h-24 w-24 rounded-full shadow-lg" src={seller.profilePicture} alt="Profile image" />
+                <img className="mb-3 h-24 w-24 rounded-full shadow-lg" src={seller.profileImage} alt="Profile image" />
                 <h5 className="mb-1 font-medium text-gray-900 xl:text-xl ">{seller.username}</h5>
                 <span className="mb-1 w-[90%] text-center text-sm text-gray-500 dark:text-gray-500">{seller.oneliner}</span>
                 <div className="flex h-6 w-full justify-center gap-x-1 self-center">

@@ -2,7 +2,7 @@ import joi, { ObjectSchema } from 'joi';
 
 const signinSchema: ObjectSchema = joi.object().keys({
   username: joi.alternatives().conditional(joi.string().email(), {
-    then: joi.string().min(4).max(16).required().messages({
+    then: joi.string().email().required().messages({
       'string.base': 'Email mush be of type string',
       'string.email': '유효하지 않은 Email 형식입니다.',
       'string.empty': 'Email은 필수 입력 필드입니다.',

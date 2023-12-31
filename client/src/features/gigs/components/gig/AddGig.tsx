@@ -103,7 +103,7 @@ const AddGig: FC = (): ReactElement => {
       const isValid: boolean = await schemaValidation();
       if (isValid) {
         const gig: ICreateGig = {
-          profilePicture: `${authUser.profilePicture}`,
+          profileImage: `${authUser.profileImage}`,
           sellerId,
           title: gigInfo.title,
           categories: gigInfo.categories,

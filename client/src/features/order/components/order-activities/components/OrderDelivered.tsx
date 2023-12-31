@@ -26,13 +26,13 @@ const OrderDelivered: ForwardRefExoticComponent<Omit<IOrderDeliveredProps, 'ref'
     const chatSeller: IChatSellerProps = {
       username: `${order?.sellerUsername}`,
       _id: `${order?.sellerId}`,
-      profilePicture: `${order?.sellerImage}`,
+      profileImage: `${order?.sellerImage}`,
       responseTime: 1
     };
     const chatBuyer: IChatBuyerProps = {
       username: `${order?.buyerUsername}`,
       _id: `${order?.buyerId}`,
-      profilePicture: `${order?.buyerImage}`
+      profileImage: `${order?.buyerImage}`
     };
 
     const onDeliveryApprovalHandler = async (): Promise<void> => {

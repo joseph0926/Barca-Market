@@ -22,7 +22,7 @@ const passwordSchema: ObjectSchema = joi.object().keys({
 });
 
 const changePasswordSchema: ObjectSchema = joi.object().keys({
-  currentPassword: joi.string().required().min(4).max(8).messages({
+  currentPassword: joi.string().required().min(4).max(12).messages({
     'string.base': 'Password mush be of type string',
     'string.min': 'Password은 최소 4글자입니다.',
     'string.max': 'Password은 최대 12글자입니다.',

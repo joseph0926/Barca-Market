@@ -5,7 +5,7 @@ import { ICreateGig } from '@/features/gigs/interfaces/gig.interface';
 
 const gigInfoSchema: ObjectSchema<ICreateGig | any> = object({
   sellerId: string().optional(),
-  profilePicture: string().optional(),
+  profileImage: string().optional(),
   title: string().max(80, { title: 'Gig title must be at most 80' }).required({ title: 'Gig title is a required field' }),
   categories: string()
     .notOneOf(['Select a category'], { categories: 'Select a category' })

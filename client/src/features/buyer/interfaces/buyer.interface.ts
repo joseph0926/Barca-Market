@@ -2,7 +2,7 @@ export interface IBuyerDocument {
   _id?: string;
   username?: string;
   email?: string;
-  profilePicture?: string;
+  profileImage?: string;
   country: string;
   isSeller?: boolean;
   purchasedGigs: string[];

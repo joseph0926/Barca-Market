@@ -16,6 +16,10 @@ class ElasticSearch {
   constructor() {
     this.elasticSearchClient = new Client({
       node: `${config.ELASTIC_SEARCH_URL}`,
+      auth: {
+        username: `${config.ELASTIC_USERNAME}`,
+        password: `${config.ELASTIC_PASSWORD}`,
+      },
     });
   }
 

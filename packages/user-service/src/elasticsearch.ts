@@ -12,6 +12,10 @@ const log: Logger = winstonLogger(
 
 const elasticSearchClient = new Client({
   node: `${config.ELASTIC_SEARCH_URL}`,
+  auth: {
+    username: `${config.ELASTIC_USERNAME}`,
+    password: `${config.ELASTIC_PASSWORD}`,
+  },
 });
 
 const checkConnection = async (): Promise<void> => {

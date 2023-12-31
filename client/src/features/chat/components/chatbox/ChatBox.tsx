@@ -55,9 +55,9 @@ const ChatBox: FC<IChatBoxProps> = ({ seller, buyer, gigId, onClose }): ReactEle
         sellerId: seller._id,
         buyerId: buyer._id,
         senderUsername: authUser.username === seller.username ? seller.username : buyer.username,
-        senderPicture: authUser.username === seller.username ? seller.profilePicture : buyer.profilePicture,
+        senderPicture: authUser.username === seller.username ? seller.profileImage : buyer.profileImage,
         receiverUsername: authUser.username !== seller.username ? seller.username : buyer.username,
-        receiverPicture: authUser.username !== seller.username ? seller.profilePicture : buyer.profilePicture,
+        receiverPicture: authUser.username !== seller.username ? seller.profileImage : buyer.profileImage,
         isRead: false,
         hasOffer: false
       };
@@ -77,7 +77,7 @@ const ChatBox: FC<IChatBoxProps> = ({ seller, buyer, gigId, onClose }): ReactEle
         <div className="border-grey fixed bottom-0 left-2 right-2 h-[400px] max-h-[500px] w-auto border bg-white md:left-8 md:h-96 md:max-h-[500px] md:w-96">
           <div className="border-grey flex items-center space-x-4 border-b px-5 py-2">
             <img
-              src={authUser.username !== seller.username ? seller.profilePicture : buyer.profilePicture}
+              src={authUser.username !== seller.username ? seller.profileImage : buyer.profileImage}
               className="h-10 w-10 rounded-full"
               alt="profile image"
             />
@@ -102,7 +102,7 @@ const ChatBox: FC<IChatBoxProps> = ({ seller, buyer, gigId, onClose }): ReactEle
                   }`}
                 >
                   <img
-                    src={buyer.profilePicture}
+                    src={buyer.profileImage}
                     className={`h-8 w-8 rounded-full object-cover ${msg.senderUsername !== buyer.username ? 'hidden' : ''}`}
                     alt="profile image"
                   />

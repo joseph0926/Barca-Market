@@ -32,7 +32,7 @@ const RegisterModal: FC<IModalBgProps> = ({ onClose, onToggle }): ReactElement =
     password: '',
     email: '',
     country: '',
-    profilePicture: ''
+    profileImage: ''
   });
   const fileInputRef = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
@@ -47,7 +47,7 @@ const RegisterModal: FC<IModalBgProps> = ({ onClose, onToggle }): ReactElement =
       if (isValid) {
         const dataImage: string | ArrayBuffer | null = await readAsBase64(file);
         setProfileImage(`${dataImage}`);
-        setUserInfo({ ...userInfo, profilePicture: `${dataImage}` });
+        setUserInfo({ ...userInfo, profileImage: `${dataImage}` });
       }
       setShowImageSelect(false);
     }
@@ -204,7 +204,7 @@ const RegisterModal: FC<IModalBgProps> = ({ onClose, onToggle }): ReactElement =
               </div>
             </div>
             <div className="relative">
-              <label htmlFor="profilePicture" className="text-sm font-bold leading-tight tracking-normal text-gray-800">
+              <label htmlFor="profileImage" className="text-sm font-bold leading-tight tracking-normal text-gray-800">
                 Profile Picture
               </label>
               <div
@@ -214,7 +214,7 @@ const RegisterModal: FC<IModalBgProps> = ({ onClose, onToggle }): ReactElement =
               >
                 {profileImage && (
                   <img
-                    id="profilePicture"
+                    id="profileImage"
                     src={profileImage}
                     alt="Profile Picture"
                     className="left-0 top-0 h-20 w-20 rounded-full bg-white object-cover"
@@ -246,9 +246,9 @@ const RegisterModal: FC<IModalBgProps> = ({ onClose, onToggle }): ReactElement =
               </div>
             </div>
             <Button
-              disabled={!userInfo.country || !userInfo.profilePicture}
+              disabled={!userInfo.country || !userInfo.profileImage}
               className={`text-md block w-full cursor-pointer rounded bg-orange-500 px-8 py-2 text-center font-bold text-white hover:bg-orange-400 focus:outline-none ${
-                !userInfo.country || !userInfo.profilePicture ? 'cursor-not-allowed' : 'cursor-pointer'
+                !userInfo.country || !userInfo.profileImage ? 'cursor-not-allowed' : 'cursor-pointer'
               }`}
               label={`${isLoading ? 'SIGNUP IN PROGRESS...' : 'SIGNUP'}`}
               onClick={onRegisterUser}

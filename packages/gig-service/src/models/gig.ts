@@ -5,7 +5,7 @@ const gigSchema: Schema = new Schema(
   {
     sellerId: { type: mongoose.Schema.Types.ObjectId, index: true },
     username: { type: String, required: true },
-    profilePicture: { type: String, required: true },
+    profileImage: { type: String, required: true },
     email: { type: String, required: true },
     title: { type: String, required: true },
     description: { type: String, required: true },

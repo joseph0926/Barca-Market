@@ -56,7 +56,7 @@ const ProfileHeader: FC<IProfileHeaderProps> = ({ sellerProfile, showHeaderInfo,
         <div className="relative flex h-56 flex-col gap-x-4 gap-y-3 bg-white px-6 py-4 md:h-52 md:flex-row">
           <div className="flex h-20 w-20 justify-center self-center md:h-24 md:w-24 lg:h-36 lg:w-36">
             <LazyLoadImage
-              src={sellerProfile?.profilePicture}
+              src={sellerProfile?.profileImage}
               alt="Gig Image"
               className="h-full w-full rounded-full object-cover"
               placeholderSrc="https://placehold.co/330x220?text=Profile+Image"

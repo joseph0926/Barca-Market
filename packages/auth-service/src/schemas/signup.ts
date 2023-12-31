@@ -7,7 +7,7 @@ const signupSchema: ObjectSchema = joi.object().keys({
     'string.max': 'Username은 최대 12글자입니다.',
     'string.empty': 'Username은 필수 입력 필드입니다.',
   }),
-  email: joi.string().min(4).max(16).required().messages({
+  email: joi.string().email().required().messages({
     'string.base': 'Email mush be of type string',
     'string.email': '유효하지 않은 Email 형식입니다.',
     'string.empty': 'Email은 필수 입력 필드입니다.',

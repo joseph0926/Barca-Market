@@ -52,7 +52,7 @@ const GigCardDisplayItem: FC<IGigCardItems> = ({ gig, linkTarget, showEditIcon }
         </Link>
         <div className="relative flex items-center gap-2">
           <LazyLoadImage
-            src={gig.profilePicture}
+            src={gig.profileImage}
             alt="Profile image"
             className="h-7 w-8 rounded-full object-cover"
             wrapperClassName="bg-center"

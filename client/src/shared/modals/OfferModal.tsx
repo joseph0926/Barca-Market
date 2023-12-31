@@ -38,9 +38,9 @@ const OfferModal: FC<IModalProps> = ({ header, gigTitle, receiver, authUser, sin
         sellerId: singleMessage?.sellerId,
         buyerId: singleMessage?.buyerId,
         senderUsername: `${authUser?.username}`,
-        senderPicture: `${authUser?.profilePicture}`,
+        senderPicture: `${authUser?.profileImage}`,
         receiverUsername: receiver?.username,
-        receiverPicture: receiver?.profilePicture,
+        receiverPicture: receiver?.profileImage,
         isRead: false,
         hasOffer: true,
         offer: {

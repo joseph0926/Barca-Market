@@ -44,7 +44,7 @@ export interface ICertificate {
 export interface IPersonalInfoData {
   [key: string]: string;
   fullName: string;
-  profilePicture: string;
+  profileImage: string;
   description: string;
   responseTime: string;
   oneliner: string;
@@ -210,7 +210,7 @@ export interface ISellerDocument extends Record<string, SellerType> {
   fullName: string;
   username?: string;
   email?: string;
-  profilePicture?: string;
+  profileImage?: string;
   description: string;
   country: string;
   oneliner: string;

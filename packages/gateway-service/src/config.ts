@@ -30,6 +30,8 @@ class Config {
   public REVIEW_BASE_URL: string | undefined;
   public REDIS_HOST: string | undefined;
   public ELASTIC_SEARCH_URL: string | undefined;
+  public ELASTIC_USERNAME: string | undefined;
+  public ELASTIC_PASSWORD: string | undefined;
 
   constructor() {
     this.JWT_TOKEN = process.env.JWT_TOKEN || '1234';
@@ -46,6 +48,8 @@ class Config {
     this.REVIEW_BASE_URL = process.env.REVIEW_BASE_URL || '';
     this.REDIS_HOST = process.env.REDIS_HOST || '';
     this.ELASTIC_SEARCH_URL = process.env.ELASTIC_SEARCH_URL || '';
+    this.ELASTIC_USERNAME = process.env.ELASTIC_USERNAME || '';
+    this.ELASTIC_PASSWORD = process.env.ELASTIC_PASSWORD || '';
   }
 }
 

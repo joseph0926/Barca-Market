@@ -60,14 +60,14 @@ export interface IChatBoxProps {
 export interface IChatSellerProps {
   _id: string;
   username: string;
-  profilePicture: string;
+  profileImage: string;
   responseTime: number;
 }
 
 export interface IChatBuyerProps {
   _id: string;
   username: string;
-  profilePicture: string;
+  profileImage: string;
 }
 
 export interface IChatMessageProps {

@@ -25,13 +25,13 @@ const GigSeller: FC = (): ReactElement => {
   const chatSeller: IChatSellerProps = {
     username: `${seller.username}`,
     _id: `${seller._id}`,
-    profilePicture: `${seller.profilePicture}`,
+    profileImage: `${seller.profileImage}`,
     responseTime: parseInt(`${seller.responseTime}`)
   };
   const chatBuyer: IChatBuyerProps = {
     username: `${buyer.username}`,
     _id: `${buyer._id}`,
-    profilePicture: `${buyer.profilePicture}`
+    profileImage: `${buyer.profileImage}`
   };
 
   return (
@@ -43,7 +43,7 @@ const GigSeller: FC = (): ReactElement => {
         </div>
         <div className="mb-0 px-4 pt-2">
           <div className="flex flex-col gap-y-3 md:flex-row md:gap-x-2">
-            <img className="flex h-24 w-24 self-center rounded-full object-cover" src={gig.profilePicture} alt="" />
+            <img className="flex h-24 w-24 self-center rounded-full object-cover" src={gig.profileImage} alt="" />
             <div className="flex flex-col self-center">
               <Link
                 to={`/seller_profile/${lowerCase(`${gig.username}`)}/${gig.sellerId}/view`}

@@ -28,7 +28,7 @@ const AddSeller: FC = (): ReactElement => {
   const buyer = useAppSelector((state: IReduxState) => state.buyer);
   const [personalInfo, setPersonalInfo] = useState<IPersonalInfoData>({
     fullName: '',
-    profilePicture: `${authUser.profilePicture}`,
+    profileImage: `${authUser.profileImage}`,
     description: '',
     responseTime: '',
     oneliner: ''
@@ -94,7 +94,7 @@ const AddSeller: FC = (): ReactElement => {
         const sellerData: ISellerDocument = {
           email: `${authUser.email}`,
           profilePublicId: `${authUser.profilePublicId}`,
-          profilePicture: `${authUser.profilePicture}`,
+          profileImage: `${authUser.profileImage}`,
           fullName: personalInfo.fullName,
           description: personalInfo.description,
           country: `${authUser.country}`,

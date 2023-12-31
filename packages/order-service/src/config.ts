@@ -29,6 +29,8 @@ class Config {
   public CLIENT_URL: string | undefined;
   public STRIPE_API_KEY: string | undefined;
   public ELASTIC_SEARCH_URL: string | undefined;
+  public ELASTIC_USERNAME: string | undefined;
+  public ELASTIC_PASSWORD: string | undefined;
 
   constructor() {
     this.DATABASE_URL = process.env.DATABASE_URL || '';
@@ -43,6 +45,8 @@ class Config {
     this.CLIENT_URL = process.env.CLIENT_URL || '';
     this.STRIPE_API_KEY = process.env.STRIPE_API_KEY || '';
     this.ELASTIC_SEARCH_URL = process.env.ELASTIC_SEARCH_URL || '';
+    this.ELASTIC_USERNAME = process.env.ELASTIC_USERNAME || '';
+    this.ELASTIC_PASSWORD = process.env.ELASTIC_PASSWORD || '';
   }
 
   public cloudinaryConfig(): void {

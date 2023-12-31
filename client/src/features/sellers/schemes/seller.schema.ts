@@ -4,7 +4,7 @@ import { IEducation, IExperience, ILanguage, IPersonalInfoData } from '../interf
 
 const personalInfoSchema: ObjectSchema<IPersonalInfoData> = object({
   fullName: string().required({ fullName: 'Fullname is a required field' }),
-  profilePicture: string().required({ profilePicture: 'Profile picture is a required field' }),
+  profileImage: string().required({ profileImage: 'Profile picture is a required field' }),
   description: string().required({ description: 'Description is a required field' }),
   responseTime: string().required({ responseTime: 'Response time is a required field' }),
   oneliner: string().required({ oneliner: 'Oneliner is a required field' })

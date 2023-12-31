@@ -80,7 +80,7 @@ const DashboardHeader: FC = (): ReactElement => {
                         label={
                           <>
                             <LazyLoadImage
-                              src={seller?.profilePicture}
+                              src={seller?.profileImage}
                               alt="profile image"
                               className="h-7 w-7 rounded-full object-cover"
                               placeholderSrc="https://placehold.co/330x220?text=Profile+Image"

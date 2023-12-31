@@ -47,7 +47,7 @@ const GigView: FC = (): ReactElement => {
         <main className="max-w-8xl container mx-auto mt-8">
           <h2 className="mb-4 px-4 text-xl font-bold text-[#404145] lg:text-3xl">{gig.current.title}</h2>
           <div className="mb-4 flex flex-row gap-x-2 px-4">
-            <img className="flex h-8 w-8 self-center rounded-full object-cover" src={gig.current.profilePicture} alt="" />
+            <img className="flex h-8 w-8 self-center rounded-full object-cover" src={gig.current.profileImage} alt="" />
             <span className="flex self-center font-extrabold">{gig.current.username}</span>
             <>
               {gig.current.ratingSum && gig.current.ratingsCount && gig.current.ratingSum >= 1 && gig.current.ratingsCount >= 1 ? (
