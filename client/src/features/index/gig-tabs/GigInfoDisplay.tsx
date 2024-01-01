@@ -3,7 +3,6 @@ import { FaArrowRight, FaCircleNotch, FaRegClock } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
 import StickyBox from 'react-sticky-box';
 import RegisterModal from '@/features/auth/components/Register';
-import { useGetAuthGigByIdQuery } from '@/features/auth/services/auth.service';
 import { ISellerGig } from '@/features/gigs/interfaces/gig.interface';
 import Button from '@/shared/Button';
 import Header from '@/shared/header/Header';
@@ -13,14 +12,16 @@ import StarRating from '@/shared/StarRating';
 import { emptyGigData } from '@/shared/utils/static-data';
 import { rating, shortenLargeNumbers } from '@/shared/utils/utils.service';
 import { v4 as uuidv4 } from 'uuid';
+import { useAuthQuery } from '@/features/auth/hooks/useAuthQuery';
 
 const GigInfoDisplay: FC = (): ReactElement => {
   const [showRegisterModal, setShowRegisterModal] = useState<boolean>(false);
   const { gigId } = useParams<string>();
-  const { data, isSuccess, isLoading } = useGetAuthGigByIdQuery(`${gigId}`);
+
+  const { gigByIdData, isGigByIdLoading, isGigByIdSuccess } = useAuthQuery(`${gigId}`);
   const gig = useRef<ISellerGig>(emptyGigData);
-  if (isSuccess) {
-    gig.current = data.gig as ISellerGig;
+  if (isGigByIdSuccess) {
+    gig.current = gigByIdData?.gig as ISellerGig;
   }
 
   return (
@@ -37,7 +38,7 @@ const GigInfoDisplay: FC = (): ReactElement => {
       )}
       <div className="flex w-screen flex-col">
         <Header navClass="navbar peer-checked:navbar-active relative z-20 w-full border-b border-gray-100 bg-white/90 shadow-2xl shadow-gray-600/5 backdrop-blur dark:border-gray-800 dark:bg-gray-900/80 dark:shadow-none" />
-        {isLoading ? (
+        {isGigByIdLoading ? (
           <CircularPageLoader />
         ) : (
           <div className="relative m-auto mt-8 min-h-screen w-screen px-6 xl:container md:px-12 lg:px-6">
@@ -67,14 +68,14 @@ const GigInfoDisplay: FC = (): ReactElement => {
               <div className="flex flex-wrap">
                 <div className="order-last flex w-full flex-col p-4 lg:order-first lg:w-2/3">
                   <div className="relative flex max-h-[600px] cursor-pointer justify-center bg-[#F5F5F5]">
-                    {!isLoading && isSuccess && (
+                    {!isGigByIdLoading && isGigByIdSuccess && (
                       <img
                         src={gig.current.coverImage}
                         alt="Gig Image"
                         className="object-contains h-full w-full transition-all duration-500 hover:scale-105"
                       />
                     )}
-                    {isLoading && !isSuccess && (
+                    {isGigByIdLoading && !isGigByIdSuccess && (
                       <div className="object-contains flex h-[600px] w-full transition-all duration-500 hover:scale-105">
                         <FaCircleNotch className="mr-3 flex h-10 w-full animate-spin self-center" size={40} color="#ff6450" />
                       </div>

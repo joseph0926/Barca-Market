@@ -7,7 +7,7 @@ export interface IAuthUser {
   email: string | null;
   emailVerificationToken: string | null;
   emailVerified: boolean | null;
-  id: number | null;
+  id: string | null;
   passwordResetExpires: Date | null;
   passwordResetToken: null | null;
   profileImage: string | null;
@@ -16,7 +16,7 @@ export interface IAuthUser {
 }
 
 export interface IAuthDocument {
-  id?: number;
+  id?: string;
   profilePublicId?: string;
   username?: string;
   email?: string;

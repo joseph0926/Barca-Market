@@ -18,9 +18,11 @@ import { ISignUpPayload } from '@/features/auth/interfaces/auth.interface';
 import { addAuthUser } from '@/features/auth/reducers/auth.reducer';
 import { updateLogout } from '@/features/auth/reducers/logout.reducer';
 import { registerUserSchema } from '@/features/auth/schemes/auth.schema';
-import { useSignUpMutation } from '@/features/auth/services/auth.service';
+import { useAuthMutation } from '../hooks/useAuthMutation';
 
 const RegisterModal: FC<IModalBgProps> = ({ onClose, onToggle }): ReactElement => {
+  const { isSignupLoading, signupMutation } = useAuthMutation();
+
   const [step, setStep] = useState<number>(1);
   const [alertMessage, setAlertMessage] = useState<string>('');
   const [country, setCountry] = useState<string>('Select Country');
@@ -37,7 +39,6 @@ const RegisterModal: FC<IModalBgProps> = ({ onClose, onToggle }): ReactElement =
   const fileInputRef = useRef<HTMLInputElement>(null);
   const dispatch = useAppDispatch();
   const [schemaValidation] = useAuthSchema({ schema: registerUserSchema, userInfo });
-  const [signUp, { isLoading }] = useSignUpMutation();
 
   const handleFileChange = async (event: ChangeEvent): Promise<void> => {
     const target: HTMLInputElement = event.target as HTMLInputElement;
@@ -57,7 +58,7 @@ const RegisterModal: FC<IModalBgProps> = ({ onClose, onToggle }): ReactElement =
     try {
       const isValid: boolean = await schemaValidation();
       if (isValid) {
-        const result: IResponse = await signUp(userInfo).unwrap();
+        const result: IResponse = await signupMutation(userInfo);
         setAlertMessage('');
         dispatch(addAuthUser({ authInfo: result.user }));
         dispatch(updateLogout(false));
@@ -250,7 +251,7 @@ const RegisterModal: FC<IModalBgProps> = ({ onClose, onToggle }): ReactElement =
               className={`text-md block w-full cursor-pointer rounded bg-orange-500 px-8 py-2 text-center font-bold text-white hover:bg-orange-400 focus:outline-none ${
                 !userInfo.country || !userInfo.profileImage ? 'cursor-not-allowed' : 'cursor-pointer'
               }`}
-              label={`${isLoading ? 'SIGNUP IN PROGRESS...' : 'SIGNUP'}`}
+              label={`${isSignupLoading ? 'SIGNUP IN PROGRESS...' : 'SIGNUP'}`}
               onClick={onRegisterUser}
             />
           </div>

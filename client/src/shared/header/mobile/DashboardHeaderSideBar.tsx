@@ -1,21 +1,23 @@
 import { FC, MouseEvent, ReactElement } from 'react';
 import { Link, NavigateFunction, useNavigate } from 'react-router-dom';
-import { applicationLogout, lowerCase } from '@/shared/utils/utils.service';
+import { lowerCase } from '@/shared/utils/utils.service';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { IReduxState } from '@/store/store.interface';
 
-import { IHeaderSideBarProps } from '../@/shared/interfaces/header.interface';
+import { IHeaderSideBarProps } from '@/shared/interfaces/header.interface';
 import { updateCategoryContainer } from '@/shared/header/reducers/category.reducer';
 import { updateHeader } from '@/shared/header/reducers/header.reducer';
+import { useAuthLogout } from '@/features/auth/hooks/useAuthLogout';
 
 const DashboardHeaderSideBar: FC<IHeaderSideBarProps> = ({ setOpenSidebar }): ReactElement => {
+  const { logoutFn } = useAuthLogout();
   const authUser = useAppSelector((state: IReduxState) => state.authUser);
   const seller = useAppSelector((state: IReduxState) => state.seller);
   const dispatch = useAppDispatch();
   const navigate: NavigateFunction = useNavigate();
 
   const onLogout = async () => {
-    applicationLogout(dispatch, navigate);
+    logoutFn(dispatch, navigate);
   };
 
   return (

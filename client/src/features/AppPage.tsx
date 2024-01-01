@@ -2,28 +2,31 @@ import { FC, ReactElement, useCallback, useEffect, useState } from 'react';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import HomeHeader from '@/shared/header/HomeHeader';
 import CircularPageLoader from '@/shared/CircularPageLoader';
-import { applicationLogout, getDataFromLocalStorage, saveToSessionStorage } from '@/shared/utils/utils.service';
+import { getDataFromLocalStorage, saveToSessionStorage } from '@/shared/utils/utils.service';
 import { socket } from 'src/sockets/socket.service';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { IReduxState } from '@/store/store.interface';
 
 import { addAuthUser } from './auth/reducers/auth.reducer';
-import { useCheckCurrentUserQuery } from './auth/services/auth.service';
 import { addBuyer } from './buyer/reducers/buyer.reducer';
 import { useGetCurrentBuyerByUsernameQuery } from './buyer/services/buyer.service';
 import Home from './home/components/Home';
 import Index from './index/Index';
 import { addSeller } from './sellers/reducers/seller.reducer';
 import { useGetSellerByUsernameQuery } from './sellers/services/seller.service';
+import { useAuthLogout } from './auth/hooks/useAuthLogout';
+import { useAuthQuery } from './auth/hooks/useAuthQuery';
 
 const AppPage: FC = (): ReactElement => {
+  const { logoutFn } = useAuthLogout();
+  const { currentUserData, currentUserError } = useAuthQuery();
+
   const authUser = useAppSelector((state: IReduxState) => state.authUser);
   const appLogout = useAppSelector((state: IReduxState) => state.logout);
   const showCategoryContainer = useAppSelector((state: IReduxState) => state.showCategoryContainer);
   const [tokenIsValid, setTokenIsValid] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const navigate: NavigateFunction = useNavigate();
-  const { data: currentUserData, isError } = useCheckCurrentUserQuery(undefined, { skip: authUser.id === null });
   const { data: buyerData, isLoading: isBuyerLoading } = useGetCurrentBuyerByUsernameQuery(undefined, { skip: authUser.id === null });
   const { data: sellerData, isLoading: isSellerLoading } = useGetSellerByUsernameQuery(`${authUser.username}`, {
     skip: authUser.id === null
@@ -51,11 +54,11 @@ const AppPage: FC = (): ReactElement => {
   }, [currentUserData, navigate, dispatch, appLogout, authUser.username, buyerData, sellerData]);
 
   const logoutUser = useCallback(async () => {
-    if ((!currentUserData && appLogout) || isError) {
+    if ((!currentUserData && appLogout) || currentUserError) {
       setTokenIsValid(false);
-      applicationLogout(dispatch, navigate);
+      logoutFn(dispatch, navigate);
     }
-  }, [currentUserData, dispatch, navigate, appLogout, isError]);
+  }, [currentUserData, dispatch, navigate, appLogout, currentUserError]);
 
   useEffect(() => {
     checkUser();

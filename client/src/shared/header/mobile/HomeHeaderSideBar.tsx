@@ -2,17 +2,19 @@ import { Transition } from '@headlessui/react';
 import { FC, MouseEvent, ReactElement, useState } from 'react';
 import { FaAngleDown, FaAngleRight, FaAngleUp } from 'react-icons/fa';
 import { Link, NavigateFunction, useNavigate } from 'react-router-dom';
-import { applicationLogout, categories, lowerCase, replaceSpacesWithDash } from '@/shared/utils/utils.service';
+import { categories, lowerCase, replaceSpacesWithDash } from '@/shared/utils/utils.service';
 import { socket } from '@/sockets/socket.service';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { IReduxState } from '@/store/store.interface';
 import { v4 as uuidv4 } from 'uuid';
 
-import { IHeaderSideBarProps, ISettings } from '../@/shared/interfaces/header.interface';
+import { IHeaderSideBarProps, ISettings } from '@/shared/interfaces/header.interface';
 import { updateCategoryContainer } from '@/shared/header/reducers/category.reducer';
 import { updateHeader } from '@/shared/header/reducers/header.reducer';
+import { useAuthLogout } from '@/features/auth/hooks/useAuthLogout';
 
 const HomeHeaderSideBar: FC<IHeaderSideBarProps> = ({ setOpenSidebar }): ReactElement => {
+  const { logoutFn } = useAuthLogout();
   const authUser = useAppSelector((state: IReduxState) => state.authUser);
   const seller = useAppSelector((state: IReduxState) => state.seller);
   const buyer = useAppSelector((state: IReduxState) => state.buyer);
@@ -39,7 +41,7 @@ const HomeHeaderSideBar: FC<IHeaderSideBarProps> = ({ setOpenSidebar }): ReactEl
   };
 
   const onLogout = (): void => {
-    applicationLogout(dispatch, navigate);
+    logoutFn(dispatch, navigate);
   };
 
   return (

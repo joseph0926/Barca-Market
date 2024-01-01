@@ -6,18 +6,19 @@ import { useAppDispatch } from '@/store/store';
 
 import { AUTH_FETCH_STATUS } from '@/features/auth/interfaces/auth.interface';
 import { addAuthUser } from '@/features/auth/reducers/auth.reducer';
-import { useVerifyEmailMutation } from '@/features/auth/services/auth.service';
+import { useAuthMutation } from '../hooks/useAuthMutation';
 
 const ConfirmEmail: FC = (): ReactElement => {
+  const {verifyEmailMutation} = useAuthMutation()
+
   const [alertMessage, setAlertMessage] = useState<string>('');
   const [status, setStatus] = useState<string>(AUTH_FETCH_STATUS.IDLE);
   const [searchParams] = useSearchParams({});
   const dispatch = useAppDispatch();
-  const [verifyEmail] = useVerifyEmailMutation();
 
   const onVerifyEmail = useCallback(async (): Promise<void> => {
     try {
-      const result: IResponse = await verifyEmail(`${searchParams.get('v_token')}`).unwrap();
+      const result: IResponse = await verifyEmailMutation(`${searchParams.get('v_token')}`);
       setAlertMessage('Email verified successfully.');
       setStatus(AUTH_FETCH_STATUS.SUCCESS);
       dispatch(addAuthUser({ authInfo: result.user }));
@@ -25,7 +26,7 @@ const ConfirmEmail: FC = (): ReactElement => {
       setStatus(AUTH_FETCH_STATUS.ERROR);
       setAlertMessage(error?.data.message);
     }
-  }, [dispatch, searchParams, verifyEmail]);
+  }, [dispatch, searchParams, verifyEmailMutation]);
 
   useEffect(() => {
     onVerifyEmail();

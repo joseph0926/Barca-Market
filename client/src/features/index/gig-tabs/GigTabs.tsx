@@ -1,22 +1,19 @@
 import { FC, ReactElement, useState } from 'react';
-import { useGetAuthGigsByCategoryQuery } from '@/features/auth/services/auth.service';
 import { ISellerGig } from '@/features/gigs/interfaces/gig.interface';
 import TopGigsView from '@/shared/gigs/TopGigsView';
 import { categories, lowerCase, replaceAmpersandAndDashWithSpace, replaceSpacesWithDash } from '@/shared/utils/utils.service';
 import { v4 as uuidv4 } from 'uuid';
+import { useAuthQuery } from '@/features/auth/hooks/useAuthQuery';
 
 const GigTabs: FC = (): ReactElement => {
   const [activeTab, setActiveTab] = useState<string>('Graphics & Design');
   const queryType = `query=${replaceAmpersandAndDashWithSpace(`${lowerCase(activeTab)}`)}`;
-  const { data, isSuccess } = useGetAuthGigsByCategoryQuery({
-    query: `${queryType}`,
-    from: '0',
-    size: '10',
-    type: 'forward'
-  });
+
+  const { isGigsByCategorySuccess, gigsByCategoryData } = useAuthQuery(`${queryType}`, '0', '10', 'forward');
+
   let categoryGigs: ISellerGig[] = [];
-  if (isSuccess) {
-    categoryGigs = data.gigs as ISellerGig[];
+  if (isGigsByCategorySuccess) {
+    categoryGigs = gigsByCategoryData?.gigs as ISellerGig[];
   }
 
   return (

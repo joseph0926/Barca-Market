@@ -1,15 +1,10 @@
-import { Dispatch } from '@reduxjs/toolkit';
 import axios, { AxiosResponse } from 'axios';
 import countries, { LocalizedCountryNames } from 'i18n-iso-countries';
 import enLocale from 'i18n-iso-countries/langs/en.json';
 import { filter } from 'lodash';
 import millify from 'millify';
-import { NavigateFunction } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { logout } from '@/features/auth/reducers/logout.reducer';
-import { authApi } from '@/features/auth/services/auth.service';
 import { IOrderDocument } from '@/features/order/interfaces/order.interface';
-import { api } from '@/store/api';
 
 countries.registerLocale(enLocale);
 
@@ -101,19 +96,6 @@ export const getDataFromLocalStorage = (key: string) => {
 
 export const deleteFromLocalStorage = (key: string): void => {
   window.localStorage.removeItem(key);
-};
-
-export const applicationLogout = (dispatch: Dispatch, navigate: NavigateFunction) => {
-  const loggedInUsername: string = getDataFromSessionStorage('loggedInuser');
-  dispatch(logout({}));
-  if (loggedInUsername) {
-    dispatch(authApi.endpoints.removeLoggedInUser.initiate(`${loggedInUsername}`, { track: false }) as never);
-  }
-  dispatch(api.util.resetApiState());
-  dispatch(authApi.endpoints.logout.initiate() as never);
-  saveToSessionStorage(JSON.stringify(false), JSON.stringify(''));
-  deleteFromLocalStorage('becomeASeller');
-  navigate('/');
 };
 
 export const isFetchBaseQueryError = (error: unknown): boolean => {

@@ -1,13 +1,15 @@
 import { FC, ReactElement } from 'react';
 import { Link, NavigateFunction, useNavigate } from 'react-router-dom';
-import { applicationLogout, lowerCase } from '@/shared/utils/utils.service';
+import { lowerCase } from '@/shared/utils/utils.service';
 import { useAppDispatch } from '@/store/store';
 
 import { IHomeHeaderProps } from '@/shared/interfaces/header.interface';
 import { updateCategoryContainer } from './reducers/category.reducer';
 import { updateHeader } from './reducers/header.reducer';
+import { useAuthLogout } from '@/features/auth/hooks/useAuthLogout';
 
 const SettingsDropdown: FC<IHomeHeaderProps> = ({ seller, authUser, buyer, type, setIsDropdownOpen }): ReactElement => {
+  const { logoutFn } = useAuthLogout();
   const navigate: NavigateFunction = useNavigate();
   const dispatch = useAppDispatch();
 
@@ -15,7 +17,7 @@ const SettingsDropdown: FC<IHomeHeaderProps> = ({ seller, authUser, buyer, type,
     if (setIsDropdownOpen) {
       setIsDropdownOpen(false);
     }
-    applicationLogout(dispatch, navigate);
+    logoutFn(dispatch, navigate);
   };
 
   return (

@@ -4,7 +4,6 @@ import { FC, ReactElement, useEffect, useRef, useState } from 'react';
 import { FaAngleLeft, FaAngleRight, FaBars, FaRegBell, FaRegEnvelope, FaTimes } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import { addAuthUser } from '@/features/auth/reducers/auth.reducer';
-import { useResendEmailMutation } from '@/features/auth/services/auth.service';
 import { IMessageDocument } from '@/features/chat/interfaces/chat.interface';
 import { IOrderNotifcation } from '@/features/order/interfaces/order.interface';
 import { useGetNotificationsByIdQuery } from '@/features/order/services/notification.service';
@@ -29,8 +28,11 @@ import MobileHeaderSearchInput from '@/shared/header/mobile/MobileHeaderSearchIn
 import NotificationDropdown from '@/shared/header/NotificationDropdown';
 import OrderDropdown from '@/shared/header/OrderDropdown';
 import SettingsDropdown from '@/shared/header/SettingsDropdown';
+import { useAuthMutation } from '@/features/auth/hooks/useAuthMutation';
 
 const HomeHeader: FC<IHomeHeaderProps> = ({ showCategoryContainer }): ReactElement => {
+  const { resendEmailMutation } = useAuthMutation();
+
   const authUser = useAppSelector((state: IReduxState) => state.authUser);
   const seller = useAppSelector((state: IReduxState) => state.seller);
   const logout = useAppSelector((state: IReduxState) => state.logout);
@@ -45,7 +47,6 @@ const HomeHeader: FC<IHomeHeaderProps> = ({ showCategoryContainer }): ReactEleme
   const [authUsername, setAuthUsername] = useState<string>('');
   const dispatch = useAppDispatch();
   const { data, isSuccess } = useGetNotificationsByIdQuery(`${authUser.username}`, { refetchOnMountOrArgChange: true });
-  const [resendEmail] = useResendEmailMutation();
 
   const [isSettingsDropdown, setIsSettingsDropdown] = useDetectOutsideClick(settingsDropdownRef, false);
   const [isMessageDropdownOpen, setIsMessageDropdownOpen] = useDetectOutsideClick(messageDropdownRef, false);
@@ -54,7 +55,7 @@ const HomeHeader: FC<IHomeHeaderProps> = ({ showCategoryContainer }): ReactEleme
 
   const onResendEmail = async (): Promise<void> => {
     try {
-      const result: IResponse = await resendEmail({ userId: authUser.id as number, email: `${authUser.email}` }).unwrap();
+      const result: IResponse = await resendEmailMutation({ userId: `${authUser.id}`, email: `${authUser.email}` });
       dispatch(addAuthUser({ authInfo: result.user }));
       showSuccessToast('Email sent successfully.');
     } catch (error) {

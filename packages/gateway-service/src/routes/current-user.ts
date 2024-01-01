@@ -26,6 +26,9 @@ class CurrentUserRoutes {
       authMiddleware.checkAuthentication,
       CurrentUserController.prototype.resendEmail,
     );
+    this.router.get('/auth/logged-in-user', authMiddleware.checkAuthentication, CurrentUserController.prototype.getLoggedInUsers);
+    this.router.delete('/auth/logged-in-user/:username', authMiddleware.checkAuthentication, CurrentUserController.prototype.removeLoggedInUser);
+    
     return this.router;
   }
 }

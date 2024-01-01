@@ -16,9 +16,11 @@ import { ISignInPayload } from '@/features/auth/interfaces/auth.interface';
 import { addAuthUser } from '@/features/auth/reducers/auth.reducer';
 import { updateLogout } from '@/features/auth/reducers/logout.reducer';
 import { loginUserSchema } from '@/features/auth/schemes/auth.schema';
-import { useSignInMutation } from '@/features/auth/services/auth.service';
+import { useAuthMutation } from '../hooks/useAuthMutation';
 
 const LoginModal: FC<IModalBgProps> = ({ onClose, onToggle, onTogglePassword }): ReactElement => {
+  const { signinMutation, isSigninLoading } = useAuthMutation();
+
   const [alertMessage, setAlertMessage] = useState<string>('');
   const [passwordType, setPasswordType] = useState<string>('password');
   const [userInfo, setUserInfo] = useState<ISignInPayload>({
@@ -27,13 +29,12 @@ const LoginModal: FC<IModalBgProps> = ({ onClose, onToggle, onTogglePassword }):
   });
   const dispatch = useAppDispatch();
   const [schemaValidation] = useAuthSchema({ schema: loginUserSchema, userInfo });
-  const [signIn, { isLoading }] = useSignInMutation();
 
   const onLoginUser = async (): Promise<void> => {
     try {
       const isValid: boolean = await schemaValidation();
       if (isValid) {
-        const result: IResponse = await signIn(userInfo).unwrap();
+        const result: IResponse = await signinMutation(userInfo);
         setAlertMessage('');
         dispatch(addAuthUser({ authInfo: result.user }));
         dispatch(updateLogout(false));
@@ -121,7 +122,7 @@ const LoginModal: FC<IModalBgProps> = ({ onClose, onToggle, onTogglePassword }):
               className={`text-md block w-full cursor-pointer rounded bg-orange-500 px-8 py-2 text-center font-bold text-white hover:bg-orange-400 focus:outline-none ${
                 !userInfo.username || !userInfo.password ? 'cursor-not-allowed' : 'cursor-pointer'
               }`}
-              label={`${isLoading ? 'LOGIN IN PROGRESS...' : 'LOGIN'}`}
+              label={`${isSigninLoading ? 'LOGIN IN PROGRESS...' : 'LOGIN'}`}
               onClick={onLoginUser}
             />
           </div>

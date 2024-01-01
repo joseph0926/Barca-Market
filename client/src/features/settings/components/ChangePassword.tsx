@@ -5,10 +5,11 @@ import Alert from '@/shared/Alert';
 import Button from '@/shared/Button';
 import Input from '@/shared/Input';
 import { PASSWORD_TYPE } from '@/shared/utils/static-data';
-import { applicationLogout, isFetchBaseQueryError, showErrorToast } from '@/shared/utils/utils.service';
+import { isFetchBaseQueryError, showErrorToast } from '@/shared/utils/utils.service';
 import { useAppDispatch } from '@/store/store';
 
 import { useChangePasswordMutation } from '../services/settings.service';
+import { useAuthLogout } from '@/features/auth/hooks/useAuthLogout';
 
 interface IPasswordItem {
   currentPassword: string;
@@ -17,6 +18,7 @@ interface IPasswordItem {
 }
 
 const ChangePassword: FC = (): ReactElement => {
+  const { logoutFn } = useAuthLogout();
   const [passwordItem, setPasswordItem] = useState<IPasswordItem>({
     currentPassword: '',
     newPassword: '',
@@ -32,7 +34,7 @@ const ChangePassword: FC = (): ReactElement => {
       await changePassword({ currentPassword: passwordItem.currentPassword, newPassword: passwordItem.newPassword }).unwrap();
       setAlertMessage('Password updated successfully.');
       setTimeout(() => {
-        applicationLogout(dispatch, navigate);
+        logoutFn(dispatch, navigate);
       }, 3000);
     } catch (error) {
       if (isFetchBaseQueryError(error)) {

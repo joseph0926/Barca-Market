@@ -1,6 +1,7 @@
 import { FC, ReactElement, useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import AppRouter from './AppRoutes';
 import useBeforeWindowUnload from '@/hooks/useBeforeWindowUnload';
@@ -9,6 +10,8 @@ import { socketService } from './sockets/socket.service';
 const App: FC = (): ReactElement => {
   useBeforeWindowUnload();
 
+  const queryClient = new QueryClient();
+
   useEffect(() => {
     socketService.setupSocketConnection();
   }, []);
@@ -16,10 +19,12 @@ const App: FC = (): ReactElement => {
   return (
     <>
       <BrowserRouter>
-        <div className="relative flex min-h-screen w-screen flex-col">
-          <AppRouter />
-          <ToastContainer />
-        </div>
+        <QueryClientProvider client={queryClient}>
+          <div className="relative flex min-h-screen w-screen flex-col">
+            <AppRouter />
+            <ToastContainer />
+          </div>
+        </QueryClientProvider>
       </BrowserRouter>
     </>
   );
