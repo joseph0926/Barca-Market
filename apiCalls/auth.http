@@ -1,0 +1,63 @@
+@host = http://localhost:4000/api/gateway/v1/auth
+
+### Sign Up
+POST {{host}}/signup
+Content-Type: application/json
+
+{
+    "username": "testuser",
+    "password": "password123",
+    "email": "test@example.com",
+    "country": "KOR",
+    "profileImage": "https://upload.wikimedia.org/wikipedia/commons/b/b4/Lionel-Messi-Argentina-2022-FIFA-World-Cup_%28cropped%29.jpg"
+}
+
+### Sign In
+POST {{host}}/signin
+Content-Type: application/json
+
+{
+    "username": "testuser",
+    "password": "password123"
+}
+
+### Verify Email
+PUT {{host}}/verify-email
+Content-Type: application/json
+
+{
+    "token": "verificationToken"
+}
+
+### Forgot Password
+PUT {{host}}/forgot-password
+Content-Type: application/json
+
+{
+    "email": "test@example.com"
+}
+
+### Reset Password
+PUT {{host}}/reset-password/someToken
+Content-Type: application/json
+
+{
+    "password": "newPassword123",
+    "confirmPassword": "newPassword123"
+}
+
+### CurrentUser
+GET {{host}}/currentuser
+Content-Type: application/json
+
+{
+    
+}
+
+### CurrentUser
+POST {{host}}/signout
+Content-Type: application/json
+
+{
+    
+}

@@ -2,7 +2,7 @@ import { FC, ReactElement, useCallback, useEffect, useState } from 'react';
 import { NavigateFunction, useNavigate } from 'react-router-dom';
 import HomeHeader from '@/shared/header/HomeHeader';
 import CircularPageLoader from '@/shared/CircularPageLoader';
-import { getDataFromLocalStorage, saveToSessionStorage } from '@/shared/utils/utils.service';
+import { getDataFromLocalStorage, getDataFromSessionStorage, saveToSessionStorage } from '@/shared/utils/utils.service';
 import { socket } from 'src/sockets/socket.service';
 import { useAppDispatch, useAppSelector } from '@/store/store';
 import { IReduxState } from '@/store/store.interface';
@@ -19,7 +19,7 @@ import { useAuthQuery } from './auth/hooks/useAuthQuery';
 
 const AppPage: FC = (): ReactElement => {
   const { logoutFn } = useAuthLogout();
-  const { currentUserData, currentUserError } = useAuthQuery();
+  const { currentUserData } = useAuthQuery();
 
   const authUser = useAppSelector((state: IReduxState) => state.authUser);
   const appLogout = useAppSelector((state: IReduxState) => state.logout);
@@ -53,12 +53,13 @@ const AppPage: FC = (): ReactElement => {
     }
   }, [currentUserData, navigate, dispatch, appLogout, authUser.username, buyerData, sellerData]);
 
+  const isLoggedIn = getDataFromSessionStorage('isLoggedIn');
   const logoutUser = useCallback(async () => {
-    if ((!currentUserData && appLogout) || currentUserError) {
+    if (!isLoggedIn) {
       setTokenIsValid(false);
       logoutFn(dispatch, navigate);
     }
-  }, [currentUserData, dispatch, navigate, appLogout, currentUserError]);
+  }, [dispatch, navigate, isLoggedIn]);
 
   useEffect(() => {
     checkUser();

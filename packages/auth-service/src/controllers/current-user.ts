@@ -18,7 +18,7 @@ export const currentUser = async (
 ): Promise<void> => {
   let user = null;
 
-  const existingUser = await getAuthUserById(req.currentUser!.id);
+  const existingUser = await getAuthUserById(req.currentUser!.userId);
   if (existingUser && Object.keys(existingUser).length) {
     user = existingUser;
   }

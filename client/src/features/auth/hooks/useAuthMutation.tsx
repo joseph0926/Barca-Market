@@ -5,27 +5,45 @@ import { ISignInPayload, ISignUpPayload } from '@/features/auth/interfaces/auth.
 
 export const useAuthMutation = () => {
   const { mutateAsync: signupMutation, isPending: isSignupLoading } = useMutation({
-    mutationFn: async (body: ISignUpPayload): Promise<IResponse> => await axiosInstance.post('/auth/signup', body)
+    mutationFn: async (body: ISignUpPayload): Promise<IResponse> => {
+      const { data } = await axiosInstance.post('/auth/signup', body);
+      return data;
+    }
   });
 
   const { mutateAsync: signinMutation, isPending: isSigninLoading } = useMutation({
-    mutationFn: async (body: ISignInPayload): Promise<IResponse> => await axiosInstance.post('/auth/signin', body)
+    mutationFn: async (body: ISignInPayload): Promise<IResponse> => {
+      const { data } = await axiosInstance.post('/auth/signin', body);
+      return data;
+    }
   });
 
   const { mutate: logoutMutation } = useMutation({
-    mutationFn: async () => await axiosInstance.post('/auth/signout')
+    mutationFn: async () => {
+      const { data } = await axiosInstance.post('/auth/signout');
+      return data;
+    }
   });
 
   const { mutate: removeLoggedInUserMutation } = useMutation({
-    mutationFn: async (username: string) => await axiosInstance.delete(`auth/logged-in-user/${username}`)
+    mutationFn: async (username: string) => {
+      const { data } = await axiosInstance.delete(`auth/logged-in-user/${username}`);
+      return data;
+    }
   });
 
   const { mutateAsync: resendEmailMutation } = useMutation({
-    mutationFn: async (data: { userId: string; email: string }): Promise<IResponse> => await axiosInstance.post('/auth/resend-email', data)
+    mutationFn: async (body: { userId: string; email: string }): Promise<IResponse> => {
+      const { data } = await axiosInstance.post('/auth/resend-email', body);
+      return data;
+    }
   });
 
   const { mutateAsync: verifyEmailMutation } = useMutation({
-    mutationFn: async (token: string): Promise<IResponse> => await axiosInstance.put('/auth/verify-email', { token })
+    mutationFn: async (token: string): Promise<IResponse> => {
+      const { data } = await axiosInstance.put('/auth/verify-email', { token });
+      return data;
+    }
   });
 
   return {

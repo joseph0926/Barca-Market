@@ -172,7 +172,6 @@ services:
     build:
       context: .
       dockerfile: ./packages/gateway-service/Dockerfile.dev
-    restart: always
     ports:
       - 4000:4000
     env_file: ./packages/gateway-service/.env
@@ -205,7 +204,6 @@ services:
     build:
       context: .
       dockerfile: ./packages/notification-service/Dockerfile.dev
-    restart: always
     ports:
       - 4001:4001
     env_file: ./packages/notification-service/.env
@@ -229,7 +227,6 @@ services:
     build:
       context: .
       dockerfile: ./packages/auth-service/Dockerfile.dev
-    restart: always
     ports:
       - 4002:4002
     env_file: ./packages/auth-service/.env
@@ -259,7 +256,6 @@ services:
     build:
       context: .
       dockerfile: ./packages/user-service/Dockerfile.dev
-    restart: always
     ports:
       - 4003:4003
     env_file: ./packages/user-service/.env
@@ -289,7 +285,6 @@ services:
     build:
       context: .
       dockerfile: ./packages/gig-service/Dockerfile.dev
-    restart: always
     ports:
       - 4004:4004
     env_file: ./packages/gig-service/.env
@@ -319,7 +314,6 @@ services:
     build:
       context: .
       dockerfile: ./packages/chat-service/Dockerfile.dev
-    restart: always
     ports:
       - 4005:4005
     env_file: ./packages/chat-service/.env
@@ -348,7 +342,6 @@ services:
     build:
       context: .
       dockerfile: ./packages/order-service/Dockerfile.dev
-    restart: always
     ports:
       - 4006:4006
     env_file: ./packages/order-service/.env
@@ -379,7 +372,6 @@ services:
     build:
       context: .
       dockerfile: ./packages/review-service/Dockerfile.dev
-    restart: always
     ports:
       - 4007:4007
     env_file: ./packages/review-service/.env
