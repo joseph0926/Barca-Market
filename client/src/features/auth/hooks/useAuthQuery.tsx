@@ -17,7 +17,7 @@ export const useAuthQuery = (query?: string, from?: string, size?: string, type?
     isSuccess: isGigsByCategorySuccess,
     isError: isGigsByCategoryError
   } = useQuery({
-    queryKey: ['gigUser'],
+    queryKey: ['gigUser', type],
     queryFn: async (): Promise<IResponse> => {
       const { data } = await axiosInstance.get(`/gig/search/gig/${from}/${size}/${type}?${query}`);
       return data;
@@ -30,7 +30,7 @@ export const useAuthQuery = (query?: string, from?: string, size?: string, type?
     isPending: isGigByIdLoading,
     isSuccess: isGigByIdSuccess
   } = useQuery({
-    queryKey: ['gigUser'],
+    queryKey: ['gigUser', gigId],
     queryFn: async (): Promise<IResponse> => {
       const { data } = await axiosInstance.get(`/gig/search/gig/${gigId}`);
       return data;

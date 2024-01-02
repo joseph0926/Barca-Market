@@ -18,10 +18,10 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { ISellerDocument } from '../../interfaces/seller.interface';
 import { addSeller } from '../../reducers/seller.reducer';
-import { useUpdateSellerMutation } from '../../services/seller.service';
 import ProfileHeader from './components/ProfileHeader';
 import ProfileTabs from './components/ProfileTabs';
 import SellerOverview from './components/SellerOverview';
+import { useSellerMutation } from '../../hooks/useSellerMutation';
 
 const CurrentSellerProfile: FC = (): ReactElement => {
   const seller = useAppSelector((state: IReduxState) => state.seller);
@@ -32,7 +32,8 @@ const CurrentSellerProfile: FC = (): ReactElement => {
   const dispatch = useAppDispatch();
   const { data, isSuccess: isSellerGigSuccess, isLoading: isSellerGigLoading } = useGetGigsBySellerIdQuery(`${sellerId}`);
   const { data: sellerData, isSuccess: isGigReviewSuccess, isLoading: isGigReviewLoading } = useGetReviewsBySellerIdQuery(`${sellerId}`);
-  const [updateSeller, { isLoading }] = useUpdateSellerMutation();
+
+  const { updateSellerMutation, isUpdateSellerMutation } = useSellerMutation();
   let reviews: IReviewDocument[] = [];
   if (isGigReviewSuccess) {
     reviews = sellerData.reviews as IReviewDocument[];
@@ -42,7 +43,7 @@ const CurrentSellerProfile: FC = (): ReactElement => {
 
   const onUpdateSeller = async (): Promise<void> => {
     try {
-      const response: IResponse = await updateSeller({ sellerId: `${sellerId}`, seller: sellerProfile }).unwrap();
+      const response: IResponse = await updateSellerMutation({ sellerId: `${sellerId}`, seller: sellerProfile });
       dispatch(addSeller(response.seller));
       setSellerProfile(response.seller as ISellerDocument);
       setShowEdit(false);
@@ -60,7 +61,7 @@ const CurrentSellerProfile: FC = (): ReactElement => {
   return (
     <div className="relative w-full pb-6">
       <Breadcrumb breadCrumbItems={['Seller', `${seller.username}`]} />
-      {isLoading || isDataLoading ? (
+      {isUpdateSellerMutation || isDataLoading ? (
         <CircularPageLoader />
       ) : (
         <div className="container mx-auto px-2 md:px-0">

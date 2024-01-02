@@ -7,11 +7,11 @@ import { useGetOrdersBySellerIdQuery } from '@/features/order/services/order.ser
 import DashboardHeader from '@/shared/header/DashboardHeader';
 
 import { ISellerDocument } from '../../interfaces/seller.interface';
-import { useGetSellerByIdQuery } from '../../services/seller.service';
+import { useSellerQuery } from '../../hooks/useSellerQuery';
 
 const Seller: FC = (): ReactElement => {
   const { sellerId } = useParams<string>();
-  const { data, isSuccess } = useGetSellerByIdQuery(`${sellerId}`);
+  const { sellerById, isSellerByIdSuccess } = useSellerQuery(`${sellerId}`);
   const { data: sellerGigs, isSuccess: isSellerGigsSuccess } = useGetGigsBySellerIdQuery(`${sellerId}`);
   const { data: sellerPausedGigs, isSuccess: isSellerPausedGigsSuccess } = useGetSellerPausedGigsQuery(`${sellerId}`);
   const { data: sellerOrders, isSuccess: isSellerOrdersSuccess } = useGetOrdersBySellerIdQuery(`${sellerId}`);
@@ -20,8 +20,8 @@ const Seller: FC = (): ReactElement => {
   let orders: IOrderDocument[] = [];
   let seller: ISellerDocument | undefined = undefined;
 
-  if (isSuccess) {
-    seller = data?.seller as ISellerDocument;
+  if (isSellerByIdSuccess) {
+    seller = sellerById?.seller as ISellerDocument;
   }
 
   if (isSellerGigsSuccess) {

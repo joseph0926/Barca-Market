@@ -24,7 +24,7 @@ export class BuyerController {
 
     res
       .status(StatusCodes.OK)
-      .json({ message: response.data.message, user: response.data.user });
+      .json({ message: response.data.message, user: response.data.buyer });
   }
 
   public async getBuyerUserByUsername(
@@ -37,6 +37,6 @@ export class BuyerController {
 
     res
       .status(StatusCodes.OK)
-      .json({ message: response.data.message, user: response.data.user });
+      .json({ message: response.data.message, user: response.data.buyer });
   }
 }

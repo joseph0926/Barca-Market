@@ -14,7 +14,6 @@ import { IReduxState } from '@/store/store.interface';
 import { useSellerSchema } from '../../hooks/useSellerSchema';
 import { ICertificate, IEducation, IExperience, ILanguage, IPersonalInfoData, ISellerDocument } from '../../interfaces/seller.interface';
 import { addSeller } from '../../reducers/seller.reducer';
-import { useCreateSellerMutation } from '../../services/seller.service';
 import PersonalInfo from './components/PersonalInfo';
 import SellerCertificateFields from './components/SellerCertificateFields';
 import SellerEducationFields from './components/SellerEducationFields';
@@ -22,6 +21,7 @@ import SellerExperienceFields from './components/SellerExperienceFields';
 import SellerLanguageFields from './components/SellerLanguagesFields';
 import SellerSkillField from './components/SellerSkillField';
 import SellerSocialLinksFields from './components/SellerSocialLinksFields';
+import { useSellerMutation } from '../../hooks/useSellerMutation';
 
 const AddSeller: FC = (): ReactElement => {
   const authUser = useAppSelector((state: IReduxState) => state.authUser);
@@ -76,7 +76,8 @@ const AddSeller: FC = (): ReactElement => {
   });
   const dispatch = useAppDispatch();
   const navigate: NavigateFunction = useNavigate();
-  const [createSeller, { isLoading }] = useCreateSellerMutation();
+
+  const { createSellerMutation, isCreateSellerLoading } = useSellerMutation();
 
   const errors = [...personalInfoErrors, ...experienceErrors, ...educationErrors, ...skillsErrors, ...languagesErrors];
 
@@ -108,7 +109,7 @@ const AddSeller: FC = (): ReactElement => {
           certificates
         };
         const updateBuyer: IBuyerDocument = { ...buyer, isSeller: true };
-        const response: IResponse = await createSeller(sellerData).unwrap();
+        const response: IResponse = await createSellerMutation(sellerData);
         dispatch(addSeller(response.seller));
         dispatch(addBuyer(updateBuyer));
         navigate(`/seller_profile/${lowerCase(`${authUser.username}`)}/${response.seller?._id}/edit`);
@@ -129,7 +130,7 @@ const AddSeller: FC = (): ReactElement => {
     <div className="relative w-full">
       <Breadcrumb breadCrumbItems={['Seller', 'Create Profile']} />
       <div className="container mx-auto my-5 overflow-hidden px-2 pb-12 md:px-0">
-        {isLoading && <CircularPageLoader />}
+        {isCreateSellerLoading && <CircularPageLoader />}
         {authUser && !authUser.emailVerified && (
           <div className="absolute left-0 top-0 z-50 flex h-full w-full justify-center bg-white/[0.8] text-sm font-bold md:text-base lg:text-xl">
             <span className="mt-20">Please verify your email.</span>

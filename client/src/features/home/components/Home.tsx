@@ -2,7 +2,6 @@ import { FC, ReactElement, useEffect } from 'react';
 import { ISellerGig } from '@/features/gigs/interfaces/gig.interface';
 import { useGetGigsByCategoryQuery, useGetTopRatedGigsByCategoryQuery } from '@/features/gigs/services/gigs.service';
 import { ISellerDocument } from '@/features/sellers/interfaces/seller.interface';
-import { useGetRandomSellersQuery } from '@/features/sellers/services/seller.service';
 import TopGigsView from '@/shared/gigs/TopGigsView';
 import { lowerCase } from '@/shared/utils/utils.service';
 import { socketService } from '@/sockets/socket.service';
@@ -12,10 +11,12 @@ import { IReduxState } from '@/store/store.interface';
 import FeaturedExperts from './FeaturedExperts';
 import HomeGigsView from './HomeGigsView';
 import HomeSlider from './HomeSlider';
+import { useSellerQuery } from '@/features/sellers/hooks/useSellerQuery';
 
 const Home: FC = (): ReactElement => {
   const authUser = useAppSelector((state: IReduxState) => state.authUser);
-  const { data, isSuccess } = useGetRandomSellersQuery('10');
+
+  const { randomSeller, isRandomSellerSuccess } = useSellerQuery('10');
   const { data: categoryData, isSuccess: isCategorySuccess } = useGetGigsByCategoryQuery(`${authUser.username}`);
   const { data: topGigsData, isSuccess: isTopGigsSuccess } = useGetTopRatedGigsByCategoryQuery(`${authUser.username}`);
   // const { data: sellerData, isSuccess: isSellerDataSuccess } = useGetMoreGigsLikeThisQuery('6559d9a3620b7db8c1fb7f01');
@@ -23,8 +24,8 @@ const Home: FC = (): ReactElement => {
   let categoryGigs: ISellerGig[] = [];
   let topGigs: ISellerGig[] = [];
 
-  if (isSuccess) {
-    sellers = data.sellers as ISellerDocument[];
+  if (isRandomSellerSuccess) {
+    sellers = randomSeller.sellers as ISellerDocument[];
   }
 
   if (isCategorySuccess) {

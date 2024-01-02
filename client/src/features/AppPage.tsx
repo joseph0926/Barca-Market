@@ -11,10 +11,10 @@ import { addBuyer } from './buyer/reducers/buyer.reducer';
 import Home from './home/components/Home';
 import Index from './index/Index';
 import { addSeller } from './sellers/reducers/seller.reducer';
-import { useGetSellerByUsernameQuery } from './sellers/services/seller.service';
 import { useAuthLogout } from './auth/hooks/useAuthLogout';
 import { useAuthQuery } from './auth/hooks/useAuthQuery';
 import { useBuyerQuery } from './buyer/hooks/useBuyerQuery';
+import { useSellerQuery } from './sellers/hooks/useSellerQuery';
 
 const AppPage: FC = (): ReactElement => {
   const { logoutFn } = useAuthLogout();
@@ -27,17 +27,16 @@ const AppPage: FC = (): ReactElement => {
   const [tokenIsValid, setTokenIsValid] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const navigate: NavigateFunction = useNavigate();
-  const { data: sellerData } = useGetSellerByUsernameQuery(`${authUser.username}`, {
-    skip: authUser.id === null
-  });
+
+  const { sellerByUsername } = useSellerQuery(`${authUser.username}`);
 
   const checkUser = useCallback(async () => {
     try {
       if (currentUserData && currentUserData.user && !appLogout) {
         setTokenIsValid(true);
         dispatch(addAuthUser({ authInfo: currentUserData.user }));
-        dispatch(addBuyer(currentBuyer?.buyer));
-        dispatch(addSeller(sellerData?.seller));
+        dispatch(addBuyer(currentBuyer?.user));
+        dispatch(addSeller(sellerByUsername?.seller));
         saveToSessionStorage(JSON.stringify(true), JSON.stringify(authUser.username));
         const becomeASeller = getDataFromLocalStorage('becomeASeller');
         if (becomeASeller) {
@@ -50,7 +49,7 @@ const AppPage: FC = (): ReactElement => {
     } catch (error) {
       console.log(error);
     }
-  }, [currentUserData, navigate, dispatch, appLogout, authUser.username, currentBuyer, sellerData]);
+  }, [currentUserData, navigate, dispatch, appLogout, authUser.username, currentBuyer, sellerByUsername]);
 
   const isLoggedIn = getDataFromSessionStorage('isLoggedIn');
   const logoutUser = useCallback(async () => {

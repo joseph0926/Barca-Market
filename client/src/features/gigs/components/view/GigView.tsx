@@ -2,7 +2,6 @@ import { FC, ReactElement, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import StickyBox from 'react-sticky-box';
 import { ISellerDocument } from '@/features/sellers/interfaces/seller.interface';
-import { useGetSellerByIdQuery } from '@/features/sellers/services/seller.service';
 import TopGigsView from '@/shared/gigs/TopGigsView';
 import CircularPageLoader from '@/shared/CircularPageLoader';
 import StarRating from '@/shared/StarRating';
@@ -15,24 +14,25 @@ import { ISellerGig } from '@/features/gigs/interfaces/gig.interface';
 import { useGetGigByIdQuery, useGetMoreGigsLikeThisQuery } from '@/features/gigs/services/gigs.service';
 import GigViewLeft from '@/features/gigs/components/view/components/GigViewLeft';
 import GigViewRight from '@/features/gigs/components/view/components/GigViewRight';
+import { useSellerQuery } from '@/features/sellers/hooks/useSellerQuery';
 
 const GigView: FC = (): ReactElement => {
   const { gigId, sellerId } = useParams<string>();
   const { data: gigData, isSuccess: isGigDataSuccess, isLoading: isGigLoading } = useGetGigByIdQuery(`${gigId}`);
-  const { data: sellerData, isSuccess: isSellerDataSuccess, isLoading: isSellerLoading } = useGetSellerByIdQuery(`${sellerId}`);
+  const { sellerById, isSellerByIdLoading, isSellerByIdSuccess } = useSellerQuery(`${sellerId}`);
   const { data: moreGigsData, isSuccess: isMoreGigsSuccess, isLoading: isMoreGigsLoading } = useGetMoreGigsLikeThisQuery(`${gigId}`);
   const gig = useRef<ISellerGig>(emptyGigData);
   const seller = useRef<ISellerDocument>(emptySellerData);
   const moreGigs = useRef<ISellerGig[]>([]);
 
-  const isLoading = isGigLoading && isSellerLoading && isMoreGigsLoading;
+  const isLoading = isGigLoading && isSellerByIdLoading && isMoreGigsLoading;
 
   if (isGigDataSuccess) {
     gig.current = gigData.gig as ISellerGig;
   }
 
-  if (isSellerDataSuccess) {
-    seller.current = sellerData.seller as ISellerDocument;
+  if (isSellerByIdSuccess) {
+    seller.current = sellerById.seller as ISellerDocument;
   }
 
   if (isMoreGigsSuccess) {

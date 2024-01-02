@@ -9,14 +9,11 @@ export const useBuyerQuery = (username?: string) => {
       const { data } = await axiosInstance.get('/buyer/username');
       return data;
     },
-    refetchOnWindowFocus: false,
-    refetchOnMount: false,
-    refetchOnReconnect: false,
     retry: 1
   });
 
   const { data: buyerByUsername, isSuccess: buyerByUsernameSuccess } = useQuery({
-    queryKey: ['buyer'],
+    queryKey: ['buyer', username],
     queryFn: async (): Promise<IResponse> => {
       const { data } = await axiosInstance.get(`/buyer/${username}`);
       return data;
