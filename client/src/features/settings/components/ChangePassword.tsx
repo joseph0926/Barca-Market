@@ -34,7 +34,8 @@ const ChangePassword: FC = (): ReactElement => {
       await changePassword({ currentPassword: passwordItem.currentPassword, newPassword: passwordItem.newPassword }).unwrap();
       setAlertMessage('Password updated successfully.');
       setTimeout(() => {
-        logoutFn(dispatch, navigate);
+        logoutFn(dispatch);
+        navigate('/');
       }, 3000);
     } catch (error) {
       if (isFetchBaseQueryError(error)) {

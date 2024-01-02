@@ -19,9 +19,10 @@ export const useAuthQuery = (query?: string, from?: string, size?: string, type?
   } = useQuery({
     queryKey: ['gigUser'],
     queryFn: async (): Promise<IResponse> => {
-      const { data } = await axiosInstance.get(`/auth/search/gig/${from}/${size}/${type}?${query}`);
+      const { data } = await axiosInstance.get(`/gig/search/gig/${from}/${size}/${type}?${query}`);
       return data;
-    }
+    },
+    enabled: query !== undefined && from !== undefined && size !== undefined && type !== undefined
   });
 
   const {
@@ -31,9 +32,10 @@ export const useAuthQuery = (query?: string, from?: string, size?: string, type?
   } = useQuery({
     queryKey: ['gigUser'],
     queryFn: async (): Promise<IResponse> => {
-      const { data } = await axiosInstance.get(`/auth/search/gig/${gigId}`);
+      const { data } = await axiosInstance.get(`/gig/search/gig/${gigId}`);
       return data;
-    }
+    },
+    enabled: gigId !== undefined
   });
 
   return {

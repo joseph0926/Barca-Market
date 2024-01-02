@@ -32,8 +32,6 @@ const MESSAGE_STATUS = {
 const NOT_EXISTING_ID = '649db27404c0c7b7d4b112ec';
 
 const ChatWindow: FC<IChatWindowProps> = ({ chatMessages, isLoading, setSkip }): ReactElement => {
-  const { buyerByUsername, buyerByUsernameSuccess } = useBuyerQuery();
-
   const seller = useAppSelector((state: IReduxState) => state.seller);
   const authUser = useAppSelector((state: IReduxState) => state.authUser);
   const fileRef = useRef<HTMLInputElement>(null);
@@ -50,6 +48,8 @@ const ChatWindow: FC<IChatWindowProps> = ({ chatMessages, isLoading, setSkip }):
   const dispatch = useAppDispatch();
   const { data } = useGetGigByIdQuery(singleMessageRef.current ? `${singleMessageRef.current?.gigId}` : NOT_EXISTING_ID);
   const [saveChatMessage] = useSaveChatMessageMutation();
+
+  const { buyerByUsername, buyerByUsernameSuccess } = useBuyerQuery(`${authUser.username}`);
 
   if (buyerByUsernameSuccess) {
     receiverRef.current = buyerByUsername?.buyer;

@@ -17,7 +17,8 @@ const SettingsDropdown: FC<IHomeHeaderProps> = ({ seller, authUser, buyer, type,
     if (setIsDropdownOpen) {
       setIsDropdownOpen(false);
     }
-    logoutFn(dispatch, navigate);
+    logoutFn(dispatch);
+    navigate('/');
   };
 
   return (

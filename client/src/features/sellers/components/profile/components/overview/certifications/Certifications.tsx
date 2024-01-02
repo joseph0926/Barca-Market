@@ -71,7 +71,7 @@ const Certifications: FC = (): ReactElement => {
           </>
         )}
 
-        {sellerProfile.certificates.length === 0 && !showCertificateAddForm && !showCertificateEditForm && (
+        {sellerProfile?.certificates.length === 0 && !showCertificateAddForm && !showCertificateEditForm && (
           <li className="mb-2 ml-4 flex justify-between">No information</li>
         )}
       </ul>

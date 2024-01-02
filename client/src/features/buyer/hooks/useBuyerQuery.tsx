@@ -20,7 +20,8 @@ export const useBuyerQuery = (username?: string) => {
     queryFn: async (): Promise<IResponse> => {
       const { data } = await axiosInstance.get(`/buyer/${username}`);
       return data;
-    }
+    },
+    enabled: username !== undefined
   });
 
   const { data: buyerByEmail, isSuccess: buyerByEmailSuccess } = useQuery({

@@ -56,7 +56,8 @@ const AppPage: FC = (): ReactElement => {
   const logoutUser = useCallback(async () => {
     if (!isLoggedIn) {
       setTokenIsValid(false);
-      logoutFn(dispatch, navigate);
+      logoutFn(dispatch);
+      navigate('/');
     }
   }, [dispatch, navigate, isLoggedIn]);
 

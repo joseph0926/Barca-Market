@@ -104,6 +104,7 @@ const gigsSearch = async (
     ],
     ...(from !== '0' && { search_after: [from] }),
   });
+
   const total: IHitsTotal = result.hits.total as IHitsTotal;
   return {
     total: total.value,

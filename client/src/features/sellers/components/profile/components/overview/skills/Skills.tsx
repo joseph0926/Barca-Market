@@ -35,7 +35,7 @@ const Skills: FC = (): ReactElement => {
         {showSkillEditForm && <SkillField type="edit" selectedSkill={selectedSkill} setShowSkillEditForm={setShowSkillEditForm} />}
         {!showSkillAddForm && (
           <div className="flex min-h-full flex-wrap gap-x-4 gap-y-5 px-2 py-4">
-            {sellerProfile.skills.map((tag: string) => (
+            {sellerProfile?.skills.map((tag: string) => (
               <Fragment key={uuidv4()}>
                 {!showSkillEditForm && (
                   <div

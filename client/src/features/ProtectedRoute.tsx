@@ -33,7 +33,8 @@ const ProtectedRoute: FC<IProtectedRouteProps> = ({ children }): ReactElement =>
 
     if (currentUserError) {
       setTokenIsValid(false);
-      logoutFn(dispatch, navigate);
+      logoutFn(dispatch);
+      navigate('/');
     }
   }, [currentUserData, dispatch, navigate, currentUserError, authUser.username]);
 
