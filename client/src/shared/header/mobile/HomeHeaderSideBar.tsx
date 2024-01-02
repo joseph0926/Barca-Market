@@ -40,8 +40,9 @@ const HomeHeaderSideBar: FC<IHeaderSideBarProps> = ({ setOpenSidebar }): ReactEl
     setToggleCategories(!toggleCategories);
   };
 
-  const onLogout = (): void => {
-    logoutFn(dispatch, navigate);
+  const onLogout = () => {
+    logoutFn(dispatch);
+    navigate('/');
   };
 
   return (

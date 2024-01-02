@@ -8,7 +8,7 @@ import { IButtonProps } from '@/shared/interfaces/shared.interface';
 import { saveToLocalStorage } from '@/shared/utils/utils.service';
 
 import { IHeader, IHeaderModalProps } from '@/shared/interfaces/header.interface';
-import HeaderSideBar from './mobile/HeaderSideBar';
+import HeaderSideBar from './mobile/HeaderSidebar';
 
 const Button: LazyExoticComponent<FC<IButtonProps>> = lazy(() => import('@/shared/Button'));
 

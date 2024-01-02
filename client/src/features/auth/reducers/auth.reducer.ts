@@ -1,11 +1,11 @@
-import { createSlice, Slice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 import { initialAuthUserValues } from '@/shared/utils/static-data';
 
 import { IAuthUser, IReduxAddAuthUser } from '@/features/auth/interfaces/auth.interface';
 
 const initialValue: IAuthUser = initialAuthUserValues as IAuthUser;
 
-const authSlice: Slice = createSlice({
+const authSlice = createSlice({
   name: 'auth',
   initialState: initialValue,
   reducers: {

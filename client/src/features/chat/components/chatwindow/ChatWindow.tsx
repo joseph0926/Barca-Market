@@ -3,7 +3,6 @@ import { ChangeEvent, FC, FormEvent, ReactElement, useEffect, useRef, useState }
 import { FaPaperclip, FaPaperPlane } from 'react-icons/fa';
 import { useParams } from 'react-router-dom';
 import { IBuyerDocument } from '@/features/buyer/interfaces/buyer.interface';
-import { useGetBuyerByUsernameQuery } from '@/features/buyer/services/buyer.service';
 import { useGetGigByIdQuery } from '@/features/gigs/services/gigs.service';
 import Button from '@/shared/Button';
 import { updateNotification } from '@/shared/header/reducers/notification.reducer';
@@ -23,6 +22,7 @@ import { useSaveChatMessageMutation } from '@/features/chat/services/chat.servic
 import ChatFile from '@/features/chat/components/chatwindow/ChatFile';
 import ChatImagePreview from '@/features/chat/components/chatwindow/ChatImagePreview';
 import ChatOffer from '@/features/chat/components/chatwindow/ChatOffer';
+import { useBuyerQuery } from '@/features/buyer/hooks/useBuyerQuery';
 
 const MESSAGE_STATUS = {
   EMPTY: '',
@@ -32,6 +32,8 @@ const MESSAGE_STATUS = {
 const NOT_EXISTING_ID = '649db27404c0c7b7d4b112ec';
 
 const ChatWindow: FC<IChatWindowProps> = ({ chatMessages, isLoading, setSkip }): ReactElement => {
+  const { buyerByUsername, buyerByUsernameSuccess } = useBuyerQuery();
+
   const seller = useAppSelector((state: IReduxState) => state.seller);
   const authUser = useAppSelector((state: IReduxState) => state.authUser);
   const fileRef = useRef<HTMLInputElement>(null);
@@ -46,12 +48,11 @@ const ChatWindow: FC<IChatWindowProps> = ({ chatMessages, isLoading, setSkip }):
   const [isUploadingFile, setIsUploadingFile] = useState<boolean>(MESSAGE_STATUS.IS_LOADING);
   const [message, setMessage] = useState<string>(MESSAGE_STATUS.EMPTY);
   const dispatch = useAppDispatch();
-  const { data: buyerData, isSuccess: isBuyerSuccess } = useGetBuyerByUsernameQuery(`${firstLetterUppercase(`${username}`)}`);
   const { data } = useGetGigByIdQuery(singleMessageRef.current ? `${singleMessageRef.current?.gigId}` : NOT_EXISTING_ID);
   const [saveChatMessage] = useSaveChatMessageMutation();
 
-  if (isBuyerSuccess) {
-    receiverRef.current = buyerData.buyer;
+  if (buyerByUsernameSuccess) {
+    receiverRef.current = buyerByUsername?.buyer;
   }
 
   if (chatMessages.length) {

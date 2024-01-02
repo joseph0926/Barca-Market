@@ -2,6 +2,7 @@ import { FC, ReactElement, useEffect } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
 import AppRouter from './AppRoutes';
 import useBeforeWindowUnload from '@/hooks/useBeforeWindowUnload';
@@ -20,6 +21,7 @@ const App: FC = (): ReactElement => {
     <>
       <BrowserRouter>
         <QueryClientProvider client={queryClient}>
+          <ReactQueryDevtools />
           <div className="relative flex min-h-screen w-screen flex-col">
             <AppRouter />
             <ToastContainer />

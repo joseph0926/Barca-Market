@@ -4,7 +4,7 @@ import { FaAngleDown, FaAngleRight, FaAngleUp } from 'react-icons/fa';
 import { categories, saveToLocalStorage } from '@/shared/utils/utils.service';
 import { v4 as uuidv4 } from 'uuid';
 
-import { IHeaderModalProps, IHeaderSideBarProps } from '../@/shared/interfaces/header.interface';
+import { IHeaderModalProps, IHeaderSideBarProps } from '@/shared/interfaces/header.interface';
 
 const HeaderSideBar: FC<IHeaderSideBarProps> = ({ setShowRegisterModal, setShowLoginModal, setOpenSidebar }): ReactElement => {
   const [isDropdownOpen, setIsDropdownOpen] = useState<boolean>(false);

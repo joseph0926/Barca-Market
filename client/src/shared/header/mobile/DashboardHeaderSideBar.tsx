@@ -16,8 +16,9 @@ const DashboardHeaderSideBar: FC<IHeaderSideBarProps> = ({ setOpenSidebar }): Re
   const dispatch = useAppDispatch();
   const navigate: NavigateFunction = useNavigate();
 
-  const onLogout = async () => {
-    logoutFn(dispatch, navigate);
+  const onLogout = () => {
+    logoutFn(dispatch);
+    navigate('/');
   };
 
   return (
