@@ -78,7 +78,7 @@ export const createUser = async (
   };
   await publishDirectMessage(
     authChannel,
-    'barca-email-notification',
+    'barca-auth-notification',
     'auth-email',
     JSON.stringify(messageDetails),
     'Verify email message has been sent to notification service',
