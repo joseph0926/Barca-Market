@@ -19,7 +19,7 @@ const Home: FC = (): ReactElement => {
   const { randomSeller, isRandomSellerSuccess } = useSellerQuery('10');
   const { data: categoryData, isSuccess: isCategorySuccess } = useGetGigsByCategoryQuery(`${authUser.username}`);
   const { data: topGigsData, isSuccess: isTopGigsSuccess } = useGetTopRatedGigsByCategoryQuery(`${authUser.username}`);
-  // const { data: sellerData, isSuccess: isSellerDataSuccess } = useGetMoreGigsLikeThisQuery('6559d9a3620b7db8c1fb7f01');
+
   let sellers: ISellerDocument[] = [];
   let categoryGigs: ISellerGig[] = [];
   let topGigs: ISellerGig[] = [];
@@ -35,10 +35,6 @@ const Home: FC = (): ReactElement => {
   if (isTopGigsSuccess) {
     topGigs = topGigsData.gigs as ISellerGig[];
   }
-
-  // if (isSellerDataSuccess) {
-  //   topGigs = sellerData.gigs as ISellerGig[];
-  // }
 
   useEffect(() => {
     socketService.setupSocketConnection();

@@ -15,7 +15,7 @@ const PersonalInfo: FC<IPersonalInfoProps> = ({ personalInfo, setPersonalInfo })
     <div className="border-grey border-b p-6">
       <div className="mb-6 grid md:grid-cols-5">
         <div className="pb-2 text-base font-medium">
-          Fullname<sup className="top-[-0.3em] text-base text-red-500">*</sup>
+          이름<sup className="top-[-0.3em] text-base text-red-500">*</sup>
         </div>
         <div className="col-span-4 w-full">
           <Input
@@ -31,7 +31,7 @@ const PersonalInfo: FC<IPersonalInfoProps> = ({ personalInfo, setPersonalInfo })
       </div>
       <div className="mb-6 grid md:grid-cols-5">
         <div className="mt-6 pb-2 text-base font-medium md:mt-0">
-          Oneliner<sup className="top-[-0.3em] text-base text-red-500">*</sup>
+          한줄 소개<sup className="top-[-0.3em] text-base text-red-500">*</sup>
         </div>
         <div className="col-span-4 w-full">
           <Input
@@ -39,7 +39,6 @@ const PersonalInfo: FC<IPersonalInfoProps> = ({ personalInfo, setPersonalInfo })
             type="text"
             name="oneliner"
             value={personalInfo.oneliner}
-            placeholder="E.g. Expert Mobile and Web Developer"
             onChange={(event: ChangeEvent) => {
               const onelinerValue: string = (event.target as HTMLInputElement).value;
               setPersonalInfo({ ...personalInfo, oneliner: onelinerValue });
@@ -53,12 +52,12 @@ const PersonalInfo: FC<IPersonalInfoProps> = ({ personalInfo, setPersonalInfo })
               }
             }}
           />
-          <span className="flex justify-end text-xs text-[#95979d]">{allowedInfoLength.oneliner} Characters</span>
+          <span className="flex justify-end text-xs text-[#95979d]">{allowedInfoLength.oneliner} 자</span>
         </div>
       </div>
       <div className="mb-6 grid md:grid-cols-5">
         <div className="pb-2 text-base font-medium">
-          Description<sup className="top-[-0.3em] text-base text-red-500">*</sup>
+          자기소개<sup className="top-[-0.3em] text-base text-red-500">*</sup>
         </div>
         <div className="col-span-4 w-full">
           <Textarea
@@ -79,7 +78,7 @@ const PersonalInfo: FC<IPersonalInfoProps> = ({ personalInfo, setPersonalInfo })
               }
             }}
           />
-          <span className="flex justify-end text-xs text-[#95979d]">{allowedInfoLength.description} Characters</span>
+          <span className="flex justify-end text-xs text-[#95979d]">{allowedInfoLength.description} 자</span>
         </div>
       </div>
       <div className="mb-6 grid md:grid-cols-5">

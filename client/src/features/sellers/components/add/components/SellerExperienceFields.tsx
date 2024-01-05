@@ -67,7 +67,7 @@ const SellerExperienceFields: FC<IExperienceProps> = ({ experienceFields, setExp
   return (
     <div className="border-grey flex w-full flex-col border-b px-6 pb-3 pt-6">
       <div className="flex justify-between">
-        <h2 className="pb-4 text-xl font-bold">Experience</h2>
+        <h2 className="pb-4 text-xl font-bold">게임</h2>
         <Button
           className="md:text-md h-7 rounded bg-orange-500 px-6 text-center text-sm font-bold text-white hover:bg-orange-400 focus:outline-none md:px-8"
           label="Add More"
@@ -80,7 +80,7 @@ const SellerExperienceFields: FC<IExperienceProps> = ({ experienceFields, setExp
           <Input
             className="border-grey mb-4 w-full rounded border p-2.5 text-sm font-normal text-gray-600 focus:outline-none"
             name="title"
-            placeholder="Title (E.g: CEO)"
+            placeholder="Title"
             value={input.title}
             onChange={(event: ChangeEvent) => handleExperienceFieldsChange(event, index)}
           />
