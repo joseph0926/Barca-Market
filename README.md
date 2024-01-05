@@ -22,8 +22,6 @@
 
 ## 프로젝트 소개
 
-[![GameAuction Screen Shot][product-screenshot]](https://example.com)
-
 GameAuction은 게임 구매 및 판매를 위한 최적의 플랫폼입니다. 본 프로젝트는 사용자가 쉽고 편리하게 게임을 사고팔 수 있는 환경을 제공함으로써 게임 거래를 한층 더 효율적으로 만들고자 합니다.
 
 ### 사용 기술
