@@ -2,6 +2,13 @@ import browseImage from '@/assets/browse.png';
 import collaborate from '@/assets/collaborate.png';
 import contact from '@/assets/contact.png';
 import create from '@/assets/create.png';
+import hero01 from '@/assets/hero01.jpg';
+import hero02 from '@/assets/hero02.jpg';
+import hero03 from '@/assets/hero03.jpg';
+import hero04 from '@/assets/hero04.jpg';
+import hero05 from '@/assets/hero05.jpg';
+import hero06 from '@/assets/hero06.jpg';
+import hero07 from '@/assets/hero07.jpg';
 import { IAuthUser } from '@/features/auth/interfaces/auth.interface';
 import { IBuyerDocument } from '@/features/buyer/interfaces/buyer.interface';
 import { ISellerGig } from '@/features/gigs/interfaces/gig.interface';
@@ -194,4 +201,10 @@ export const STATIC_DATA = {
   END_DATE: 'endDate',
   LANGUAGE: 'language',
   LEVEL: 'level'
+};
+
+const heroBg = [hero01, hero02, hero03, hero04, hero05, hero06, hero07];
+
+export const imageByIndex = (index: number) => {
+  return heroBg[index];
 };

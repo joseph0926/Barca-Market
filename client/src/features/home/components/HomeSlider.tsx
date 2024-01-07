@@ -1,56 +1,104 @@
-import { FC, ReactElement, useEffect, useState } from 'react';
-import { ISliderImagesText } from '@/shared/interfaces/shared.interface';
-import { sliderImages, sliderImagesText } from '@/shared/utils/static-data';
-
-import { ISliderState } from '../interfaces/home.interface';
+import { useState, useEffect, useCallback, FC, ReactElement } from 'react';
+import { EmblaOptionsType, EmblaPluginType } from 'embla-carousel';
+import useEmblaCarousel from 'embla-carousel-react';
+import Autoplay from 'embla-carousel-autoplay';
+import { HomeSliderButton } from './HomeSliderButton';
+import { imageByIndex } from '@/shared/utils/static-data';
 
 const HomeSlider: FC = (): ReactElement => {
-  const [slideState, setSlideState] = useState<ISliderState>({
-    slideShow: sliderImages[0],
-    slideIndex: 0
-  });
-  const [sliderInterval, setSliderInterval] = useState<NodeJS.Timeout>();
-  const [currentSliderImageText, setCurrentSliderImageText] = useState<ISliderImagesText>(sliderImagesText[0]);
+  const options: EmblaOptionsType = {};
+  const SLIDE_COUNT = 7;
+  const slides = Array.from(Array(SLIDE_COUNT).keys());
 
-  const { slideIndex, slideShow } = slideState;
-  let currentSlideIndex = 0;
-
-  useEffect(() => {
-    const timeInterval: NodeJS.Timeout = setInterval(() => {
-      autoMoveSlide();
-    }, 4000);
-    setSliderInterval(timeInterval);
-
-    return () => {
-      clearInterval(timeInterval);
-      clearInterval(sliderInterval);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const autoMoveSlide = (): void => {
-    const lastIndex = currentSlideIndex + 1;
-    currentSlideIndex = lastIndex >= sliderImages.length ? 0 : lastIndex;
-    setCurrentSliderImageText(sliderImagesText[currentSlideIndex]);
-    setSlideState((prev: ISliderState) => ({
-      ...prev,
-      slideIndex: currentSlideIndex,
-      slideShow: sliderImages[currentSlideIndex]
-    }));
+  const autoplayOptions = {
+    delay: 2000,
+    rootNode: (emblaRoot: EmblaPluginType) => emblaRoot.parentElement
   };
 
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [emblaMainRef, emblaMainApi] = useEmblaCarousel(options);
+  const [emblaThumbsRef, emblaThumbsApi] = useEmblaCarousel(
+    {
+      containScroll: 'keepSnaps',
+      dragFree: true,
+      loop: true
+    },
+    [Autoplay(autoplayOptions)]
+  );
+
+  const onThumbClick = useCallback(
+    (index: number) => {
+      if (!emblaMainApi || !emblaThumbsApi) return;
+      setSelectedIndex(index);
+      emblaMainApi.scrollTo(index);
+      emblaThumbsApi.scrollTo(index);
+    },
+    [emblaMainApi, emblaThumbsApi, setSelectedIndex]
+  );
+
+  useEffect(() => {
+    if (!emblaThumbsApi) return;
+
+    const onSelectThumb = () => {
+      const selectedIndex = emblaThumbsApi.selectedScrollSnap();
+      setSelectedIndex(selectedIndex);
+      if (!emblaMainApi) return;
+      emblaMainApi.scrollTo(selectedIndex);
+    };
+
+    emblaThumbsApi.on('select', onSelectThumb);
+    return () => {
+      if (emblaThumbsApi) {
+        emblaThumbsApi.off('select', onSelectThumb);
+      }
+    };
+  }, [emblaThumbsApi, emblaMainApi]);
+
+  useEffect(() => {
+    if (!emblaMainApi || !emblaThumbsApi) return;
+
+    const onSelectMain = () => {
+      const selectedIndex = emblaMainApi.selectedScrollSnap();
+      setSelectedIndex(selectedIndex);
+      emblaThumbsApi.scrollTo(selectedIndex);
+    };
+
+    emblaMainApi.on('select', onSelectMain);
+    return () => {
+      if (emblaMainApi) {
+        emblaMainApi.off('select', onSelectMain);
+      }
+    };
+  }, [emblaMainApi, emblaThumbsApi, setSelectedIndex]);
+
   return (
-    <div className="flex gap-x-8">
-      <div className="relative h-96 w-full overflow-hidden bg-red-50">
-        <img alt="slider" className="absolute h-96 w-full object-cover transition" src={slideShow} />
-        <div className="absolute px-6 py-4">
-          <h2 className="text-3xl font-bold text-white">{currentSliderImageText.header}</h2>
-          <h4 className="pt-1 font-bold text-white">{currentSliderImageText.subHeader}</h4>
-        </div>
-        <div className="absolute bottom-0 flex gap-3 px-6 py-4">
-          {sliderImages.map((_, index: number) => (
-            <div key={index} className={`h-2 w-2 rounded-full ${slideIndex === index ? 'bg-orange-500' : 'bg-gray-300'}`}></div>
+    <div className="embla">
+      <div className="embla__viewport" ref={emblaMainRef}>
+        <div className="embla__container">
+          {slides.map((index) => (
+            <div className="embla__slide" key={index}>
+              <div className="embla__slide__number">
+                <span>{index + 1}</span>
+              </div>
+              <img className="embla__slide__img" src={imageByIndex(index)} alt="Your alt text" />
+            </div>
           ))}
+        </div>
+      </div>
+
+      <div className="embla-thumbs">
+        <div className="embla-thumbs__viewport" ref={emblaThumbsRef}>
+          <div className="embla-thumbs__container">
+            {slides.map((index) => (
+              <HomeSliderButton
+                onClick={() => onThumbClick(index)}
+                selected={index === selectedIndex}
+                index={index}
+                imgSrc={imageByIndex(index)}
+                key={index}
+              />
+            ))}
+          </div>
         </div>
       </div>
     </div>
