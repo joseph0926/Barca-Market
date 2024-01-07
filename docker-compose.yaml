@@ -425,4 +425,5 @@ networks:
     name: elastic
 # docker compose up -d redis mongodb mysql psql rabbitmq elasticsearch kibana metricbeat heartbeat gateway auth user notification gig order review chat jenkins jenkins-agent
 
-# docker compose up -d gateway auth user notification gig order review chat
+# docker compose up -d auth user notification gig order review chat
+# docker compose up -d gateway
